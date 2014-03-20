@@ -18,6 +18,6 @@ describe "a user searches" do
 
     expect(page).to have_content("Sharks")
     expect(page).to have_content("fish")
-
+    save_and_open_page
   end
 end

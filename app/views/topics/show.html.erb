@@ -3,6 +3,7 @@
 <% end %>
   <div><h1><%= @word_association[:word] %></h1>
     <p> <%= @description %> </p>
+    <img src="<%= @photo %>">
     <% @word_association[:definitions].each do |definition| %>
       <div><%= definition["text"] %></div>
     <% end %>
@@ -10,5 +11,6 @@
       <div><%= association["words"] %></div>
     <% end %>
   </div>
-</div>
- 
+</div> 
+<div id="viz"></div>
+<script type="text/JavaScript" src="treediagram.js"></script> 
