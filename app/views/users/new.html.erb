@@ -1,0 +1,14 @@
+<h2>Create a new user</h2>
+
+<% unless @user.nil? || @user.id.nil? %>
+  <div id="errors">
+    <h3>Errors!</h3>
+    <ul>
+      <% @user.errors.messages.each do |field,error| %>
+        <li><em><%= "#{field.capitalize} #{error.first}!" %></em></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= render "form" %>
