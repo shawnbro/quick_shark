@@ -6,8 +6,12 @@ describe "a user searches" do
     visit root_path
     fill_in 'topic[topic]', with: "Sharks"
     click_button 'Submit'
+    it "creates a new journey" do 
+      within ('#journey') do 
+        expect(page).to have_content("Sharks")
+      end
+    end
     expect(page).to have_content("Sharks")
     expect(page).to have_content("fish")
-
   end
 end
