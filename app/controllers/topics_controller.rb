@@ -2,18 +2,17 @@ class TopicsController < ApplicationController
   include TopicsHelper
   
   def create
-    @journey = Journey.create(title: params["topic"]["topic"])
     @topic = Topic.create(name: params["topic"]["topic"])
-    if current_user?
-      @topic << @journey
-      @journey << @user
+    if current_user
+      @journey = Journey.create(title: params["topic"]["topic"], user_id: current_user[:id])
+      @journey.topics << @topic
     end
     redirect_to topic_path(@topic)
   end
 
   def show
-    binding.pry
     @topic = Topic.find_by(id: params[:id])
+    @journey = Journey.find_by(id: @topic[:journey_id])  
     @word_association = get_word_associations(@topic[:name])
   end
 
