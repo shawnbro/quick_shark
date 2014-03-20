@@ -1,10 +1,13 @@
 QuickShark::Application.routes.draw do
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
 
+
   resources :topics, except: [:new]
 
-  resources :journeys, shallow: true do
-    resources :topics, except: [:new]
+  resources :users do
+    resources :journeys, shallow: true do
+      resources :topics, except: [:new]
+    end
   end
 
   get "/login", to: "session#new"

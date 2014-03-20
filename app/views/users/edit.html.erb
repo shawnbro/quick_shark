@@ -1,0 +1,16 @@
+<h2>Update user <%= @user.email %></h2>
+
+<% unless @update_worked %>
+<div id="errors">
+  <h3>Errors!</h3>
+  <ul>
+    <% @user.errors.messages.each do |field,error| %>
+    <li><em><%= "#{field.capitalize} #{error.first}!" %></em></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<%= render "form" %>
+
+<p><%= link_to "Return to user home.", user_path(@user) %></p>
