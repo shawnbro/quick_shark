@@ -1,0 +1,12 @@
+<h1><%= @topic.name %></h1>
+<div id='word-association'>
+  <div><h1><%= @word_association[:word] %></h1>
+    <% @word_association[:definitions].each do |definition| %>
+      <div><%= definition["text"] %></div>
+    <% end %>
+    <% @word_association[:word_associations].each do |association| %>
+      <div><%= association["words"] %></div>
+    <% end %>
+  </div>
+</div>
+ 
