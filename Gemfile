@@ -32,7 +32,7 @@ gem 'json'
 gem 'flickraw'
 gem "unirest"
 
-gem 'bcrypt', '~> 3.1.2'
+gem 'bcrypt-ruby', '~> 3.1.2'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -45,7 +45,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'shoulda-matchers'
-  gem 'factory_girl'
+  gem 'factory_girl_rails'
   gem 'jasmine-rails'
   gem 'simplecov'
   gem 'launchy'
