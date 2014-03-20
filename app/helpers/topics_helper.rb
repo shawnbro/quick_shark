@@ -1,3 +1,4 @@
+
 module TopicsHelper
   def get_word_associations(word) 
       word_association = {
