@@ -9,7 +9,6 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.find_by(id: params[:id])
     @word_association = get_word_associations(@topic[:name])
-    binding.pry
   end
 
   
