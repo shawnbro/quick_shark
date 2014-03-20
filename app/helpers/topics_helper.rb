@@ -1,12 +1,12 @@
 module TopicsHelper
-  
-  def get_word_associations(word) 
+
+  def get_word_associations(word)
       word_association = {
         word: word,
         definitions: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word+'/definitions?limit=200&includeRelated=true&useCanonical=true&includeTags=false&api_key='+WORDNIK_API_KEY),
         # etymologies: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word+'/etymologies?api_key='+WORKNIK_API_KEY),
         word_associations: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word+'/relatedWords?useCanonical=true&limitPerRelationshipType=10&api_key='+WORDNIK_API_KEY),
-        reverse_definitions: HTTParty.get('http://api.wordnik.com:80/v4/words.json/reverseDictionary?query='+word+'&minCorpusCount=5&maxCorpusCount=-1&minLength=1&maxLength=-1&includeTags=false&skip=0&limit=200&api_key='+WORDNIK_API_KEY)    
+        reverse_definitions: HTTParty.get('http://api.wordnik.com:80/v4/words.json/reverseDictionary?query='+word+'&minCorpusCount=5&maxCorpusCount=-1&minLength=1&maxLength=-1&includeTags=false&skip=0&limit=200&api_key='+WORDNIK_API_KEY)
       }
       word_association[:definitions].each do |definition|
         definition.delete("textProns")
@@ -36,17 +36,20 @@ module TopicsHelper
   end
 
   def find_photo(tags)
-    result = flickr.photos.search(:tags => tags)
+    result = flickr.photos.search(
+      :tags => tags,
+      :is_getty => true
+      )
     # fallback logic
     if result.length == 0
       url = "http://www.yiyinglu.com/failwhale/images/Homer_the_New_Fail_Whale_by_edwheeler.jpg"
     else
       photo_id = result[0]["id"]
-      info = flickr.photos.getInfo(:photo_id => photo_id)  
-      url = FlickRaw.url(info)  
+      info = flickr.photos.getInfo(:photo_id => photo_id)
+      url = FlickRaw.url(info)
     end
 
-    return url 
+    return url
   end
 
 end
