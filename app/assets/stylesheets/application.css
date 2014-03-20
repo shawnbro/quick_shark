@@ -11,3 +11,32 @@
  *= require_self
  *= require_tree .
  */
+
+header {
+  height: 70px;  
+  display: inline;
+}
+
+header nav ul {
+  list-style: none; 
+  overflow: hidden; 
+  position: relative;
+  float: right;
+  padding: 10px;
+  outline: solid black 1px;
+}
+
+header nav ul li{ 
+  font-size: 20px;
+  float: left; 
+  margin: 0 20px 0 20px;
+  }
+
+header nav ul li a{
+  text-decoration: none;
+}
+
+
+
+
+
