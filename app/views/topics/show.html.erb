@@ -1,5 +1,5 @@
 <h1><%= @topic.name %></h1>
-<div id='word-association'>
+<div id='journey'><div id='word-association'></div></div>
   <div><h1><%= @word_association[:word] %></h1>
     <% @word_association[:definitions].each do |definition| %>
       <div><%= definition["text"] %></div>
