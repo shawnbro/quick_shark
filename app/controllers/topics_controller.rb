@@ -12,5 +12,4 @@ class TopicsController < ApplicationController
     binding.pry
   end
 
-  
 end
