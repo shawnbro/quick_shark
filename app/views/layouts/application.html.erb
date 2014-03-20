@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>QuickShark</title>
+  <title>Tangent</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<header>
+  <nav>
+  <ul>
+      <li><%= link_to("My Account", "#{user_path(session[:user_id])}") if !session[:user_id].nil?%></li>
+      <li><%= link_to "Create Account", new_user_path if session[:user_id].nil? %></li>
+      <li><%= link_to("Log in","/login") if session[:user_id].nil? %></li>
+      <li><%= link_to("Log out #{User.find_by(id: session[:user_id]).first_name}", "/session", method: "delete") unless session[:user_id].nil? %></li>
+  </ul>
+  </nav>
+</header>
 <%= yield %>
 
 </body>
 </html>
+
+

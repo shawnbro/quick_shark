@@ -1,0 +1,23 @@
+<h2>Login below!</h2>
+
+<div class="form">
+<% unless @message.nil? %>
+  <div id="errors">
+    <h3>Errors!</h3>
+    <ul>
+      <li><em><%= @message %></em></li>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_tag "/session" do %>
+  <%= label_tag :email %>
+  <%= email_field_tag :email %>
+  <%= label_tag :password %>
+  <%= password_field_tag :password %>
+  <br>
+  <div class="login">
+  <%= submit_tag "Log in!" %>
+</div>
+<% end %>
+</div>
