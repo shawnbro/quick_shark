@@ -1,7 +1,5 @@
 QuickShark::Application.routes.draw do
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
-
-    root "topic#new"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

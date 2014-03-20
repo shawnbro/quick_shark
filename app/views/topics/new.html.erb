@@ -1,0 +1,4 @@
+<%= form_for :topic, url: topics_path do |f| %>
+  Enter Any Word, Topic, Idea, etc.: <%= f.text_field :topic %><br />
+  <%= f.submit "Submit" %>
+<% end %>
