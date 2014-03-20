@@ -3,6 +3,7 @@
 <% end %>
   <div><h1><%= @word_association[:word] %></h1>
     <p> <%= @description %> </p>
+    <img src="<%= @photo %>">
     <% @word_association[:definitions].each do |definition| %>
       <div><%= definition["text"] %></div>
     <% end %>
