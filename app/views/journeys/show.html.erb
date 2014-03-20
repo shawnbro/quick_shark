@@ -5,3 +5,9 @@
   in 
     <span class="tangent-number"><%= @journey.topics.count %></span>
   tangents.</h1>
+
+<div class="journey-graph">
+  <% @journey.topics.each do | topic | %>
+   <div><%= topic.name %></div>
+  <% end %>
+</div>
