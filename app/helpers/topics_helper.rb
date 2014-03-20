@@ -29,10 +29,15 @@ module TopicsHelper
       type: "/common/topic"
     }
     from_freebase = HTTParty.get(url, :format => :json)
-    mid = from_freebase["result"][0]["mid"]
-    description = HTTParty.get("https://www.googleapis.com/freebase/v1/topic#{mid}?filter=/common/topic/description", :format => :json)
+    # fallback logic
+    if from_freebase["result"].length == 0
+      return "No description available"
+    else
+      mid = from_freebase["result"][0]["mid"]
+      description = HTTParty.get("https://www.googleapis.com/freebase/v1/topic#{mid}?filter=/common/topic/description", :format => :json)
 
-    return description["property"]["/common/topic/description"]["values"][0]["value"]
+      return description["property"]["/common/topic/description"]["values"][0]["value"]
+    end
   end
 
   def find_photo(tags)

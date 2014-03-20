@@ -9,6 +9,7 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.find_by(id: params[:id])
     @word_association = get_word_associations(@topic[:name])
+    @description = find_topic_description(@topic[:name])
   end
 
   
