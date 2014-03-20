@@ -18,7 +18,7 @@ class TopicsController < ApplicationController
   end
 
   def data
-    @topic = Topic.find_by(id: params[:id])
+    @topic = Topic.find_by(name: params[:word] )
     @word_association = get_word_associations(@topic[:name])
     array_results = @word_association[:word_associations]
     @raw_tree_data = tree_results(array_results)
