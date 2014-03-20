@@ -1,6 +1,7 @@
 QuickShark::Application.routes.draw do
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
 
+  resources :topics, except: [:new]
   resources :journeys, shallow: true do
     resources :topics, except: [:new]
   end

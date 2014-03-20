@@ -6,7 +6,7 @@ describe "a user searches" do
     visit root_path
     fill_in 'topic[topic]', with: "Sharks"
     click_button 'Submit'
-
+    save_and_open_page
     expect(page).to have_content("Sharks")
 
   end
