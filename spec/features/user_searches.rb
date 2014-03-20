@@ -4,11 +4,10 @@ describe "a user searches" do
   it "enters a search term and clicks a search button" do 
 
     visit root_path
-    save_and_open_page
-    fill_in 'search[search]', with: "Sharks"
-    click_button 'Search'
-
+    fill_in 'topic[topic]', with: "Sharks"
+    click_button 'Submit'
     expect(page).to have_content("Sharks")
+    expect(page).to have_content("fish")
 
   end
 end
