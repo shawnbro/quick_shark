@@ -1,5 +1,6 @@
 class TopicsController < ApplicationController
   include TopicsHelper
+
   def new
     @random_word = get_random_word["word"]
   end
@@ -15,8 +16,9 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find_by(name: params[:id])
-    @journey = Journey.find_by(id: @topic[:journey_id])  
-    @word_association = get_word_associations(@topic[:name])
+    @journey = Journey.find_by(id: @topic.journey_id)  
+    @word_association = get_word_associations(@topic.name)
+    @videos = get_youtube_vids(@topic.name).take(4)
   end
 
   def description
@@ -53,11 +55,17 @@ class TopicsController < ApplicationController
     if current_user
       @journey = Journey.find(params[:journey])  
       @journey.topics << @topic
+      render json: @topic
     end
-
-    render json: @topic
   end
 
+  def ytdata
+    @topic = Topic.find_by(name: params[:word] )
+    @video_data = youtube_json(@topic.name)
+    render json: @video_data
+  end
+
+  private
 
   def get_random_word
     randomWord = HTTParty.get("http://api.wordnik.com:80/v4/words.json/randomWord?hasDictionaryDef=false&minCorpusCount=0&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=5&maxLength=-1&api_key="+WORDNIK_API_KEY)

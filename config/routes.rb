@@ -22,4 +22,6 @@ QuickShark::Application.routes.draw do
 
   post "/add_topic", to: "topics#add_topic"
 
+  get "/ytdata", to: "topics#ytdata"
+
 end

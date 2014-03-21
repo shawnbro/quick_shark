@@ -1,7 +1,7 @@
 <% if current_user %>
   <div id='journey'> Current Journey: <span><%= @journey[:title] %></span> </div><span id="journey_id" style="display: none;"><%= @journey[:id] %></span>
 <% end %>
-  <div><h1><%= @word_association[:word] %></h1>
+  <div><h1><%= @word_association[:word] %></h1><span><%=@word_association[:reverse_definitions]["results"][0]["text"] %>
   </div>
   
 <div id="define"><h2>Description</h2><p> <%= @description %> </p>
@@ -11,6 +11,36 @@
 <div id="pictures"></div>
 <div id="videos"></div>
 <div id="stats"></div>
+
+</div>
+<div class="Youtube-videos">
+  <% @videos.each do |video| %>
+      <iframe width="420" height="345"
+      src="http://www.youtube.com/embed/<%= video[0] %>">
+      </iframe>
+  <% end %>
+</div>
+<button class="refresh">Refresh Videos</button>
+<script type="text/javascript">
+var word = $('h1').text();
+
+var videos;
+var video_index = 4;
+
+$.getJSON("/ytdata?word="+word, function (data) {
+  videos = data;
+});
+
+$('button.refresh').click(function() {
+  $('iframe').remove();
+  for ( var i = 0; i < 4; i++ ){
+      $('<iframe width="420" height="345">').attr( "src", 'http://www.youtube.com/embed/' + videos.items[(i+video_index) % 50].id.videoId + '').appendTo('div.Youtube-videos');
+    }
+  video_index += 4;
+
+});
+</script>
+
 <div id="viz"></div>
 
 

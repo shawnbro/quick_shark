@@ -15,3 +15,4 @@
 //= require turbolinks
 //= require treediagram
 //= require d3
+//= require keyboard
