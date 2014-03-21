@@ -1,11 +1,3 @@
-<!-- show.html.erb -->
-<%= form_for :topic, url: topics_path do |f| %>
-  Enter Any Word, Topic, Idea, etc.: <%= f.text_field :topic %><br />
-  <%= f.submit "Submit" %>
-<% end %>
-
-
-
 <h2><%= @user.first_name.capitalize %>'s Homepage</h2>
 
 <%= link_to "Edit My Info", edit_user_path(@user) %>
