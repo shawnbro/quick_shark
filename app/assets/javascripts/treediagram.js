@@ -1,9 +1,11 @@
 
 //JSON object with the data
 window.onload = function() {
-var value = $("h1").text()
-d3.json("/data?word="+value, function(data){treeData=data
+var value = $("h1").text();
+d3.json("/data?word="+value, draw)}
 
+var draw = function(data){treeData=data
+$("div#viz").empty()
 // Create a svg canvas
   var vis = d3.select("#viz").append("svg:svg")
     .attr("width", 900)
@@ -38,16 +40,12 @@ d3.json("/data?word="+value, function(data){treeData=data
     .attr("stroke", "grey")
     .attr("fill", "white")
     // add animation
-    .on("mouseover", function(){d3.select(this).style("fill", "aliceblue");})
-    .on("mouseout", function(){d3.select(this).style("fill", "white");})
-    .on("mouseover", animate);
+    .on("mouseover", animatecircle);
 
-  function animate() {
+  function animatecircle() {
     d3.select(this).transition()
         .duration(1000)
-        .attr("r", 10)
-      .transition()
-        .attr("r", 40)
+        .attr("r", 20)
       .transition()
         .duration(1000)
         .attr("r", 10);
@@ -58,7 +56,26 @@ d3.json("/data?word="+value, function(data){treeData=data
     .attr("dy", ".31em")
     .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
     .attr("transform", function(d) { return d.x < 180 ? null : "rotate(180)"; })
-    .text(function(d) { return d.name; });
+    .text(function(d) { return d.name; })
+    .on("mouseover", animatetext)
+    .on("click", function(d,i){
+      d3.json("/data?word="+d.name, draw)
+      $("h1").text(d.name)
+      addTopic($("span#journey_id").text(), d.name);
+    });
 
-});
-}
+  function animatetext() {
+    d3.select(this).transition()
+        .duration(100)
+        .style("font-size", "16px")
+      .transition()
+        .delay(1500)
+        .duration(100)
+        .style("font-size", "12px")
+  };
+
+  var addTopic = function(journey, topic){
+    $.post("/add_topic?journey="+journey+"&topic="+topic);
+  };
+
+};

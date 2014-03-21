@@ -1,8 +1,9 @@
 <% if current_user %>
-  <div id='journey'> Current Journey: <%= @journey[:title] %> </div>
+  <div id='journey'> Current Journey: <span><%= @journey[:title] %></span> </div><span id="journey_id" style="display: none;"><%= @journey[:id] %></span>
 <% end %>
   <div><h1><%= @word_association[:word] %></h1>
     <p> <%= @description %> </p>
+    <img src="<%= @photo %>">
     <% @word_association[:definitions].each do |definition| %>
       <div><%= definition["text"] %></div>
     <% end %>
@@ -12,4 +13,4 @@
   </div>
 </div> 
 <div id="viz"></div>
-<script type="text/JavaScript" src="treediagram.js"></script> 
+
