@@ -14,14 +14,14 @@
 
 header {
   height: 70px;  
-  display: inline;
+  display: inline-block;
 }
 
 header nav ul {
   list-style: none; 
   overflow: hidden; 
   position: relative;
-  float: right;
+  float: left;
   padding: 10px;
   outline: solid black 1px;
 }
@@ -36,7 +36,9 @@ header nav ul li a{
   text-decoration: none;
 }
 
-
-
-
+#search_bar{
+  position: fixed;
+  top: 50%;
+  left: 25%;
+}
 
