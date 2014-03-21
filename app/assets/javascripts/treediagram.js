@@ -116,6 +116,18 @@ $("div#viz").empty()
     reset();
     $("div#stats")[0].style.left = "5%";
     $("div#videos")[0].style.left = "-85%";
+    // ajax get for stats from wolfram
+    $.ajax({
+      url: "/stats",
+      data: {name: $("h1").text()},
+      dataType: "JSON",
+      success: function(result){
+        $("div#stats img").remove();
+        for(i=0; i < result.length; i++) {
+          $("div#stats").append("<img src='"+result[i]["image"]["src"]+"' >");
+        }
+      }
+    })
   });
 
   KeyboardJS.on('right', function() {
