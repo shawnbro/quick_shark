@@ -18,8 +18,5 @@ describe "click-search" do
     within '#journey-topics' do 
       expect(page).to have_content("clown")
     end
-    click_link("buffoon")
-
-
   end
 end
