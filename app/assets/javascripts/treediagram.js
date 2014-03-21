@@ -82,7 +82,7 @@ $("div#viz").empty()
     });
     
   };
-
+// this is now broken
   KeyboardJS.on('down', function() {
     reset();
     $("div#define")[0].style.top = "5%";
@@ -134,7 +134,32 @@ $("div#viz").empty()
     reset();
     $("div#videos")[0].style.left = "5%";
     $("div#stats")[0].style.left = "95%";
+    $.ajax({
+      url: "/ytdata",
+      data: {name: $("h1").text()},
+      dataType: "JSON",
+      success: function(result){ 
+        $('iframe').remove();
+        $('button').remove();
+        $("div#videos").append($("<button>").text("Refresh"))
+        for ( var i = 0; i < 4; i++ ){
+        $('<iframe width="420" height="345">').attr( "src", 'http://www.youtube.com/embed/' + result.items[i].id.videoId + '').appendTo('div#videos');
+        }
+      }
+    })
   });
+
+  // var videoIndex = 4;
+
+  // var refreshButton = function(){
+  //   $('button.refresh').click(function() {
+  //   $('iframe').remove();
+  //   for ( var i = 0; i < 4; i++ ){
+  //       $('<iframe width="420" height="345">').attr( "src", 'http://www.youtube.com/embed/' + videos.items[(i+videoIndex) % 50].id.videoId + '').appendTo('div.Youtube-videos');
+  //     }
+  //   videoIndex += 4;
+  //   });
+  // }
 
   var reset = function() {
     $("div#define")[0].style.top = "-85%";
