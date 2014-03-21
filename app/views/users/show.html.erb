@@ -3,3 +3,28 @@
   Enter Any Word, Topic, Idea, etc.: <%= f.text_field :topic %><br />
   <%= f.submit "Submit" %>
 <% end %>
+
+
+
+<h2><%= @user.first_name.capitalize %>'s Homepage</h2>
+
+<%= link_to "Edit My Info", edit_user_path(@user) %>
+
+<%= form_tag user_path(@user), method: "delete" do %>
+<%= submit_tag("Delete My Account") %>
+<% end %>
+
+
+
+<div>
+  <h3>Saved Journeys</h3>
+  <span class="journey_title">
+  <ul>
+    <% journey_list = Journey.where(:user_id == @user.id) %>
+    <% journey_list.each do |journey| %>
+      <li><a href="/journeys/<%= journey.id %>"><%= journey.title  %></a></li>
+    <% end %>
+  </ul>
+  </span> 
+</div>
+
