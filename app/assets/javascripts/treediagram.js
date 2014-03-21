@@ -1,9 +1,11 @@
 
 //JSON object with the data
 window.onload = function() {
-var value = $("h1").text()
-d3.json("/data?word="+value, function(data){treeData=data
+var value = $("h1").text();
+d3.json("/data?word="+value, draw)}
 
+var draw = function(data){treeData=data
+$("div#viz").empty()
 // Create a svg canvas
   var vis = d3.select("#viz").append("svg:svg")
     .attr("width", 900)
@@ -38,8 +40,6 @@ d3.json("/data?word="+value, function(data){treeData=data
     .attr("stroke", "grey")
     .attr("fill", "white")
     // add animation
-    // .on("mouseover", function(){d3.select(this).style("fill", "aliceblue");})
-    // .on("mouseout", function(){d3.select(this).style("fill", "white");})
     .on("mouseover", animatecircle);
 
   function animatecircle() {
@@ -59,7 +59,9 @@ d3.json("/data?word="+value, function(data){treeData=data
     .text(function(d) { return d.name; })
     .on("mouseover", animatetext)
     .on("click", function(d,i){
-      console.log(d.name);
+      d3.json("/data?word="+d.name, draw)
+      $("h1").text(d.name)
+      addTopic($("span#journey_id").text(), d.name);
     });
 
   function animatetext() {
@@ -69,8 +71,16 @@ d3.json("/data?word="+value, function(data){treeData=data
       .transition()
         .delay(1500)
         .duration(100)
-        .style("font-size", "10px")
+        .style("font-size", "12px")
   };
 
-});
-}
+  var addTopic = function(journey, topic){
+    var url = "/add_topic?journey=" + journey + "&topic=" + topic;
+
+    $.post(url, function(res) {
+      history.pushState({}, null, res.name);
+    });
+    
+  };
+
+};

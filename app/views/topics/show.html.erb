@@ -1,5 +1,5 @@
 <% if current_user %>
-  <div id='journey'> Current Journey: <%= @journey[:title] %> </div>
+  <div id='journey'> Current Journey: <span><%= @journey[:title] %></span> </div><span id="journey_id" style="display: none;"><%= @journey[:id] %></span>
 <% end %>
   <div><h1><%= @word_association[:word] %></h1>
     <p> <%= @description %> </p>
@@ -11,6 +11,13 @@
       <div><%= association["words"] %></div>
     <% end %>
   </div>
+
+<div id='wolfram'>  
+  <% @wolfram.each do |result| %>
+    <div><img src='<%= result["image"]["src"] %>' alt='image'/></div>
+  <% end %>
+</div>
 </div> 
 <div id="viz"></div>
+
 

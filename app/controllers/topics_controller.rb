@@ -11,15 +11,20 @@ class TopicsController < ApplicationController
   end
 
   def show
-    @topic = Topic.find_by(id: params[:id])
+    @topic = Topic.find_by(name: params[:id])
     @journey = Journey.find_by(id: @topic[:journey_id])  
     @word_association = get_word_associations(@topic[:name])
     @description = find_topic_description(@topic[:name])
     @photo = find_photo(@topic[:name])
+    @wolfram = get_wolfram_alpha(@topic[:name])
   end
 
   def data
-    @topic = Topic.find_by(name: params[:word] )
+    if Topic.find_by(name: params[:word] ) !=  nil
+      @topic = Topic.find_by(name: params[:word] ) 
+      else
+      @topic = Topic.create(name: params[:word])
+    end
     @word_association = get_word_associations(@topic[:name])
     array_results = @word_association[:word_associations]
     @raw_tree_data = tree_results(array_results)
@@ -27,19 +32,16 @@ class TopicsController < ApplicationController
     render json: @tree_data
   end
 
-private 
+  def add_topic
+    @topic = Topic.find_by(name: params[:topic]) || Topic.create(name: params[:topic])
 
-  def tree_results(array_results)
-    tree_data = {"name"=> (@topic[:name]), "info" => "tst", "children" => [
-      ]}
-    array_results.each do |results|
-      tree_data["children"].push({"name" => results["relationshipType"], "children" => 
-        (results["words"].map do |word|
-           Hash["name", word]
-        end)
-      })
+    if current_user
+      @journey = Journey.find(params[:journey])  
+      @journey.topics << @topic
     end
-    return tree_data
+
+    render json: @topic
   end
+
 
 end
