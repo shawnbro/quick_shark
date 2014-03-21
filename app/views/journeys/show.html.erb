@@ -1,13 +1,21 @@
 <h1>From 
-    <span class="starting-word"><%= @journey.topics.first.name %></span> 
+  <span class="starting-word"><%= @journey.topics.first.name %></span> 
   to 
-    <span class="ending-word"><%= @journey.topics.last.name %></span> 
+  <span class="ending-word"><%= @journey.topics.last.name %></span> 
   in 
-    <span class="tangent-number"><%= @journey.topics.count %></span>
+  <span class="tangent-number"><%= @journey.topics.count %></span>
   tangents.</h1>
 
-<div class="journey-graph">
-  <% @journey.topics.each do | topic | %>
-   <div><%= topic.name %></div>
-  <% end %>
+
+
 </div>
+
+<div id="bar-chart">
+
+</div>
+
+<script type="text/javascript">
+  window.journeyID = <%= @journey.id %>;
+</script>
+
+<%= javascript_include_tag "journeybargraph" %>

@@ -18,6 +18,8 @@ QuickShark::Application.routes.draw do
   get "/pictures", to: "topics#pictures"
   get "/stats", to: "topics#stats"
 
+  get "/journey_data", to: "journeys#journey_data"
+
   post "/add_topic", to: "topics#add_topic"
 
   get "/ytdata", to: "topics#ytdata"

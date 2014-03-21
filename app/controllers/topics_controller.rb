@@ -49,37 +49,23 @@ class TopicsController < ApplicationController
     render json: @tree_data
   end
 
-<<<<<<< HEAD
   def add_topic
     @topic = Topic.find_by(name: params[:topic]) || Topic.create(name: params[:topic])
 
     if current_user
       @journey = Journey.find(params[:journey])  
       @journey.topics << @topic
-=======
+      render json: @topic
+    end
+  end
+
   def ytdata
     @topic = Topic.find_by(name: params[:word] )
     @video_data = youtube_json(@topic[:name])
     render json: @video_data
   end
 
-private
-
-  def tree_results(array_results)
-    tree_data = {"name"=> (@topic[:name]), "info" => "tst", "children" => [
-      ]}
-    array_results.each do |results|
-      tree_data["children"].push({"name" => results["relationshipType"], "children" =>
-        (results["words"].map do |word|
-           Hash["name", word]
-        end)
-      })
->>>>>>> f650ae7a6676b4a5a0c571fabe917230a7c8b032
-    end
-
-    render json: @topic
-  end
-
+  private
 
   def get_random_word
     randomWord = HTTParty.get("http://api.wordnik.com:80/v4/words.json/randomWord?hasDictionaryDef=false&minCorpusCount=0&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=5&maxLength=-1&api_key="+WORDNIK_API_KEY)
