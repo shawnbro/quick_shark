@@ -62,7 +62,7 @@ module TopicsHelper
     video_results = []
     full_results = HTTParty.get("https://www.googleapis.com/youtube/v3/search?part=snippet&q=#{query}&maxResults=10&key=AIzaSyCRDeDMGiK7fjDi3u04Qiz1TmuNRnSECdk")
     full_results["items"].each do |result|
-      video_results.push("videoId" => result["id"]["videoId"], "title" => result["snippet"]["title"])
+      video_results.push([result["id"]["videoId"], result["snippet"]["title"]])
     end
     return video_results
   end
