@@ -14,31 +14,28 @@
 </div>
 <div class="Youtube-videos">
   <% @videos.each do |video| %>
-    <div id="video">
       <iframe width="420" height="345"
       src="http://www.youtube.com/embed/<%= video[0] %>">
       </iframe>
-    </div>
   <% end %>
-  <button class="refresh">Refresh Videos</button>
 </div>
+<button class="refresh">Refresh Videos</button>
 <script type="text/javascript">
-var j = 4
+var word = $('h1').text();
+
+var videos;
+var video_index = 4;
+
+$.getJSON("/ytdata?word="+word, function (data) {
+  videos = data;
+});
+
 $('button.refresh').click(function() {
   $('iframe').remove();
-  $('div#video').remove();
-  for ( var i = 0; i < 4; i++){
-    $.getJSON( "https://www.googleapis.com/youtube/v3/search?part=snippet&q=pikachu&maxResults=10&key=AIzaSyCRDeDMGiK7fjDi3u04Qiz1TmuNRnSECdk", function (data) {
-    var ytObject = data;
-    // data.items[1].id.videoId
-    });
-    $('<div id="video">');
-    if ( ytObject.items.length > j ){
-      j = 0
+  for ( var i = 0; i < 4; i++ ){
+      $('<iframe width="420" height="345">').attr( "src", 'http://www.youtube.com/embed/' + videos.items[(i+video_index) % 50].id.videoId + '').appendTo('div.Youtube-videos');
     }
-    $('<iframe width="420" height="345">').attr( "src", 'http://www.youtube.com/embed/' + ytObject.items[j].id.videoId + '')
-    j++
-  }
+  video_index += 4;
 
 });
 </script>

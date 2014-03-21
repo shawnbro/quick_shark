@@ -28,6 +28,12 @@ class TopicsController < ApplicationController
     render json: @tree_data
   end
 
+  def ytdata
+    @topic = Topic.find_by(name: params[:word] )
+    @video_data = youtube_json(@topic[:name])
+    render json: @video_data
+  end
+
 private
 
   def tree_results(array_results)
