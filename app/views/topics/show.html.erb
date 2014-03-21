@@ -2,19 +2,16 @@
   <div id='journey'> Current Journey: <span><%= @journey[:title] %></span> </div><span id="journey_id" style="display: none;"><%= @journey[:id] %></span>
 <% end %>
   <div><h1><%= @word_association[:word] %></h1>
-    <p> <%= @description %> </p>
-    <img src="<%= @photo %>">
-    <% @word_association[:definitions].each do |definition| %>
-      <div><%= definition["text"] %></div>
-    <% end %>
-    <% @word_association[:word_associations].each do |association| %>
-      <div><%= association["words"] %></div>
-    <% end %>
   </div>
-</div> 
-<div id="define"></div>
-<div id="pictures"></div>
+  
+
+<div id="define"><h2>Description</h2><p> <%= @description %> </p>
+  <% @word_association[:definitions].each do |definition| %>
+      <div><%= definition["text"] %></div>
+      <% end %></div>
+<div id="pictures"><img src="<%= @photo %>"></div>
 <div id="videos"></div>
 <div id="stats"></div>
+
 <div id="viz"></div>
 

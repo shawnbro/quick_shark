@@ -17,6 +17,8 @@ QuickShark::Application.routes.draw do
   root "topics#new"
 
   get "/data", to: "topics#data"
+  get "/description", to: "topics#description"
 
   post "/add_topic", to: "topics#add_topic"
+
 end

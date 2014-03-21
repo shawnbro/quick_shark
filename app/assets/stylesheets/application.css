@@ -36,6 +36,10 @@ header nav ul li a{
   text-decoration: none;
 }
 
+div#viz{
+  margin-left: 5%;
+}
+
 div#define{
   height: 90%;
   width: 90%;
