@@ -18,13 +18,8 @@ module TopicsHelper
         word: word,
         definitions: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word.gsub(" ", "%20")+'/definitions?limit=200&includeRelated=true&useCanonical=true&includeTags=false&api_key='+WORDNIK_API_KEY),
         # etymologies: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word+'/etymologies?api_key='+WORKNIK_API_KEY),
-<<<<<<< HEAD
-        word_associations: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word+'/relatedWords?useCanonical=false&limitPerRelationshipType=10&api_key='+WORDNIK_API_KEY),
-        reverse_definitions: HTTParty.get('http://api.wordnik.com:80/v4/words.json/reverseDictionary?query='+word+'&minCorpusCount=5&maxCorpusCount=-1&minLength=1&maxLength=-1&includeTags=false&skip=0&limit=200&api_key='+WORDNIK_API_KEY)
-=======
         word_associations: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word.gsub(" ", "%20")+'/relatedWords?useCanonical=false&limitPerRelationshipType=10&api_key='+WORDNIK_API_KEY),
         reverse_definitions: HTTParty.get('http://api.wordnik.com:80/v4/words.json/reverseDictionary?query='+word.gsub(" ", "%20")+'&minCorpusCount=5&maxCorpusCount=-1&minLength=1&maxLength=-1&includeTags=false&skip=0&limit=5&api_key='+WORDNIK_API_KEY)    
->>>>>>> ee54c34652846c170abb0f4aa9ea14f50d8abc08
         }
       word_association[:definitions].each do |definition|
         definition.delete("textProns")
