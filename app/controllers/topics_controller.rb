@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
   include TopicsHelper
-  
+
   def create
     @topic = Topic.create(name: params["topic"]["topic"])
     if current_user
@@ -12,10 +12,11 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find_by(id: params[:id])
-    @journey = Journey.find_by(id: @topic[:journey_id])  
+    @journey = Journey.find_by(id: @topic[:journey_id])
     @word_association = get_word_associations(@topic[:name])
     @description = find_topic_description(@topic[:name])
     @photo = find_photo(@topic[:name])
+    @video = get_youtube_vids(@topic[:name])
   end
 
   def data
@@ -27,13 +28,13 @@ class TopicsController < ApplicationController
     render json: @tree_data
   end
 
-private 
+private
 
   def tree_results(array_results)
     tree_data = {"name"=> (@topic[:name]), "info" => "tst", "children" => [
       ]}
     array_results.each do |results|
-      tree_data["children"].push({"name" => results["relationshipType"], "children" => 
+      tree_data["children"].push({"name" => results["relationshipType"], "children" =>
         (results["words"].map do |word|
            Hash["name", word]
         end)

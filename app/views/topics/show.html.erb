@@ -11,6 +11,17 @@
       <div><%= association["words"] %></div>
     <% end %>
   </div>
-</div> 
+</div>
+<div class="Youtube-videos">
+  <% 4.times do %>
+    <% @video.each do |vid| %>
+      <div id="video">
+        <iframe width="420" height="345"
+        src="http://www.youtube.com/embed/<% vid["videoId"] %>">
+        </iframe>
+      </div>
+    <% end %>
+  <% end %>
+</div>
 <div id="viz"></div>
 

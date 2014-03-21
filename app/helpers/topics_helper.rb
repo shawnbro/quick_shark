@@ -7,7 +7,7 @@ module TopicsHelper
         definitions: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word+'/definitions?limit=200&includeRelated=true&useCanonical=true&includeTags=false&api_key='+WORDNIK_API_KEY),
         # etymologies: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word+'/etymologies?api_key='+WORKNIK_API_KEY),
         word_associations: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word+'/relatedWords?useCanonical=false&limitPerRelationshipType=10&api_key='+WORDNIK_API_KEY),
-        reverse_definitions: HTTParty.get('http://api.wordnik.com:80/v4/words.json/reverseDictionary?query='+word+'&minCorpusCount=5&maxCorpusCount=-1&minLength=1&maxLength=-1&includeTags=false&skip=0&limit=200&api_key='+WORDNIK_API_KEY)    
+        reverse_definitions: HTTParty.get('http://api.wordnik.com:80/v4/words.json/reverseDictionary?query='+word+'&minCorpusCount=5&maxCorpusCount=-1&minLength=1&maxLength=-1&includeTags=false&skip=0&limit=200&api_key='+WORDNIK_API_KEY)
         }
       word_association[:definitions].each do |definition|
         definition.delete("textProns")
@@ -58,4 +58,12 @@ module TopicsHelper
     return url
   end
 
+  def get_youtube_vids(query)
+    video_results = []
+    full_results = HTTParty.get("https://www.googleapis.com/youtube/v3/search?part=snippet&q=#{query}&maxResults=10&key=AIzaSyCRDeDMGiK7fjDi3u04Qiz1TmuNRnSECdk")
+    full_results["items"].each do |result|
+      video_results.push("videoId" => result["id"]["videoId"], "title" => result["snippet"]["title"])
+    end
+    return video_results
+  end
 end
