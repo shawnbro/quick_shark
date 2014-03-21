@@ -16,9 +16,9 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find_by(name: params[:id])
-    @journey = Journey.find_by(id: @topic[:journey_id])  
-    @word_association = get_word_associations(@topic[:name])
-    @videos = get_youtube_vids(@topic[:name]).take(4)
+    @journey = Journey.find_by(id: @topic.journey_id)  
+    @word_association = get_word_associations(@topic.name)
+    @videos = get_youtube_vids(@topic.name).take(4)
   end
 
   def description
@@ -61,7 +61,7 @@ class TopicsController < ApplicationController
 
   def ytdata
     @topic = Topic.find_by(name: params[:word] )
-    @video_data = youtube_json(@topic[:name])
+    @video_data = youtube_json(@topic.name)
     render json: @video_data
   end
 
