@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require treediagram
+//= require keyboard
 //= require d3
