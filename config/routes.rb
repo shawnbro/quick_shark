@@ -1,15 +1,12 @@
 QuickShark::Application.routes.draw do
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
 
-
-  resources :topics, except: [:new]
-
   resources :users do
-    resources :journeys, shallow: true do
-      resources :topics, except: [:new]
-    end
+    resources :journeys, shallow: true
   end
 
+  resources :topics
+  
   get "/login", to: "session#new"
   post "/session", to: "session#create"
   delete "/session", to: "session#destroy"
@@ -18,4 +15,5 @@ QuickShark::Application.routes.draw do
 
   get "/data", to: "topics#data"
 
+  post "/add_topic", to: "topics#add_topic"
 end
