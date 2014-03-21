@@ -36,7 +36,59 @@ header nav ul li a{
   text-decoration: none;
 }
 
+div#define{
+  height: 90%;
+  width: 90%;
+  position: fixed;
+  background-color: rgba(102,102,102,.75);
+  z-index: 1;
+  border-radius: 15px;
+  top: -85%;
+  left: 5%;
+}
 
+div#pictures{
+  height: 90%;
+  width: 90%;
+  position: fixed;
+  background-color: rgba(66,153,51,.75);
+  z-index: 1;
+  border-radius: 15px;
+  top: 95%;
+  left: 5%;
+}
+
+div#videos{
+  height: 90%;
+  width: 90%;
+  position: fixed;
+  background-color: rgba(48,63,145,.75);
+  z-index: 1;
+  border-radius: 15px;
+  left: -85%;
+  top: 5%;
+}
+
+div#stats{
+  height: 90%;
+  width: 90%;
+  position: fixed;
+  background-color: rgba(201,94,98,.75);
+  z-index: 1;
+  border-radius: 15px;
+  left: 95%;
+  top: 5%;
+}
+
+svg {
+    border: solid 1px #ccc;
+    font: 12px sans-serif;
+}
+.link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 1.5px;
+}
 
 
 

@@ -9,7 +9,7 @@ $("div#viz").empty()
 // Create a svg canvas
   var vis = d3.select("#viz").append("svg:svg")
     .attr("width", 900)
-    .attr("height", 900)
+    .attr("height", 850)
     .append("svg:g")
     .attr("transform", "translate(400, 400)");
 
@@ -77,5 +77,39 @@ $("div#viz").empty()
   var addTopic = function(journey, topic){
     $.post("/add_topic?journey="+journey+"&topic="+topic);
   };
+
+  KeyboardJS.on('down', function() {
+    reset();
+    $("div#define")[0].style.top = "5%";
+    $("div#pictures")[0].style.top = "95%";
+  });
+
+  KeyboardJS.on('up', function() {
+    reset();
+    $("div#pictures")[0].style.top = "5%";
+    $("div#define")[0].style.top = "-85%";
+  });
+
+  KeyboardJS.on('left', function() {
+    reset();
+    $("div#stats")[0].style.left = "5%";
+    $("div#videos")[0].style.left = "-85%";
+  });
+
+  KeyboardJS.on('right', function() {
+    reset();
+    $("div#videos")[0].style.left = "5%";
+    $("div#stats")[0].style.left = "95%";
+  });
+
+  var reset = function() {
+    $("div#define")[0].style.top = "-85%";
+    $("div#pictures")[0].style.top = "95%";
+    $("div#videos")[0].style.left = "-85%";
+    $("div#stats")[0].style.left = "95%";
+  }
+
+  KeyboardJS.on('c', reset);
+
 
 };
