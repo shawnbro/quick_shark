@@ -16,6 +16,7 @@ class TopicsController < ApplicationController
     @word_association = get_word_associations(@topic[:name])
     @description = find_topic_description(@topic[:name])
     @photo = find_photo(@topic[:name])
+    @wolfram = get_wolfram_alpha(@topic[:name])
   end
 
   def data

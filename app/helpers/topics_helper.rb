@@ -1,6 +1,10 @@
 
 module TopicsHelper
 
+  def get_wolfram_alpha(word)
+    stuff = HTTParty.get('http://api.wolframalpha.com/v2/query?input='+word+'&appid='+WOLFRAM_ALPHA_API_KEY)
+  end
+
   def get_word_associations(word)
       word_association = {
         word: word,
