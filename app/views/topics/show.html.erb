@@ -11,6 +11,13 @@
       <div><%= association["words"] %></div>
     <% end %>
   </div>
+
+<div id='wolfram'>  
+  <% @wolfram.each do |result| %>
+    <div><img src='<%= result["image"]["src"] %>' alt='image'/></div>
+  <% end %>
+</div>
 </div> 
 <div id="viz"></div>
+
 
