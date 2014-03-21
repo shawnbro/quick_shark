@@ -50,7 +50,6 @@ module TopicsHelper
       wordTree = []
       mid = from_freebase["result"][0]["mid"]
       description = HTTParty.get("https://www.googleapis.com/freebase/v1/topic#{mid}?filter=/common/topic/description", :format => :json)
-      split_up_description = []
       description = description["property"]["/common/topic/description"]["values"][0]["value"]
     end
   end
