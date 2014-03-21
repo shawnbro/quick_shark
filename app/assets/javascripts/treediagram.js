@@ -75,7 +75,9 @@ $("div#viz").empty()
   };
 
   var addTopic = function(journey, topic){
-    $.post("/add_topic?journey="+journey+"&topic="+topic, function(res) {
+    var url = "/add_topic?journey=" + journey + "&topic=" + topic;
+
+    $.post(url, function(res) {
       history.pushState({}, null, res.name);
     });
     
