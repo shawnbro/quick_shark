@@ -58,4 +58,17 @@ module TopicsHelper
     return url
   end
 
+  def tree_results(array_results)
+    tree_data = {"name"=> (@topic[:name]), "info" => "tst", "children" => [
+      ]}
+    array_results.each do |results|
+      tree_data["children"].push({"name" => results["relationshipType"], "children" => 
+        (results["words"].map do |word|
+           Hash["name", word]
+        end)
+      })
+    end
+    return tree_data
+  end
+
 end
