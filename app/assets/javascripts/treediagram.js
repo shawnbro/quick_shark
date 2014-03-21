@@ -75,7 +75,10 @@ $("div#viz").empty()
   };
 
   var addTopic = function(journey, topic){
-    $.post("/add_topic?journey="+journey+"&topic="+topic);
+    $.post("/add_topic?journey="+journey+"&topic="+topic, function(res) {
+      history.pushState({}, null, res.name);
+    });
+    
   };
 
 };
