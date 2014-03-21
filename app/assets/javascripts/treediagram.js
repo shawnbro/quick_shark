@@ -38,16 +38,14 @@ d3.json("/data?word="+value, function(data){treeData=data
     .attr("stroke", "grey")
     .attr("fill", "white")
     // add animation
-    .on("mouseover", function(){d3.select(this).style("fill", "aliceblue");})
-    .on("mouseout", function(){d3.select(this).style("fill", "white");})
-    .on("mouseover", animate);
+    // .on("mouseover", function(){d3.select(this).style("fill", "aliceblue");})
+    // .on("mouseout", function(){d3.select(this).style("fill", "white");})
+    .on("mouseover", animatecircle);
 
-  function animate() {
+  function animatecircle() {
     d3.select(this).transition()
         .duration(1000)
-        .attr("r", 10)
-      .transition()
-        .attr("r", 40)
+        .attr("r", 20)
       .transition()
         .duration(1000)
         .attr("r", 10);
@@ -58,7 +56,21 @@ d3.json("/data?word="+value, function(data){treeData=data
     .attr("dy", ".31em")
     .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
     .attr("transform", function(d) { return d.x < 180 ? null : "rotate(180)"; })
-    .text(function(d) { return d.name; });
+    .text(function(d) { return d.name; })
+    .on("mouseover", animatetext)
+    .on("click", function(d,i){
+      console.log(d.name);
+    });
+
+  function animatetext() {
+    d3.select(this).transition()
+        .duration(100)
+        .style("font-size", "16px")
+      .transition()
+        .delay(1500)
+        .duration(100)
+        .style("font-size", "10px")
+  };
 
 });
 }
