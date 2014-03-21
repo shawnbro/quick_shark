@@ -9,7 +9,7 @@ $("div#viz").empty()
 // Create a svg canvas
   var vis = d3.select("#viz").append("svg:svg")
     .attr("width", 900)
-    .attr("height", 900)
+    .attr("height", 850)
     .append("svg:g")
     .attr("transform", "translate(400, 400)");
 
@@ -82,5 +82,56 @@ $("div#viz").empty()
     });
     
   };
+
+  KeyboardJS.on('down', function() {
+    reset();
+    $("div#define")[0].style.top = "5%";
+    $("div#pictures")[0].style.top = "95%";
+    // ajax get for description
+    $.ajax({
+      url: "/description",
+      data: {name: $("h1").text()},
+      dataType: "text",
+      success: function(result){$("div#define p").text(result)}
+    });
+  });
+
+  KeyboardJS.on('up', function() {
+    reset();
+    $("div#pictures")[0].style.top = "5%";
+    $("div#define")[0].style.top = "-85%";
+    // ajax get for pictures
+    $.ajax({
+      url: "/pictures",
+      data: {name: $("h1").text()},
+      dataType: "text",
+      success: function(result){
+        $("div#pictures img").remove();
+        $("div#pictures").append("<img src="+result+" >");
+      }
+    });
+  });
+
+  KeyboardJS.on('left', function() {
+    reset();
+    $("div#stats")[0].style.left = "5%";
+    $("div#videos")[0].style.left = "-85%";
+  });
+
+  KeyboardJS.on('right', function() {
+    reset();
+    $("div#videos")[0].style.left = "5%";
+    $("div#stats")[0].style.left = "95%";
+  });
+
+  var reset = function() {
+    $("div#define")[0].style.top = "-85%";
+    $("div#pictures")[0].style.top = "95%";
+    $("div#videos")[0].style.left = "-85%";
+    $("div#stats")[0].style.left = "95%";
+  }
+
+  KeyboardJS.on('c', reset);
+
 
 };

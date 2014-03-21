@@ -71,6 +71,7 @@ module TopicsHelper
     return url
   end
 
+# formatting the incoming results from wordnik to the proper nested format
   def tree_results(array_results)
     tree_data = {"name"=> (@topic[:name]), "info" => "tst", "children" => [
       ]}
