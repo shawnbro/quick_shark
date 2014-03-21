@@ -2,7 +2,16 @@
 module TopicsHelper
 
   def get_wolfram_alpha(word)
+    wolfram = []
     stuff = HTTParty.get('http://api.wolframalpha.com/v2/query?input='+word+'&appid='+WOLFRAM_ALPHA_API_KEY)
+    # binding.pry
+    stuff["queryresult"]["pod"].each do |subpod|
+      puts subpod["subpod"].class
+      unless subpod["subpod"].class == Array
+        wolfram.push(Hash["plaintext", subpod["subpod"]["plaintext"], "image", subpod["subpod"]["img"]])
+      end
+    end
+    wolfram
   end
 
   def get_word_associations(word)
