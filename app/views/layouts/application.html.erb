@@ -9,7 +9,7 @@
   <style>
     svg {
         border: solid 1px #ccc;
-        font: 10px sans-serif;
+        font: 12px sans-serif;
     }
     .link {
         fill: none;
@@ -22,10 +22,11 @@
 <header>
   <nav>
   <ul>
+      <li><%= link_to("Home", root_path) %></li>
       <li><%= link_to("My Account", "#{user_path(session[:user_id])}") if !session[:user_id].nil?%></li>
       <li><%= link_to "Create Account", new_user_path if session[:user_id].nil? %></li>
       <li><%= link_to("Log in","/login") if session[:user_id].nil? %></li>
-      <li><%= link_to("Log out #{User.find_by(id: session[:user_id]).first_name}", "/session", method: "delete") unless session[:user_id].nil? %></li>
+      <li><%= link_to("Log out #{User.find_by(id: session[:user_id]).first_name.capitalize}", "/session", method: "delete") unless session[:user_id].nil? %></li>
   </ul>
   </nav>
 </header>
