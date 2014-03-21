@@ -2,7 +2,7 @@
   <div id='journey'> Current Journey: <%= @journey[:title] %> </div>
 <% end %>
   <div><h1><%= @word_association[:word] %></h1>
-    <p> <%= @description.split %> </p>
+    <p> <%= @description %> </p>
     <img src="<%= @photo %>">
     <% @word_association[:definitions].each do |definition| %>
       <div><%= definition["text"] %></div>
