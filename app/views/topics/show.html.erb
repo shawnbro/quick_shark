@@ -3,12 +3,6 @@
 <% end %>
   <div><h1><%= @word_association[:word] %></h1>
   </div>
-
-<div id='wolfram'>  
-  <% @wolfram.each do |result| %>
-    <div><img src='<%= result["image"]["src"] %>' alt='image'/></div>
-  <% end %>
-</div> 
   
 <div id="define"><h2>Description</h2><p> <%= @description %> </p>
   <% @word_association[:definitions].each do |definition| %>

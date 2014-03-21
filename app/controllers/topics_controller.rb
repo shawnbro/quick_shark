@@ -14,7 +14,6 @@ class TopicsController < ApplicationController
     @topic = Topic.find_by(name: params[:id])
     @journey = Journey.find_by(id: @topic[:journey_id])  
     @word_association = get_word_associations(@topic[:name])
-    @wolfram = get_wolfram_alpha(@topic[:name])
   end
 
   def description
@@ -25,6 +24,11 @@ class TopicsController < ApplicationController
   def pictures
     @photo = find_photo(params[:name])
     render json: @photo
+  end
+
+  def stats
+    @wolfram = get_wolfram_alpha(params[:name])
+    render json: @wolfram
   end
 
   def data
