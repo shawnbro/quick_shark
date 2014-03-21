@@ -1,5 +1,6 @@
 class TopicsController < ApplicationController
   include TopicsHelper
+
   def new
     @random_word = get_random_word["word"]
   end
@@ -17,6 +18,7 @@ class TopicsController < ApplicationController
     @topic = Topic.find_by(name: params[:id])
     @journey = Journey.find_by(id: @topic[:journey_id])  
     @word_association = get_word_associations(@topic[:name])
+    @videos = get_youtube_vids(@topic[:name]).take(4)
   end
 
   def description
@@ -47,12 +49,32 @@ class TopicsController < ApplicationController
     render json: @tree_data
   end
 
+<<<<<<< HEAD
   def add_topic
     @topic = Topic.find_by(name: params[:topic]) || Topic.create(name: params[:topic])
 
     if current_user
       @journey = Journey.find(params[:journey])  
       @journey.topics << @topic
+=======
+  def ytdata
+    @topic = Topic.find_by(name: params[:word] )
+    @video_data = youtube_json(@topic[:name])
+    render json: @video_data
+  end
+
+private
+
+  def tree_results(array_results)
+    tree_data = {"name"=> (@topic[:name]), "info" => "tst", "children" => [
+      ]}
+    array_results.each do |results|
+      tree_data["children"].push({"name" => results["relationshipType"], "children" =>
+        (results["words"].map do |word|
+           Hash["name", word]
+        end)
+      })
+>>>>>>> f650ae7a6676b4a5a0c571fabe917230a7c8b032
     end
 
     render json: @topic
