@@ -11,8 +11,8 @@ class TopicsController < ApplicationController
   end
 
   def show
-    @topic = Topic.find_by(id: params[:id])
-    @journey = @topic.journey  
+    @topic = Topic.find_by(name: params[:id])
+    @journey = Journey.find_by(id: @topic[:journey_id])  
     @word_association = get_word_associations(@topic[:name])
     @description = find_topic_description(@topic[:name])
     @photo = find_photo(@topic[:name])
@@ -33,13 +33,14 @@ class TopicsController < ApplicationController
   end
 
   def add_topic
-    if Topic.find_by(name: params[:topic] ) !=  nil
-      @topic = Topic.find_by(name: params[:topic] ) 
-      else
-      @topic = Topic.create(name: params[:topic])
+    @topic = Topic.find_by(name: params[:topic]) || Topic.create(name: params[:topic])
+
+    if current_user
+      @journey = Journey.find(params[:journey])  
+      @journey.topics << @topic
     end
-    @journey = Journey.find(params[:journey])  
-    @journey.topics << @topic
+
+    render json: @topic
   end
 
 
