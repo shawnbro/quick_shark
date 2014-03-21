@@ -10,7 +10,7 @@
 <header>
   <nav>
   <ul>
-      <li><%= link_to("Home", root_path) %></li>
+      <li><%= link_to("New Journey", root_path) %></li>
       <li><%= link_to("My Account", "#{user_path(session[:user_id])}") if !session[:user_id].nil?%></li>
       <li><%= link_to "Create Account", new_user_path if session[:user_id].nil? %></li>
       <li><%= link_to("Log in","/login") if session[:user_id].nil? %></li>
