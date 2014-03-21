@@ -18,6 +18,7 @@ QuickShark::Application.routes.draw do
 
   get "/data", to: "topics#data"
   get "/description", to: "topics#description"
+  get "/pictures", to: "topics#pictures"
 
   post "/add_topic", to: "topics#add_topic"
 

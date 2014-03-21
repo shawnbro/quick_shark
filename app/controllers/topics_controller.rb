@@ -15,12 +15,17 @@ class TopicsController < ApplicationController
     @journey = Journey.find_by(id: @topic[:journey_id])  
     @word_association = get_word_associations(@topic[:name])
     # @description = find_topic_description(@topic[:name])
-    @photo = find_photo(@topic[:name])
+    # @photo = find_photo(@topic[:name])
   end
 
   def description
     @description = find_topic_description(params[:name])
     render json: @description
+  end
+
+  def pictures
+    @photo = find_photo(params[:name])
+    render json: @photo
   end
 
   def data

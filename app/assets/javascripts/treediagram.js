@@ -82,20 +82,29 @@ $("div#viz").empty()
     reset();
     $("div#define")[0].style.top = "5%";
     $("div#pictures")[0].style.top = "95%";
-    // ajax get request
+    // ajax get for description
     $.ajax({
       url: "/description",
       data: {name: $("h1").text()},
       dataType: "text",
       success: function(result){$("div#define p").text(result)}
-       });
-
+    });
   });
 
   KeyboardJS.on('up', function() {
     reset();
     $("div#pictures")[0].style.top = "5%";
     $("div#define")[0].style.top = "-85%";
+    // ajax get for pictures
+    $.ajax({
+      url: "/pictures",
+      data: {name: $("h1").text()},
+      dataType: "text",
+      success: function(result){
+        $("div#pictures img").remove();
+        $("div#pictures").append("<img src="+result+" >");
+      }
+    });
   });
 
   KeyboardJS.on('left', function() {
