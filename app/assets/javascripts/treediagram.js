@@ -61,11 +61,11 @@ $("div#viz").empty()
     .text(function(d) { return d.name; })
     .on("mouseover", animatetext)
     .on("click", function(d,i){
-      d3.json("/data?word="+d.name, draw)
-      $("h1").text(d.name)
       addTopic($("span#journey_id").text(), d.name);
       $.post("/topics/" +$("span#topic_id").text(), {counter: $("span#counter").text(), _method: "put"});
       count = 0;
+      d3.json("/data?word="+d.name, draw)
+      $("h1").text(d.name)
     });
 
   function animatetext() { 
@@ -83,6 +83,8 @@ $("div#viz").empty()
 
     $.post(url, function(res) {
       history.pushState({}, null, res.name);
+      window.newTopicId=res;
+      $("span#topic_id").text(newTopicId.id);
     });
     
   };

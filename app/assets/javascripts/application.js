@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require treediagram
 //= require keyboard
 //= require movingdivs
 //= require timer
