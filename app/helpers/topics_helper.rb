@@ -86,7 +86,7 @@ module TopicsHelper
 
   def get_youtube_vids(query)
     video_results = []
-    full_results = HTTParty.get("https://www.googleapis.com/youtube/v3/search?part=snippet&q=#{query}&maxResults=10&key="+YOUTUBE_API_KEY)
+    full_results = HTTParty.get("https://www.googleapis.com/youtube/v3/search?part=snippet&q=#{query.gsub(" ", "%20")}&maxResults=10&key="+YOUTUBE_API_KEY)
     full_results["items"].each do |result|
       video_results.push([result["id"]["videoId"], result["snippet"]["title"]])
     end
