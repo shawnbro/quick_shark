@@ -22,7 +22,7 @@ $(document).ready(function(){
             .rangeRoundBands([0, width], 0);
 
       var y = d3.scale.linear()
-            .domain([0, d3.max($.map(data, function(b){ (b.counter) }))])
+            .domain([0, d3.max($.map(data, function(b){ return b.counter }))])
             .range([height, 0]);
 
       var xAxis = d3.svg.axis().scale(x).orient("bottom");
@@ -49,7 +49,7 @@ $(document).ready(function(){
                 .style("text-anchor", "end")
                 .text("Time Spent on Topic");
 
-      svgContainer.selectAll(".bar").data($.map(data, function(b){ (b.counter) })).enter().append("rect")
+      svgContainer.selectAll(".bar").data($.map(data, function(b){ return b.counter })).enter().append("rect")
        .attr("class", "bar")
             .attr("x", function(d, i) {
                 return i * x.rangeBand();
