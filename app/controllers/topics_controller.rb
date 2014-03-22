@@ -60,9 +60,15 @@ class TopicsController < ApplicationController
   end
 
   def ytdata
-    @topic = Topic.find_by(name: params[:word] )
+    @topic = Topic.find_by(name: params[:name] )
     @video_data = youtube_json(@topic.name)
     render json: @video_data
+  end
+
+  def update
+    @topic = Topic.find(params[:id])
+    @topic.counter = params[:counter]
+    @topic.save
   end
 
   private

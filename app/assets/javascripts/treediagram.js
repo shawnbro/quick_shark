@@ -1,8 +1,10 @@
 
 //JSON object with the data
 window.onload = function() {
-var value = $("h1").text();
-d3.json("/data?word="+value, draw)}
+  var value = $("h1").text();
+  d3.json("/data?word="+value, draw);
+  startCounter = window.setInterval(increment, 1000);
+}
 
 var draw = function(data){treeData=data
 $("div#viz").empty()
@@ -62,9 +64,11 @@ $("div#viz").empty()
       d3.json("/data?word="+d.name, draw)
       $("h1").text(d.name)
       addTopic($("span#journey_id").text(), d.name);
+      $.post("/topics/" +$("span#topic_id").text(), {counter: $("span#counter").text(), _method: "put"});
+      count = 0;
     });
 
-  function animatetext() {
+  function animatetext() { 
     d3.select(this).transition()
         .duration(100)
         .style("font-size", "16px")
@@ -82,68 +86,4 @@ $("div#viz").empty()
     });
     
   };
-
-  KeyboardJS.on('down', function() {
-    reset();
-    $("div#define")[0].style.top = "5%";
-    $("div#pictures")[0].style.top = "95%";
-    // ajax get for description
-    $.ajax({
-      url: "/description",
-      data: {name: $("h1").text()},
-      dataType: "text",
-      success: function(result){$("div#define p").text(result)}
-    });
-  });
-
-  KeyboardJS.on('up', function() {
-    reset();
-    $("div#pictures")[0].style.top = "5%";
-    $("div#define")[0].style.top = "-85%";
-    // ajax get for pictures
-    $.ajax({
-      url: "/pictures",
-      data: {name: $("h1").text()},
-      dataType: "text",
-      success: function(result){
-        $("div#pictures img").remove();
-        $("div#pictures").append("<img src="+result+" >");
-      }
-    });
-  });
-
-  KeyboardJS.on('left', function() {
-    reset();
-    $("div#stats")[0].style.left = "5%";
-    $("div#videos")[0].style.left = "-85%";
-    // ajax get for stats from wolfram
-    $.ajax({
-      url: "/stats",
-      data: {name: $("h1").text()},
-      dataType: "JSON",
-      success: function(result){
-        $("div#stats img").remove();
-        for(i=0; i < result.length; i++) {
-          $("div#stats").append("<img src='"+result[i]["image"]["src"]+"' >");
-        }
-      }
-    })
-  });
-
-  KeyboardJS.on('right', function() {
-    reset();
-    $("div#videos")[0].style.left = "5%";
-    $("div#stats")[0].style.left = "95%";
-  });
-
-  var reset = function() {
-    $("div#define")[0].style.top = "-85%";
-    $("div#pictures")[0].style.top = "95%";
-    $("div#videos")[0].style.left = "-85%";
-    $("div#stats")[0].style.left = "95%";
-  }
-
-  KeyboardJS.on('c', reset);
-
-
 };
