@@ -15,7 +15,7 @@ class TopicsController < ApplicationController
   end
 
   def show
-    @topic = Topic.find_by(name: params[:id])
+    @topic = Topic.find_by(id: params[:id])
     @journey = Journey.find_by(id: @topic.journey_id)  
     @word_association = get_word_associations(@topic.name)
     @videos = get_youtube_vids(@topic.name).take(4)
