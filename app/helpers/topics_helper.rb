@@ -3,11 +3,23 @@ module TopicsHelper
 
   def get_wolfram_alpha(word)
     wolfram = []
-    stuff = HTTParty.get('http://api.wolframalpha.com/v2/query?input='+word+'&appid='+WOLFRAM_ALPHA_API_KEY)
+    stuff = HTTParty.get('http://api.wolframalpha.com/v2/query?input='+word.gsub(" ", "%20")+'&appid='+WOLFRAM_ALPHA_API_KEY)
     stuff["queryresult"]["pod"].each do |subpod|
       puts subpod["subpod"].class
       unless subpod["subpod"].class == Array
         wolfram.push(Hash["plaintext", subpod["subpod"]["plaintext"], "image", subpod["subpod"]["img"]])
+      end
+    end
+    wolfram
+  end
+
+  def get_wolfram_text(word)
+    wolfram = []
+    stuff = HTTParty.get('http://api.wolframalpha.com/v2/query?input='+word.gsub(" ", "%20")+'&appid='+WOLFRAM_ALPHA_API_KEY)
+    stuff["queryresult"]["pod"].each do |subpod|
+      puts subpod["subpod"].class
+      unless subpod["subpod"].class == Array
+        wolfram.push(Hash["plaintext", subpod["subpod"]["plaintext"]])
       end
     end
     wolfram
@@ -72,14 +84,26 @@ module TopicsHelper
 
 # formatting the incoming results from wordnik to the proper nested format
   def tree_results(array_results)
-    tree_data = {"name"=> (@topic[:name]), "info" => "tst", "children" => [
+    tree_data = {"name"=> (array_results[0]["plaintext"]), "info" => "tst", "children" => [
       ]}
-    array_results.each do |results|
-      tree_data["children"].push({"name" => results["relationshipType"], "children" => 
-        (results["words"].map do |word|
-           Hash["name", word]
-        end)
-      })
+    if array_results[0].include?("plaintext")
+      array_results.each do |results|
+        unless results["plaintext"].nil?
+         tree_data["children"].push({"name" => results["plaintext"].split(" | ")[0], "children" => 
+           (results["plaintext"].split("|").map do |word|
+              Hash["name", word.split("|")]
+           end)
+         })
+        end
+      end
+    else
+      array_results.each do |results|
+        tree_data["children"].push({"name" => results["relationshipType"], "children" => 
+          (results["words"].map do |word|
+             Hash["name", word]
+          end)
+        })
+      end
     end
     return tree_data
   end
