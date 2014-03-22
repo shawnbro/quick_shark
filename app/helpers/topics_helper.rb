@@ -2,7 +2,6 @@
 module TopicsHelper
 
   def get_wolfram_alpha(word)
-    binding.pry
     wolfram = []
     stuff = HTTParty.get('http://api.wolframalpha.com/v2/query?input='+word+'&appid='+WOLFRAM_ALPHA_API_KEY)
     stuff["queryresult"]["pod"].each do |subpod|
