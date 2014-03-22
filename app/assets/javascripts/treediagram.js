@@ -66,7 +66,18 @@ $("div#viz").empty()
       count = 0;
       d3.json("/data?word="+d.name, draw)
       $("h1").text(d.name)
+      $("span#past_topics").append("<span> </span><span>"+d.name+"</span>")
     });
+  
+  $("span#past_topics span").on("click", function(){
+    console.log(this.innerText)
+    addTopic($("span#journey_id").text(), this.innerText)
+    $.post("/topics/" + $("span#topic_id").text(), {counter: $("span#counter").text(), _method: "put"});
+    count = 0;
+    d3.json("/data?word="+ this.innerText, draw)
+    $("h1").text(this.innerText)
+    $("span#past_topics").append("<span> </span><span>"+ this.innerText +"</span>" )
+  })    
 
   function animatetext() { 
     d3.select(this).transition()
