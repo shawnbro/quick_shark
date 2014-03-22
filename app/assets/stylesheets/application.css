@@ -53,8 +53,10 @@ div#define{
   background-color: rgba(102,102,102,.75);
   z-index: 1;
   border-radius: 15px;
-  top: -85%;
+  top: -90%;
   left: 5%;
+  overflow: auto;
+  border: 20px solid rgba(0, 0, 0, 0);
 }
 
 div#pictures{
@@ -64,8 +66,10 @@ div#pictures{
   background-color: rgba(66,153,51,.75);
   z-index: 1;
   border-radius: 15px;
-  top: 95%;
+  top: 97%;
   left: 5%;
+  overflow: auto;
+  border: 20px solid rgba(0, 0, 0, 0);
 }
 
 div#videos{
@@ -75,8 +79,10 @@ div#videos{
   background-color: rgba(48,63,145,.75);
   z-index: 1;
   border-radius: 15px;
-  left: -85%;
+  left: -90%;
   top: 5%;
+  overflow: auto;
+  border: 20px solid rgba(0, 0, 0, 0);
 }
 
 div#stats{
@@ -86,8 +92,10 @@ div#stats{
   background-color: rgba(201,94,98,.75);
   z-index: 1;
   border-radius: 15px;
-  left: 95%;
+  left: 97%;
   top: 5%;
+  overflow: auto;
+  border: 20px solid rgba(0, 0, 0, 0);
 }
 
 svg {
