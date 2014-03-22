@@ -94,7 +94,7 @@ module TopicsHelper
   end
 
   def youtube_json(query)
-    full_results = HTTParty.get("https://www.googleapis.com/youtube/v3/search?part=snippet&q=#{query}&maxResults=50&key="+YOUTUBE_API_KEY)
+    full_results = HTTParty.get("https://www.googleapis.com/youtube/v3/search?part=snippet&q=#{query.gsub(" ", "%20")}&maxResults=50&key="+YOUTUBE_API_KEY)
     return full_results
   end
 end
