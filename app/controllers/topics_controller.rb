@@ -65,6 +65,12 @@ class TopicsController < ApplicationController
     render json: @video_data
   end
 
+  def update
+    @topic = Topic.find(params[:id])
+    @topic.counter = params[:counter]
+    @topic.save
+  end
+
   private
 
   def get_random_word
