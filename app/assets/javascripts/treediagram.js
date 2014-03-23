@@ -35,7 +35,8 @@ $("div#viz").empty()
     .data(nodes)
     .enter().append("svg:g")
     .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
-    .attr("id", function(d){return d.name});
+    .attr("id", function(d){ return d.name })
+    .attr("class", function(){ return "words" });
 
   // Add the dot at every node
   node.append("svg:circle")
