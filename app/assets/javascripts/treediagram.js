@@ -35,6 +35,7 @@ $("div#viz").empty()
     .data(nodes)
     .enter().append("svg:g")
     .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
+    .attr("id", function(d){return d.name});
 
   // Add the dot at every node
   node.append("svg:circle")
@@ -79,10 +80,6 @@ $("div#viz").empty()
       $("span#past_topics").append(topicSpan)
     });
 
-  var value = $("h1").text();
-  d3.select("#"+value).style("font-size", "24px");
-  // d3.select("#"+value).attr("transform", "rotate(0 0 0)");
-
   var create = function(){
     addTopic($("span#journey_id").text(), this.innerText)
     $.post("/topics/" + $("span#topic_id").text(), {counter: $("span#counter").text(), _method: "put"});
@@ -95,19 +92,30 @@ $("div#viz").empty()
 
 
   function animateText() { 
-    d3.select(this)
-      .transition()
-        .duration(100)
-        .style("font-size", "16px")
-        .style("cursor", "pointer");
+    if(this.id !== $("h1").text()){
+      d3.select(this)
+        .transition()
+          .duration(100)
+          .style("font-size", "16px")
+          .style("cursor", "pointer")
+          .style("fill", "rgb(0,154,205)")
+      }
   };
 
   function removeTextSize() {
-    d3.select(this)
-      .transition()
-        .duration(100)
-        .style("font-size", "14px");
+    if(this.id !== $("h1").text()){
+      d3.select(this)
+        .transition()
+          .duration(100)
+          .style("font-size", "14px")
+          .style("fill", "white")
+      }
   };
+
+  var value = $("h1").text();
+  d3.select("#"+value).style("font-size", "26px")
+  d3.select("g#"+value).attr("transform", function(){ return "rotate(0 0 0)"});
+
 
   var addTopic = function(journey, topic){
     var url = "/add_topic?journey=" + journey + "&topic=" + topic;
