@@ -12,6 +12,15 @@
  *= require_tree .
  */
 
+/* Adding a pretty font */
+*, *:after, *::before { box-sizing: border-box; }
+
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700|Raleway:400,300,700);
+
+body {
+  background-color: rgba(84,84,84,1);
+}
+
 header {
   height: 70px;  
   display: inline-block;
@@ -36,11 +45,11 @@ header nav ul li a{
   text-decoration: none;
 }
 
-#search_bar{
+/*#search_bar{
   position: fixed;
   top: 50%;
   left: 25%;
-}
+}*/
 
 div#viz{
   margin-left: 5%;
@@ -53,8 +62,10 @@ div#define{
   background-color: rgba(102,102,102,.75);
   z-index: 1;
   border-radius: 15px;
-  top: -85%;
+  top: -90%;
   left: 5%;
+  overflow: auto;
+  border: 20px solid rgba(0, 0, 0, 0);
 }
 
 div#pictures{
@@ -64,8 +75,10 @@ div#pictures{
   background-color: rgba(66,153,51,.75);
   z-index: 1;
   border-radius: 15px;
-  top: 95%;
+  top: 97%;
   left: 5%;
+  overflow: auto;
+  border: 20px solid rgba(0, 0, 0, 0);
 }
 
 div#videos{
@@ -75,8 +88,10 @@ div#videos{
   background-color: rgba(48,63,145,.75);
   z-index: 1;
   border-radius: 15px;
-  left: -85%;
+  left: -90%;
   top: 5%;
+  overflow: auto;
+  border: 20px solid rgba(0, 0, 0, 0);
 }
 
 div#stats{
@@ -86,22 +101,202 @@ div#stats{
   background-color: rgba(201,94,98,.75);
   z-index: 1;
   border-radius: 15px;
-  left: 95%;
+  left: 97%;
   top: 5%;
+  overflow: auto;
+  border: 20px solid rgba(0, 0, 0, 0);
 }
 
 svg {
-    height: 1600px;
-    width: 1600px;
-    border: solid 1px #ccc;
-    font: 12px sans-serif;
-    overflow: scroll;
+  height: 1600px;
+  width: 1600px;
+  border: solid 1px #ccc;
+  font: 12px sans-serif;
+  color: white;
 }
+
+svg.icon {
+height: 35px;
+width: 35px;
+float: left;
+margin-top: -7px;
+}
+
+text {
+  color:white;
+}
+
 .link {
-    fill: none;
-    stroke: #ccc;
-    stroke-width: 1.5px;
+  fill: none;
+  stroke: rgb(120,120,120);
+  stroke-width: 1.5px;
+  stroke-color: rgb(120,120,120);
 }
+
+span#past_topics {
+  cursor: pointer;
+}
+
+.tooltipsy {
+  padding: 10px;
+  max-width: 200px;
+  color: white;
+  border-radius: 5px;
+  background-color: rgba(135,135,135,.8)
+}
+
+
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700|Raleway:400,300,700);
+
+/* Intro Button Styling*/
+/* ================================ */
+.btn {
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  cursor: pointer;
+  padding: 25px 80px;
+  display: inline-block;
+  margin: 15px 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  outline: none;
+  position: relative;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+  width: 325px;
+  height: 80px;
+}
+
+.container > section p {
+  font-family: 'Lato', Arial, sans-serif;
+}
+
+.container > section {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.container > section p {
+  color: #fff;
+  font-size: 1.3em;
+  font-weight: 300;
+}
+
+.container > section * {
+  font-family: 'Lato', Arial, sans-serif;
+}
+
+.container > section {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.container > section * {
+  color: #fff;
+  font-size: 1.3em;
+  font-weight: 300;
+}
+
+section {
+  margin: 0 auto;
+  text-align: center;
+}
+
+form {
+  display: inline-block;
+}
+
+.intro-button:after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.intro-button {
+  border: 3px solid #fff;
+  color: #fff;
+}
+
+.intro-button:after {
+  width: 100%;
+  height: 0;
+  top: 0;
+  left: 0;
+  background: #fff;
+}
+
+.intro-button:hover,
+.intro-button:active {
+  color: #0e83cd;
+}
+
+.intro-button:hover:after,
+.intro-button:active:after {
+  height: 100%;
+}
+
+
+
+.perspective {
+  display: inline-block;
+}
+
+/* Search Box Styling*/
+/* ================================ */
+
+#search {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.container {
+  width: 70%;
+  margin: 200px auto;
+  text-align: center;
+}
+
+
+form {
+  height: 100px;
+  display: inline;
+  position: relative;
+  -webkit-user-select: none;
+  cursor: text;
+}
+
+form input[type=search]::-webkit-search-cancel-button {
+-webkit-appearance: 100px;
+}
+
+form input[type=search] {
+color: #FFFFFF;
+text-transform: uppercase;
+display: block;
+margin: 0;
+width: 100%;
+height: 1.2em;
+border: 0 solid #98989f;
+border-bottom: 3px solid #fff;
+background: transparent;
+font-size: 3em;
+-webkit-appearance: none;
+-webkit-tap-highlight-color: rgba(0,0,0,0);
+outline: none;
+text-align: center;
+}
+
+
+
+
+
+
 
 
 

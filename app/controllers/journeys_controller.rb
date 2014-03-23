@@ -21,7 +21,7 @@ class JourneysController < ApplicationController
   end
 
   def journey_data
-    render json: @journey.topics
+    render json: @journey.topics.order('created_at')
   end
 
   private

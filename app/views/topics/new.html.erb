@@ -1,14 +1,43 @@
-<div id="search_bar">
+<div class="container">
+  
   <%= form_for :topic, url: topics_path do |f| %>
-    Enter Any Word, Topic, Idea, etc.: <%= f.text_field :topic %><br />
-    <%= f.submit "Submit" %>
+    <%= f.search_field :topic, placeholder: "Enter Any Word, Topic, Idea, etc.", autofocus: "autofocus", autocomplete: "off" %><br />
+    <p class="perspective">
+        <button class="btn intro-button">
+          <svg class="icon">
+            <use xlink:href="#compass"></use>
+          </svg>
+          Explore
+        </button>
+      </p>
   <% end %>
-
-
+    
   <%= form_for :topic, url: topics_path, :html => {:class => "explore"} do |f| %>
     <%= f.hidden_field :topic, :value => @random_word %>
-    <%= f.submit "Explore" %>
+    <p class="perspective">
+        <button class="btn intro-button" onKeyPress=”return disableEnterKey(event)”>
+          <svg class="icon">
+            <use xlink:href="#shuffle"></use>
+          </svg>
+          Random
+        </button>
+      </p>
+    
   <% end %>
+   
 </div>
 
+<script type="text/javascript">
+        function disableEnterKey(e)
+{
+     var key;      
+     if(window.event)
+          key = window.event.keyCode; //IE
+     else
+          key = e.which; //firefox      
+
+     return (key != 13);
+}
+
+</script>
 
