@@ -119,7 +119,7 @@ $("div#viz").empty()
       }
   };
 
-  $("text").tooltipsy();
+  $("text").tooltipsy({alignTo: 'cursor'});
 
   var value = $("h1").text();
   d3.select("#"+value).style("font-size", "26px")
