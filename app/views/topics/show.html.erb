@@ -1,6 +1,6 @@
 <% if current_user %>
   <div id='journey'> Current Journey: <span><%= @journey[:title] %></span> </div><span id="journey_id" style="display: none;"><%= @journey[:id] %></span>
-  <span id='past_topics'><%=@topic.name%></span>
+  <span id='past_topics'><span><%=@topic.name%></span></span>
 <% end %>
   <div><h1><%= @word_association[0][:word] %></h1><% unless !@word_association[0][:reverse_definitions].nil? %><span><%=@word_association[0][:reverse_definitions]["results"].sample["text"] %> <% end %>
   </div>
