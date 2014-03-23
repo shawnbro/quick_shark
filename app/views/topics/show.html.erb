@@ -22,4 +22,4 @@
 <%= javascript_include_tag "treediagram" %>
 <div id="viz"></div>
 
-
+<%= button_to "End Journey" , journey_path(@journey.id) , method: "get", id: "end_journey" %>
