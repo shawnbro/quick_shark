@@ -10,8 +10,8 @@ var draw = function(data){treeData=data
 $("div#viz").empty()
 // Create a svg canvas
   var vis = d3.select("#viz").append("svg:svg")
-    .attr("width", 1850)
-    .attr("height", 1850)
+    .attr("width", 900)
+    .attr("height", 850)
     .append("svg:g")
     .attr("transform", "translate(425, 425)");
 
