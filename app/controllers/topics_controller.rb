@@ -6,12 +6,16 @@ class TopicsController < ApplicationController
   end
 
   def create
-    @topic = Topic.create(name: params["topic"]["topic"])
-    if current_user
-      @journey = Journey.create(title: params["topic"]["topic"], user_id: current_user[:id])
-      @journey.topics << @topic
+    unless params[:topic]["topic"].empty?
+      @topic = Topic.create(name: params["topic"]["topic"])
+        if current_user
+          @journey = Journey.create(title: params["topic"]["topic"], user_id: current_user[:id])
+          @journey.topics << @topic
+        end
+        redirect_to topic_path(@topic)
+      else
+        redirect_to root_path
     end
-    redirect_to topic_path(@topic)
   end
 
   def show

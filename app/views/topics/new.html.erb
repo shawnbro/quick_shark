@@ -1,9 +1,9 @@
 <div class="container">
   
-  <%= form_for :topic, url: topics_path do |f| %>
+  <%= form_for :topic, url: topics_path, :html => {:id => "explore" } do |f| %>
     <%= f.search_field :topic, placeholder: "Enter Any Word, Topic, Idea, etc.", autofocus: "autofocus", autocomplete: "off" %><br />
     <p class="perspective">
-        <button class="btn intro-button">
+        <button class="btn intro-button" id="explore" disabled="true">
           <svg class="icon">
             <use xlink:href="#compass"></use>
           </svg>
@@ -12,10 +12,10 @@
       </p>
   <% end %>
     
-  <%= form_for :topic, url: topics_path, :html => {:class => "explore"} do |f| %>
+  <%= form_for :topic, url: topics_path, :html => {:id => "random"} do |f| %>
     <%= f.hidden_field :topic, :value => @random_word %>
     <p class="perspective">
-        <button class="btn intro-button" onKeyPress=”return disableEnterKey(event)”>
+        <button id="random"class="btn intro-button" onKeyPress=”return disableEnterKey(event)”>
           <svg class="icon">
             <use xlink:href="#shuffle"></use>
           </svg>
@@ -28,7 +28,7 @@
 </div>
 
 <script type="text/javascript">
-        function disableEnterKey(e)
+function disableEnterKey(e)
 {
      var key;      
      if(window.event)
@@ -38,6 +38,16 @@
 
      return (key != 13);
 }
+
+</script>
+
+<script type="text/javascript">
+/*deactivates explore button if search input is empty */
+  $( "input#topic_topic" ).on("keyup", function(e) { 
+    if(67 < e.keyCode && e.keyCode < 90) {
+      $( "button#explore" ).prop('disabled', false);
+    }
+  });
 
 </script>
 
