@@ -43,16 +43,14 @@ class TopicsController < ApplicationController
       @topic = Topic.create(name: params[:word])
     end
     @word_association = get_word_associations(@topic[:name]) 
-    if @word_association[:word_associations].empty?
+    if @word_association[0][:word_associations].nil?
       array_results = get_wolfram_text(@topic.name)
       @raw_tree_data = tree_results(array_results)
       @tree_data = @raw_tree_data.to_json
       render json: @tree_data
     else
-      array_results = [@word_association[:word_associations] 
-      @raw_tree_data = tree_results(array_results)
-      @tree_data = @raw_tree_data.to_json
-      render json: @tree_data
+      @tree = tree_results(@word_association[0])
+      render json: @tree.to_json
     end
   end
 

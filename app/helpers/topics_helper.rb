@@ -26,14 +26,14 @@ module TopicsHelper
   end
 
   def get_word_associations(word)
-      word_association = {
+      word_association = [{
         word: word,
-        definitions: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word.gsub(" ", "%20")+'/definitions?limit=200&includeRelated=true&useCanonical=true&includeTags=false&api_key='+WORDNIK_API_KEY),
+        definitions: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word.gsub(" ", "%20")+'/definitions?limit=200&includeRelated=true&useCanonical=true&includeTags=false&api_key='+WORDNIK_API_KEY).map,
         # etymologies: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word+'/etymologies?api_key='+WORKNIK_API_KEY),
-        word_associations: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word.gsub(" ", "%20")+'/relatedWords?useCanonical=false&limitPerRelationshipType=10&api_key='+WORDNIK_API_KEY),
-        reverse_definitions: HTTParty.get('http://api.wordnik.com:80/v4/words.json/reverseDictionary?query='+word.gsub(" ", "%20")+'&minCorpusCount=5&maxCorpusCount=-1&minLength=1&maxLength=-1&includeTags=false&skip=0&limit=5&api_key='+WORDNIK_API_KEY)    
-        }
-      word_association[:definitions].each do |definition|
+        word_associations: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word.gsub(" ", "%20")+'/relatedWords?useCanonical=false&limitPerRelationshipType=10&api_key='+WORDNIK_API_KEY).map,
+        reverse_definitions: HTTParty.get('http://api.wordnik.com:80/v4/words.json/reverseDictionary?query='+word.gsub(" ", "%20")+'&minCorpusCount=5&maxCorpusCount=-1&minLength=1&maxLength=-1&includeTags=false&skip=0&limit=5&api_key='+WORDNIK_API_KEY).map    
+        }]
+      word_association[0][:definitions].each do |definition|
         definition.delete("textProns")
         definition.delete("exampleUses")
         definition.delete("labels")
@@ -43,6 +43,8 @@ module TopicsHelper
         definition.delete("sequence")
         definition.delete("score")
         definition.delete("partOfSpeech")
+        definition.delete("sourceDictionary")
+        definition["word"] = "definition"
       end
     word_association
   end
@@ -83,11 +85,10 @@ module TopicsHelper
   end
 
 # formatting the incoming results from wordnik to the proper nested format
-  def tree_results(array_results)
-    tree_data = {"name"=> (array_results[0]["plaintext"]), "info" => "tst", "children" => [
-      ]}
-    if array_results[0].include?("plaintext")
-      array_results.each do |results|
+  def tree_results(word_data)
+    if word_data.include?("plaintext")
+      tree_data = {"name"=> (word_data[0]["plaintext"]), "info" => "tst", "children" => []}
+      word_data.each do |results|
         unless results["plaintext"].nil?
          tree_data["children"].push({"name" => results["plaintext"].split(" | ")[0], "children" => 
            (results["plaintext"].split("|").map do |word|
@@ -97,12 +98,18 @@ module TopicsHelper
         end
       end
     else
-      array_results.each do |results|
-        tree_data["children"].push({"name" => results["relationshipType"], "children" => 
-          (results["words"].map do |word|
-             Hash["name", word]
-          end)
-        })
+      tree_data = {"name"=> (@topic.name), "info" => "tst", "children" => []}
+      word_data.each do |k, v|
+        tree_data["children"].push({"name" => k.to_s, "children" => []})
+      end
+      tree_data["children"][0]["children"] << Hash["name", word_data[:word]]
+      word_data[:definitions].each do |k|
+        tree_data["children"][1]["children"] << Hash["name", k["text"]]
+        word_data[:word_associations].each do |k|
+          unless k["words"].nil?
+            tree_data["children"][2]["children"] << Hash["name", k["words"]]
+          end
+        end      
       end
     end
     return tree_data
