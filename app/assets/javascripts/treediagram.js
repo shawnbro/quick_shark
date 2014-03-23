@@ -13,7 +13,7 @@ $("div#viz").empty()
     .attr("width", 900)
     .attr("height", 850)
     .append("svg:g")
-    .attr("transform", "translate(400, 400)");
+    .attr("transform", "translate(425, 425)");
 
   // Create a cluster "canvas"
   var cluster = d3.layout.cluster()
@@ -35,6 +35,7 @@ $("div#viz").empty()
     .data(nodes)
     .enter().append("svg:g")
     .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
+    .attr("id", function(d){return d.name});
 
   // Add the dot at every node
   node.append("svg:circle")
@@ -42,24 +43,33 @@ $("div#viz").empty()
     .attr("stroke", "grey")
     .attr("fill", "white")
     // add animation
-    .on("mouseover", animatecircle);
+    .on("mouseover", addColor)
+    .on("mouseout", removeColor);
 
-  function animatecircle() {
-    d3.select(this).transition()
-        .duration(1000)
-        .attr("r", 20)
+  function addColor() {
+    d3.select(this)
       .transition()
-        .duration(1000)
-        .attr("r", 10);
+        .duration(300)
+        .style("fill", "rgb(0,154,205)")
   };
 
+  function removeColor() {
+    d3.select(this)
+      .transition()
+        .duration(800)
+        .style("fill", "white")
+  }
+
   node.append("svg:text")
-    .attr("dx", function(d) { return d.x < 180 ? 8 : -8; })
+    .attr("dx", function(d) { return d.x < 180 ? 15 : -15; })
     .attr("dy", ".31em")
+    .attr("fill", "white")
+    .attr("id", function(d){return d.name})
     .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
     .attr("transform", function(d) { return d.x < 180 ? null : "rotate(180)"; })
     .text(function(d) { return d.name; })
-    .on("mouseover", animatetext)
+    .on("mouseover", animateText)
+    .on("mouseout", removeTextSize)
     .on("click", function(d,i){
       addTopic($("span#journey_id").text(), d.name);
       $.post("/topics/" +$("span#topic_id").text(), {counter: $("span#counter").text(), _method: "put"});
@@ -71,8 +81,6 @@ $("div#viz").empty()
     });
 
   var create = function(){
-    console.log(this)
-    console.log(this.innerText)
     addTopic($("span#journey_id").text(), this.innerText)
     $.post("/topics/" + $("span#topic_id").text(), {counter: $("span#counter").text(), _method: "put"});
     count = 0;
@@ -82,15 +90,32 @@ $("div#viz").empty()
     $("span#past_topics").append(topicSpan)
   };    
 
-  function animatetext() { 
-    d3.select(this).transition()
-        .duration(100)
-        .style("font-size", "16px")
-      .transition()
-        .delay(1500)
-        .duration(100)
-        .style("font-size", "12px")
+
+  function animateText() { 
+    if(this.id !== $("h1").text()){
+      d3.select(this)
+        .transition()
+          .duration(100)
+          .style("font-size", "16px")
+          .style("cursor", "pointer")
+          .style("fill", "rgb(0,154,205)")
+      }
   };
+
+  function removeTextSize() {
+    if(this.id !== $("h1").text()){
+      d3.select(this)
+        .transition()
+          .duration(100)
+          .style("font-size", "14px")
+          .style("fill", "white")
+      }
+  };
+
+  var value = $("h1").text();
+  d3.select("#"+value).style("font-size", "26px")
+  d3.select("g#"+value).attr("transform", function(){ return "rotate(0 0 0)"});
+
 
   var addTopic = function(journey, topic){
     var url = "/add_topic?journey=" + journey + "&topic=" + topic;
