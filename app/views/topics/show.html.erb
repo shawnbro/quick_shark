@@ -2,11 +2,12 @@
   <div id='journey'> Current Journey: <span><%= @journey[:title] %></span> </div><span id="journey_id" style="display: none;"><%= @journey[:id] %></span>
   <span id='past_topics'><%=@topic.name%></span>
 <% end %>
+
   <div><h1 style="display:none;"><%= @word_association[:word] %></h1><% unless !@word_association[:reverse_definitions].nil? %><span><%=@word_association[:reverse_definitions]["results"].sample["text"] %> <% end %>
   </div>
   
 <div id="define"><h2>Description</h2><p> <%= @description %> </p>
-  <% @word_association[:definitions].each do |definition| %>
+  <% @word_association[0][:definitions].each do |definition| %>
       <div><%= definition["text"] %></div>
       <% end %></div>
 
