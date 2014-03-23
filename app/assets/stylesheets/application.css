@@ -113,10 +113,10 @@ svg {
 }
 
 svg.icon {
-height: 35px;
-width: 35px;
-float: left;
-margin-top: -7px;
+  height: 35px;
+  width: 35px;
+  float: left;
+  margin-top: -7px;
 }
 
 text {
