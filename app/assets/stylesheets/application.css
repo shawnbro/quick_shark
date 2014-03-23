@@ -51,7 +51,10 @@ header nav ul li a{
   left: 25%;
 }*/
 
-div#viz{
+div#viz {
+  overflow: auto;
+  width: 90%;
+  height: 90%;
   margin-left: 5%;
 }
 
@@ -148,25 +151,25 @@ span#past_topics {
 /* Intro Button Styling*/
 /* ================================ */
 .btn {
-border: none;
-font-family: inherit;
-font-size: inherit;
-color: inherit;
-background: none;
-cursor: pointer;
-padding: 25px 80px;
-display: inline-block;
-margin: 15px 30px;
-text-transform: uppercase;
-letter-spacing: 1px;
-font-weight: 700;
-outline: none;
-position: relative;
--webkit-transition: all 0.3s;
--moz-transition: all 0.3s;
-transition: all 0.3s;
-width: 325px;
-height: 80px;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  cursor: pointer;
+  padding: 25px 80px;
+  display: inline-block;
+  margin: 15px 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  outline: none;
+  position: relative;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+  width: 325px;
+  height: 80px;
 }
 
 .container > section p {
@@ -245,10 +248,6 @@ form {
 .perspective {
   display: inline-block;
 }
-
-
-
-
 
 /* Search Box Styling*/
 /* ================================ */

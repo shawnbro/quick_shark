@@ -3,9 +3,8 @@ module TopicsHelper
 
   def get_wolfram_alpha(word)
     wolfram = []
-    stuff = HTTParty.get('http://api.wolframalpha.com/v2/query?input='+word+'&appid='+WOLFRAM_ALPHA_API_KEY)
+    stuff = HTTParty.get('http://api.wolframalpha.com/v2/query?input='+word.gsub(" ", "%20")+'&appid='+WOLFRAM_ALPHA_API_KEY)
     stuff["queryresult"]["pod"].each do |subpod|
-      puts subpod["subpod"].class
       unless subpod["subpod"].class == Array
         wolfram.push(Hash["plaintext", subpod["subpod"]["plaintext"], "image", subpod["subpod"]["img"]])
       end
@@ -13,24 +12,27 @@ module TopicsHelper
     wolfram
   end
 
+  def get_wolfram_text(word)
+    wolfram = []
+    stuff = HTTParty.get('http://api.wolframalpha.com/v2/query?input='+word.gsub(" ", "%20")+'&appid='+WOLFRAM_ALPHA_API_KEY)
+    stuff["queryresult"]["pod"].each do |subpod|
+      unless subpod["subpod"].class == Array
+        wolfram.push(Hash["plaintext", subpod["subpod"]["plaintext"]])
+      end
+    end
+    wolfram
+  end
+
   def get_word_associations(word)
-      word_association = {
+      word_association = [{
         word: word,
-        definitions: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word.gsub(" ", "%20")+'/definitions?limit=200&includeRelated=true&useCanonical=true&includeTags=false&api_key='+WORDNIK_API_KEY),
+        definitions: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word.gsub(" ", "%20")+'/definitions?limit=200&includeRelated=true&useCanonical=true&includeTags=false&api_key='+WORDNIK_API_KEY).map,
         # etymologies: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word+'/etymologies?api_key='+WORKNIK_API_KEY),
-        word_associations: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word.gsub(" ", "%20")+'/relatedWords?useCanonical=false&limitPerRelationshipType=10&api_key='+WORDNIK_API_KEY),
+        word_associations: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word.gsub(" ", "%20")+'/relatedWords?limit=2&useCanonical=false&limitPerRelationshipType=10&api_key='+WORDNIK_API_KEY).map,
         reverse_definitions: HTTParty.get('http://api.wordnik.com:80/v4/words.json/reverseDictionary?query='+word.gsub(" ", "%20")+'&minCorpusCount=5&maxCorpusCount=-1&minLength=1&maxLength=-1&includeTags=false&skip=0&limit=5&api_key='+WORDNIK_API_KEY)    
-        }
-      word_association[:definitions].each do |definition|
-        definition.delete("textProns")
-        definition.delete("exampleUses")
-        definition.delete("labels")
-        definition.delete("attributionText")
-        definition.delete("relatedWords")
-        definition.delete("citations")
-        definition.delete("sequence")
-        definition.delete("score")
-        definition.delete("partOfSpeech")
+        }]
+      word_association[0][:definitions].each do |definition|
+        definition["word"] = "definition"
       end
     word_association
   end
@@ -71,16 +73,49 @@ module TopicsHelper
   end
 
 # formatting the incoming results from wordnik to the proper nested format
-  def tree_results(array_results)
-    tree_data = {"name"=> (@topic[:name]), "info" => "tst", "children" => [
-      ]}
-    array_results.each do |results|
-      tree_data["children"].push({"name" => results["relationshipType"], "children" => 
-        (results["words"].map do |word|
-           Hash["name", word]
-        end)
-      })
+  def tree_results(word_data)
+    if word_data.include?("plaintext")
+      tree_data = {"name"=> (word_data[0]["plaintext"]), "info" => "tst", "children" => []}
+      word_data.each do |results|
+        unless results["plaintext"].nil?
+         tree_data["children"].push({"name" => results["plaintext"].split(" | ")[0], "children" => 
+           (results["plaintext"].split("|").map do |word|
+              Hash["name", word.split("|")]
+           end)
+         })
+        end
+      end
+    else
+      #get the data ready for d3 view
+      tree_data = {"name"=> (@topic.name), "info" => "tst", "children" => []}
+      
+      word_data.each do |text, v|
+        tree_data["children"].push({"name" => text.to_s, "children" => []})
+      end
+      
+      tree_data["children"][0]["children"] << Hash["name", word_data[:word]]
+      
+      word_data[:definitions].each do |text|
+        tree_data["children"][1]["children"] << Hash["name", text["text"]]
+      end
+      
+      word_data[:word_associations].each do |text|
+        tree_data["children"][2]["children"] << Hash["name", text["relationshipType"], "children", []]
+      end     
+      
+      word_data[:reverse_definitions]["results"].each do |result| 
+        tree_data["children"][3]["children"] << Hash["name", result["text"]]
+      end
+      i = 0
+      word_data[:word_associations].each do |text|
+        text["words"].each do |word|
+          tree_data["children"][2]["children"][i]["children"] << Hash["name", word]
+        end
+        i+=1
+      end
     end
+    #reduce duplicates in word_association hash
+    tree_data["children"][2]["children"].uniq!
     return tree_data
   end
 
@@ -94,7 +129,7 @@ module TopicsHelper
   end
 
   def youtube_json(query)
-    full_results = HTTParty.get("https://www.googleapis.com/youtube/v3/search?part=snippet&q=#{query}&maxResults=50&key="+YOUTUBE_API_KEY)
+    full_results = HTTParty.get("https://www.googleapis.com/youtube/v3/search?part=snippet&q=#{query.gsub(" ", "%20")}&maxResults=50&key="+YOUTUBE_API_KEY)
     return full_results
   end
 end
