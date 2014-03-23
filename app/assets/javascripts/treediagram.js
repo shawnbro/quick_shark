@@ -17,7 +17,7 @@ $("div#viz").empty()
 
   // Create a cluster "canvas"
   var cluster = d3.layout.cluster()
-    .size([360,325]);
+    .size([360,400]);
 
   var diagonal = d3.svg.diagonal.radial()
     .projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
