@@ -35,7 +35,8 @@ $("div#viz").empty()
     .data(nodes)
     .enter().append("svg:g")
     .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
-    .attr("id", function(d){return d.name});
+    .attr("id", function(d){ return d.name })
+    .attr("class", function(){ return "words" });
 
   // Add the dot at every node
   node.append("svg:circle")
@@ -65,9 +66,15 @@ $("div#viz").empty()
     .attr("dy", ".31em")
     .attr("fill", "white")
     .attr("id", function(d){return d.name})
+    .attr("title", function(d) {return d.name} )
     .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
     .attr("transform", function(d) { return d.x < 180 ? null : "rotate(180)"; })
-    .text(function(d) { return d.name; })
+    .text(function(d) { words = d.name.split(" "); 
+      if(words.length > 3){
+        return words[0]+" "+words[1]+" "+words[2]+"..."; 
+      } else {
+          return d.name;
+        }})
     .on("mouseover", animateText)
     .on("mouseout", removeTextSize)
     .on("click", function(d,i){
@@ -111,6 +118,8 @@ $("div#viz").empty()
           .style("fill", "white")
       }
   };
+
+  $("text").tooltipsy();
 
   var value = $("h1").text();
   d3.select("#"+value).style("font-size", "26px")
