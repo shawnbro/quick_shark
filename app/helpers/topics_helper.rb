@@ -5,7 +5,6 @@ module TopicsHelper
     wolfram = []
     stuff = HTTParty.get('http://api.wolframalpha.com/v2/query?input='+word.gsub(" ", "%20")+'&appid='+WOLFRAM_ALPHA_API_KEY)
     stuff["queryresult"]["pod"].each do |subpod|
-      puts subpod["subpod"].class
       unless subpod["subpod"].class == Array
         wolfram.push(Hash["plaintext", subpod["subpod"]["plaintext"], "image", subpod["subpod"]["img"]])
       end
@@ -17,7 +16,6 @@ module TopicsHelper
     wolfram = []
     stuff = HTTParty.get('http://api.wolframalpha.com/v2/query?input='+word.gsub(" ", "%20")+'&appid='+WOLFRAM_ALPHA_API_KEY)
     stuff["queryresult"]["pod"].each do |subpod|
-      puts subpod["subpod"].class
       unless subpod["subpod"].class == Array
         wolfram.push(Hash["plaintext", subpod["subpod"]["plaintext"]])
       end
@@ -31,19 +29,9 @@ module TopicsHelper
         definitions: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word.gsub(" ", "%20")+'/definitions?limit=200&includeRelated=true&useCanonical=true&includeTags=false&api_key='+WORDNIK_API_KEY).map,
         # etymologies: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word+'/etymologies?api_key='+WORKNIK_API_KEY),
         word_associations: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word.gsub(" ", "%20")+'/relatedWords?limit=2&useCanonical=false&limitPerRelationshipType=10&api_key='+WORDNIK_API_KEY).map,
-        reverse_definitions: HTTParty.get('http://api.wordnik.com:80/v4/words.json/reverseDictionary?query='+word.gsub(" ", "%20")+'&minCorpusCount=5&maxCorpusCount=-1&minLength=1&maxLength=-1&includeTags=false&skip=0&limit=5&api_key='+WORDNIK_API_KEY).map    
+        reverse_definitions: HTTParty.get('http://api.wordnik.com:80/v4/words.json/reverseDictionary?query='+word.gsub(" ", "%20")+'&minCorpusCount=5&maxCorpusCount=-1&minLength=1&maxLength=-1&includeTags=false&skip=0&limit=5&api_key='+WORDNIK_API_KEY)    
         }]
       word_association[0][:definitions].each do |definition|
-        # definition.delete("textProns")
-        # definition.delete("exampleUses")
-        # definition.delete("labels")
-        # definition.delete("attributionText")
-        # definition.delete("relatedWords")
-        # definition.delete("citations")
-        # definition.delete("sequence")
-        # definition.delete("score")
-        # definition.delete("partOfSpeech")
-        # definition.delete("sourceDictionary")
         definition["word"] = "definition"
       end
     word_association
@@ -98,21 +86,22 @@ module TopicsHelper
         end
       end
     else
+      #get the data ready for d3 view
       tree_data = {"name"=> (@topic.name), "info" => "tst", "children" => []}
-      word_data.each do |k, v|
-        tree_data["children"].push({"name" => k.to_s, "children" => []})
+      word_data.each do |text, v|
+        tree_data["children"].push({"name" => text.to_s, "children" => []})
       end
       tree_data["children"][0]["children"] << Hash["name", word_data[:word]]
-      word_data[:definitions].each do |k|
-        tree_data["children"][1]["children"] << Hash["name", k["text"]]
-        word_data[:word_associations].each do |k|
-          unless k["words"].nil?
-            tree_data["children"][2]["children"] << Hash["name", k["words"]]
-          end
-        end      
+      word_data[:definitions].each do |text|
+        tree_data["children"][1]["children"] << Hash["name", text["text"]]
+      end
+      word_data[:word_associations].each do |text|
+        tree_data["children"][2]["children"] << Hash["name", text["words"]]
+      end   
+      word_data[:reverse_definitions]["results"].each do |result| 
+        tree_data["children"][3]["children"] << Hash["name", result["text"]]
       end
     end
-    binding.pry
     #reduce duplicates in word_association hash
     tree_data["children"][2]["children"].uniq!
     return tree_data
