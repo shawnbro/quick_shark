@@ -22,7 +22,7 @@ body {
 }
 
 header {
-  height: 70px;  
+  height: 50px;  
   display: inline-block;
   position: fixed;
   top: 0;
@@ -32,10 +32,13 @@ header {
 header nav ul {
   list-style: none; 
   overflow: hidden; 
-  position: relative;
-  float: left;
+  position: fixed;
   padding: 10px;
   outline: solid black 1px;
+  margin: 0;
+  width: 100%;
+  background-color: rgba(184,184,184,.9);
+  z-index: 100;
 }
 
 header nav ul li{ 
@@ -46,6 +49,34 @@ header nav ul li{
 
 header nav ul li a{
   text-decoration: none;
+}
+
+a {
+  color: black;
+}
+
+a:visited {
+  color: black;
+}
+
+a:hover {
+  color: rgb(0,154,205);
+}
+
+span {
+  color: white;
+}
+
+span > span:hover {
+  color: rgb(0,154,205);
+}
+
+div#journey {
+  color: white;
+}
+
+h1 {
+  color: white;
 }
 
 

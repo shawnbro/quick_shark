@@ -120,7 +120,7 @@ $("div#viz").empty()
 
   };
 
-  $("text").tooltipsy();
+  $("text").tooltipsy({alignTo: 'cursor', offset: [5, 5]});
 
   var value = $("h1").text();
   d3.select("#"+value).style("font-size", "26px")
@@ -138,7 +138,6 @@ $("div#viz").empty()
       window.newTopicId=res;
       $("span#topic_id").text(newTopicId.id);
     });
-    
   };
 };
 
