@@ -17,7 +17,7 @@ $("div#viz").empty()
 
   // Create a cluster "canvas"
   var cluster = d3.layout.cluster()
-    .size([360,400]);
+    .size([360,325]);
 
   var diagonal = d3.svg.diagonal.radial()
     .projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
@@ -120,7 +120,7 @@ $("div#viz").empty()
 
   };
 
-  $("text").tooltipsy({alignTo: 'cursor'});
+  $("text").tooltipsy({alignTo: 'cursor', offset: [5, 5]});
 
   var value = $("h1").text();
   d3.select("#"+value).style("font-size", "26px")
@@ -138,7 +138,6 @@ $("div#viz").empty()
       window.newTopicId=res;
       $("span#topic_id").text(newTopicId.id);
     });
-    
   };
 };
 
