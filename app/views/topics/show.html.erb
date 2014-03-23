@@ -3,7 +3,7 @@
   <span id='past_topics'><%=@topic.name%></span>
 <% end %>
 
-  <div><h1 style="display:none;"><%= @word_association[:word] %></h1><% unless !@word_association[:reverse_definitions].nil? %><span><%=@word_association[:reverse_definitions]["results"].sample["text"] %> <% end %>
+  <div><h1 style="display:none;"><%= @word_association[0][:word] %></h1><% unless !@word_association[0][:reverse_definitions].nil? %><span><%=@word_association[0][:reverse_definitions]["results"].sample["text"] %> <% end %>
   </div>
   
 <div id="define"><h2>Description</h2><p> <%= @description %> </p>
