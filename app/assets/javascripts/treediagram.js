@@ -117,6 +117,7 @@ $("div#viz").empty()
           .style("font-size", "14px")
           .style("fill", "white")
       }
+
   };
 
   $("text").tooltipsy({alignTo: 'cursor'});
@@ -125,6 +126,9 @@ $("div#viz").empty()
   d3.select("#"+value).style("font-size", "26px")
   d3.select("g#"+value).attr("transform", function(){ return "rotate(0 0 0)"});
 
+  $("#end_journey").click(function(topic){
+    $.post("/topics/" +$("span#topic_id").text(), {counter: $("span#counter").text(), _method: "put"});
+  });
 
   var addTopic = function(journey, topic){
     var url = "/add_topic?journey=" + journey + "&topic=" + topic;
@@ -137,3 +141,6 @@ $("div#viz").empty()
     
   };
 };
+
+
+
