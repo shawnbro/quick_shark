@@ -88,18 +88,30 @@ module TopicsHelper
     else
       #get the data ready for d3 view
       tree_data = {"name"=> (@topic.name), "info" => "tst", "children" => []}
+      
       word_data.each do |text, v|
         tree_data["children"].push({"name" => text.to_s, "children" => []})
       end
+      
       tree_data["children"][0]["children"] << Hash["name", word_data[:word]]
+      
       word_data[:definitions].each do |text|
         tree_data["children"][1]["children"] << Hash["name", text["text"]]
       end
+      
       word_data[:word_associations].each do |text|
-        tree_data["children"][2]["children"] << Hash["name", text["words"]]
-      end   
+        tree_data["children"][2]["children"] << Hash["name", text["relationshipType"], "children", []]
+      end     
+      
       word_data[:reverse_definitions]["results"].each do |result| 
         tree_data["children"][3]["children"] << Hash["name", result["text"]]
+      end
+      i = 0
+      word_data[:word_associations].each do |text|
+        text["words"].each do |word|
+          tree_data["children"][2]["children"][i]["children"] << Hash["name", word]
+        end
+        i+=1
       end
     end
     #reduce duplicates in word_association hash
