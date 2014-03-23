@@ -2,7 +2,7 @@
   <div id='journey'> Current Journey: <span><%= @journey[:title] %></span> </div><span id="journey_id" style="display: none;"><%= @journey[:id] %></span>
   <span id='past_topics'><%=@topic.name%></span>
 <% end %>
-  <div><h1><%= @word_association[:word] %></h1><% unless !@word_association[:reverse_definitions].nil? %><span><%=@word_association[:reverse_definitions]["results"].sample["text"] %> <% end %>
+  <div><h1 style="display:none;"><%= @word_association[:word] %></h1><% unless !@word_association[:reverse_definitions].nil? %><span><%=@word_association[:reverse_definitions]["results"].sample["text"] %> <% end %>
   </div>
   
 <div id="define"><h2>Description</h2><p> <%= @description %> </p>
@@ -21,5 +21,7 @@
 <span id="topic_id" style="display:none"><%=@topic.id%></span>
 <%= javascript_include_tag "treediagram" %>
 <div id="viz"></div>
-
-
+<div class="arrow-right"></div>
+<div class="arrow-left"></div>
+<div class="arrow-top"></div>
+<div class="arrow-bottom"></div>
