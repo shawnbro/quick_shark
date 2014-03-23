@@ -17,3 +17,4 @@
 //= require movingdivs
 //= require timer
 //= require d3
+//= require tooltipsy.min
