@@ -122,7 +122,7 @@ $("div.tooltipsy").remove()
         .transition()
           .duration(100)
           .style("font-size", "14px")
-          .style("fill", "white")
+          .style("fill", "black")
       }
 
   };

@@ -18,7 +18,7 @@
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700|Raleway:400,300,700);
 
 body {
-  background-color: rgba(84,84,84,1);
+  background-color: rgba(255,255,255,1);
 }
 
 header {
@@ -145,6 +145,27 @@ div#stats{
   border-top: 10px;
 }
 
+/*Style for Wolfram Alpha Tab*/
+#stats > div.stats {
+  width: 50%;
+  display: inline-block;
+  padding: 2em;
+  position: relative;
+}
+
+#stats > div:nth-child(1) {
+  display: block;
+  width: 100%;
+}
+
+#stats > div > img {
+  position: relative;
+}
+
+#stats > div:nth-child(3) {
+/*  position: absolute;*/
+}
+
 svg {
   font: 12px sans-serif;
   color: white;
@@ -158,7 +179,7 @@ svg.icon {
 }
 
 text {
-  color:white;
+  fill: black;
 }
 
 .link {
@@ -314,7 +335,7 @@ form input[type=search]::-webkit-search-cancel-button {
 }
 
 form input[type=search] {
-color: #FFFFFF;
+color: black;
 text-transform: uppercase;
 display: block;
 margin: 0;
