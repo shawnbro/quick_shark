@@ -136,6 +136,11 @@ $("div.tooltipsy").remove()
     $.post("/topics/" +$("span#topic_id").text(), {counter: $("span#counter").text(), _method: "put"});
   });
 
+  $("#new_journey").click(function(topic){
+    $.post("/topics/" +$("span#topic_id").text(), {counter: $("span#counter").text(), _method: "put"});
+  });
+
+
   var addTopic = function(journey, topic){
     var url = "/add_topic?journey=" + journey + "&topic=" + topic;
 
