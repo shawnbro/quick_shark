@@ -132,13 +132,33 @@ div#stats{
   height: 90%;
   width: 90%;
   position: fixed;
-  background-color: rgba(201,94,98,.75);
+  background-color: rgba(255,255,255,1);
   z-index: 1;
   border-radius: 15px;
   left: 120%;
   top: 5%;
   overflow: auto;
   border: 20px solid rgba(0, 0, 0, 0);
+}
+
+/*Style for Wolfram Alpha Tab*/
+#stats > div.stats {
+  width: 50%;
+  display: inline-block;
+  padding: 2em;
+}
+
+#stats > div:nth-child(1) {
+  display: block;
+  width: 100%;
+}
+
+#stats > div > img {
+  position: relative;
+}
+
+#stats > div:nth-child(3) {
+  position: absolute;
 }
 
 svg {

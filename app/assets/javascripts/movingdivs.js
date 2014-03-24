@@ -38,9 +38,9 @@
       data: {name: $("h1").text()},
       dataType: "JSON",
       success: function(result){
-        $("div#stats img").remove();
+        $("div#stats div").remove();
         for(i=0; i < result.length; i++) {
-          $("div#stats").append("<img src='"+result[i]["image"]["src"]+"' >");
+          $("div#stats").append("<div class='stats'><img src='"+result[i]["image"]["src"]+"' ></div>");
         }
       }
     })

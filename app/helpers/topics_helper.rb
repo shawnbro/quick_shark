@@ -9,19 +9,20 @@ module TopicsHelper
         wolfram.push(Hash["plaintext", subpod["subpod"]["plaintext"], "image", subpod["subpod"]["img"]])
       end
     end
+    binding.pry
     wolfram
   end
 
-  def get_wolfram_text(word)
-    wolfram = []
-    stuff = HTTParty.get('http://api.wolframalpha.com/v2/query?input='+word.gsub(" ", "%20").downcase+'&appid='+WOLFRAM_ALPHA_API_KEY)
-    stuff["queryresult"]["pod"].each do |subpod|
-      unless subpod["subpod"].class == Array
-        wolfram.push(Hash["plaintext", subpod["subpod"]["plaintext"]])
-      end
-    end
-    wolfram
-  end
+  # def get_wolfram_text(word)
+  #   wolfram = []
+  #   stuff = HTTParty.get('http://api.wolframalpha.com/v2/query?input='+word.gsub(" ", "%20").downcase+'&appid='+WOLFRAM_ALPHA_API_KEY)
+  #   stuff["queryresult"]["pod"].each do |subpod|
+  #     unless subpod["subpod"].class == Array
+  #       wolfram.push(Hash["plaintext", subpod["subpod"]["plaintext"]])
+  #     end
+  #   end
+  #   wolfram
+  # end
 
   def get_word_associations(word)
       word_association = [{
@@ -95,17 +96,17 @@ module TopicsHelper
       
       tree_data["children"][0]["children"] << Hash["name", word_data[:word]]
       
-      # word_data[:definitions].each do |text|
-      #   tree_data["children"][1]["children"] << Hash["name", text["text"]]
-      # end
+      word_data[:definitions].each do |text|
+        tree_data["children"][1]["children"] << Hash["name", text["text"]]
+      end
       
       word_data[:word_associations].each do |text|
         tree_data["children"][2]["children"] << Hash["name", text["relationshipType"], "children", []]
       end     
       
-      # word_data[:reverse_definitions]["results"].each do |result| 
-      #   tree_data["children"][3]["children"] << Hash["name", result["text"]]
-      # end
+      word_data[:reverse_definitions]["results"].each do |result| 
+        tree_data["children"][3]["children"] << Hash["name", result["text"]]
+      end
 
       i = 0
       word_data[:word_associations].each do |text|
@@ -116,6 +117,7 @@ module TopicsHelper
       end
     end
     #reduce duplicates in word_association hash
+    tree_data["children"][3]["children"].uniq!
     tree_data["children"][2]["children"].uniq!
     return tree_data
   end
