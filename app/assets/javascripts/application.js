@@ -18,3 +18,4 @@
 //= require timer
 //= require d3
 //= require tooltipsy.min
+//= require jquery.darktooltip

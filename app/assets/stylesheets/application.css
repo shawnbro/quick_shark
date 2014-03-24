@@ -164,8 +164,11 @@ text {
   stroke-color: rgb(120,120,120);
 }
 
-span#past_topics {
+div#past_topics {
   cursor: pointer;
+  width: 400px;
+  overflow: auto;
+  margin: 8px 40px;
 }
 
 .tooltipsy {
@@ -385,4 +388,30 @@ form input[type=text] {
 }
 
 
+/* The Timeline On The Topic Show Page */
 
+div .bubble-line {
+  border-bottom: 2px solid #808080;
+  display: inline-block;
+  width: 14px;
+  position: relative;
+  top: -6px;
+  left: 0px;
+  margin: -2px;
+  z-index: -1;
+}
+
+div .bubble {
+  border: 2px solid #808080;
+  background: #FFFFFF;
+  border-radius: 10px;
+  height: 10px;
+  width: 10px;
+  display: inline-block;
+  margin: 0px;
+  margin-right: -3px;
+}
+
+div .bubble:hover {
+  background: #009acd;
+}
