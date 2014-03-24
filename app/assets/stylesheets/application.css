@@ -41,10 +41,9 @@ header nav ul li {
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-weight: 400;
+  font-weight: 500;
   text-shadow: 0 0 1px rgba(255,255,255,0.3);
-  font-size: 1.35em;
-  font-size: 20px;
+  font-size: .8em;
   float: left; 
   margin: 0 20px 0 20px;
 }
@@ -65,9 +64,9 @@ header nav ul li a::after {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 80px;
-  height: 80px;
-  border: 2px solid rgba(0,0,0,0.1);
+  width: 60px;
+  height: 60px;
+  border: 2px solid rgba(174, 19, 171, 0.1);
   border-radius: 50%;
   content: '';
   opacity: 0;
@@ -80,9 +79,9 @@ header nav ul li a::after {
 }
 
 header nav ul li a::after {
-  width: 70px;
-  height: 70px;
-  border-width: 2px;
+  width: 50px;
+  height: 50px;
+  border-width: 3px;
   -webkit-transform: translateX(-50%) translateY(-50%) scale(0.8);
   -moz-transform: translateX(-50%) translateY(-50%) scale(0.8);
   transform: translateX(-50%) translateY(-50%) scale(0.8);
@@ -104,11 +103,11 @@ header nav ul li a{
 }
 
 a {
-  color: black;
+  color: rgb(120, 120, 120);
 }
 
 a:visited {
-  color: black;
+  color: rgb(120, 120, 120);
 }
 
 /*a:hover {
@@ -124,7 +123,8 @@ span > span:hover {
 }
 
 div#journey {
-  color: white;
+  font-family: 'Lato', Arial, sans-serif;
+  color: black;
 }
 
 h1 {
