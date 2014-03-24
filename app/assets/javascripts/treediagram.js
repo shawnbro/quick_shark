@@ -81,16 +81,17 @@ $("div.tooltipsy").remove()
         }})
     .on("mouseover", animateText)
     .on("mouseout", removeTextSize)
-    .on("click", function(d,i){
+    .on("click", function(d,i){ 
       addTopic($("span#journey_id").text(), d.name);
       $.post("/topics/" +$("span#topic_id").text(), {counter: $("span#counter").text(), _method: "put"});
       count = 0;
       d3.json("/data?word="+d.name, draw)
       $("h1").text(d.name)
       var topicSpan = $("<div class='bubble-line'></div><a id='sup' data-tooltip='"+d.name+"'><div class='bubble'></div></a>").on("click", create);
-      $("div#past_topics").append(topicSpan)
+      $("div#past_topics").append(topicSpan);
       makeTimeline();
     });
+
 
   var create = function(){
     addTopic($("span#journey_id").text(), this.getAttribute("data-tooltip"))
@@ -121,7 +122,7 @@ $("div.tooltipsy").remove()
         .transition()
           .duration(100)
           .style("font-size", "14px")
-          .style("fill", "white")
+          .style("fill", "black")
       }
 
   };

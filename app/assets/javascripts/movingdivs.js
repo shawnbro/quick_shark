@@ -8,7 +8,23 @@
       url: "/description",
       data: {name: $("h1").text()},
       dataType: "text",
-      success: function(result){$("div#define p").text(result)}
+      success: function(result){$("div#define p#description").text(result)}
+    });
+    // ajax get for definitions
+    $.ajax({
+      url: "/definitions",
+      data: {name: $("h1").text()},
+      dataType: "JSON",
+      success: function(result){
+        $("div#definitions p").remove();
+        $("div#reverse_definitions p").remove();
+        $.each(result[0]["definitions"], function(index, value){
+        $("div#definitions").append($("<p>").text(value["text"]))
+          })
+        $.each(result[0]["reverse_definitions"]["results"], function(index, value){
+        $("div#reverse_definitions").append($("<p>").text(value["text"]))
+          });
+      }
     });
   });
 
@@ -38,9 +54,9 @@
       data: {name: $("h1").text()},
       dataType: "JSON",
       success: function(result){
-        $("div#stats img").remove();
+        $("div#stats div").remove();
         for(i=0; i < result.length; i++) {
-          $("div#stats").append("<img src='"+result[i]["image"]["src"]+"' >");
+          $("div#stats").append("<div class='stats'><img src='"+result[i]["image"]["src"]+"' ></div>");
         }
       }
     })
@@ -57,6 +73,7 @@
       success: function(result){
         $('iframe').remove();
         $('button').remove();
+        // $("div#videos").append($("<button>").text("Refresh"))
         for ( var i = 0; i < 4; i++ ){
         $('<iframe height="425" width="320">').attr( "src", 'http://www.youtube.com/embed/' + result.items[i].id.videoId + '').append('div#videos');
         }
