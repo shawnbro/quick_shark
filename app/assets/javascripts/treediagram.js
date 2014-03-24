@@ -12,8 +12,8 @@ $("div.tooltipsy").remove()
 // Create a svg canvas
   var vis = d3.select("#viz").append("svg:svg")
     .call(d3.behavior.zoom().scaleExtent([0, 8]).on("zoom", zoom))
-    .attr("width", 800)
-    .attr("height", 650)
+    .attr("width", "100%")
+    .attr("height", "100%")
     .append("svg:g")
     .attr("transform", "translate(425, 425)")
     .append("g");
@@ -136,6 +136,11 @@ $("div.tooltipsy").remove()
   $("#end_journey").click(function(topic){
     $.post("/topics/" +$("span#topic_id").text(), {counter: $("span#counter").text(), _method: "put"});
   });
+
+  $("#new_journey").click(function(topic){
+    $.post("/topics/" +$("span#topic_id").text(), {counter: $("span#counter").text(), _method: "put"});
+  });
+
 
   var addTopic = function(journey, topic){
     var url = "/add_topic?journey=" + journey + "&topic=" + topic;
