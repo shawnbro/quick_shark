@@ -2,7 +2,7 @@
   KeyboardJS.on('down', function() {
     reset();
     $("div#define")[0].style.top = "5%";
-    $("div#pictures")[0].style.top = "95%";
+    $("div#pictures")[0].style.top = "105%";
     // ajax get for description
     $.ajax({
       url: "/description",
@@ -15,7 +15,7 @@
   KeyboardJS.on('up', function() {
     reset();
     $("div#pictures")[0].style.top = "5%";
-    $("div#define")[0].style.top = "-85%";
+    $("div#define")[0].style.top = "-105%";
     // ajax get for pictures
     $.ajax({
       url: "/pictures",
@@ -31,7 +31,7 @@
   KeyboardJS.on('left', function() {
     reset();
     $("div#stats")[0].style.left = "5%";
-    $("div#videos")[0].style.left = "-85%";
+    $("div#videos")[0].style.left = "-105%";
     // ajax get for stats from wolfram
     $.ajax({
       url: "/stats",
@@ -40,7 +40,7 @@
       success: function(result){
         $("div#stats img").remove();
         for(i=0; i < result.length; i++) {
-          $("div#stats").append("<img src='"+result[i]["image"]["src"]+"' ><br>");
+          $("div#stats").append("<img src='"+result[i]["image"]["src"]+"' >");
         }
       }
     })
@@ -49,7 +49,7 @@
   KeyboardJS.on('right', function() {
     reset();
     $("div#videos")[0].style.left = "5%";
-    $("div#stats")[0].style.left = "95%";
+    $("div#stats")[0].style.left = "105%";
     $.ajax({
       url: "/ytdata",
       data: {name: $("h1").text()},
@@ -78,10 +78,10 @@
   // }
 
   var reset = function() {
-    $("div#define")[0].style.top = "-85%";
-    $("div#pictures")[0].style.top = "95%";
-    $("div#videos")[0].style.left = "-85%";
-    $("div#stats")[0].style.left = "95%";
+    $("div#define")[0].style.top = "-105%";
+    $("div#pictures")[0].style.top = "105%";
+    $("div#videos")[0].style.left = "-105%";
+    $("div#stats")[0].style.left = "105%";
   }
 
   KeyboardJS.on('c', reset);
