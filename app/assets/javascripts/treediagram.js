@@ -8,16 +8,19 @@ window.onload = function() {
 
 var draw = function(data){treeData=data
 $("div#viz").empty()
+$("div.tooltipsy").remove()
 // Create a svg canvas
   var vis = d3.select("#viz").append("svg:svg")
-    .attr("width", 900)
-    .attr("height", 850)
+    .call(d3.behavior.zoom().scaleExtent([0, 8]).on("zoom", zoom))
+    .attr("width", 800)
+    .attr("height", 650)
     .append("svg:g")
-    .attr("transform", "translate(425, 425)");
+    .attr("transform", "translate(425, 425)")
+    .append("g");
 
   // Create a cluster "canvas"
   var cluster = d3.layout.cluster()
-    .size([360,325]);
+    .size([360,425]);
 
   var diagonal = d3.svg.diagonal.radial()
     .projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
@@ -37,6 +40,7 @@ $("div#viz").empty()
     .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
     .attr("id", function(d){ return d.name })
     .attr("class", function(){ return "words" });
+
 
   // Add the dot at every node
   node.append("svg:circle")
@@ -77,23 +81,24 @@ $("div#viz").empty()
         }})
     .on("mouseover", animateText)
     .on("mouseout", removeTextSize)
-    .on("click", function(d,i){
+    .on("click", function(d,i){ 
       addTopic($("span#journey_id").text(), d.name);
       $.post("/topics/" +$("span#topic_id").text(), {counter: $("span#counter").text(), _method: "put"});
       count = 0;
       d3.json("/data?word="+d.name, draw)
       $("h1").text(d.name)
       var topicSpan = $("<div class='bubble-line'></div><a id='sup' data-tooltip='"+d.name+"'><div class='bubble'></div></a>").on("click", create);
-      $("div#past_topics").append(topicSpan)
+      $("div#past_topics").append(topicSpan);
       makeTimeline();
     });
 
+
   var create = function(){
-    addTopic($("span#journey_id").text(), this.innerText)
+    addTopic($("span#journey_id").text(), this.getAttribute("data-tooltip"))
     $.post("/topics/" + $("span#topic_id").text(), {counter: $("span#counter").text(), _method: "put"});
     count = 0;
     d3.json("/data?word="+ (this.getAttribute("data-tooltip")), draw)
-    $("h1").text(this.innerText)
+    $("h1").text(this.getAttribute("data-tooltip"))
     var topicSpan = $("<div class='bubble-line'></div><a id='sup' data-tooltip='"+this.getAttribute("data-tooltip")+"'><div class='bubble'></div></a>").on("click", create);
     $("div#past_topics").append(topicSpan)
     makeTimeline();
@@ -117,7 +122,7 @@ $("div#viz").empty()
         .transition()
           .duration(100)
           .style("font-size", "14px")
-          .style("fill", "white")
+          .style("fill", "black")
       }
 
   };
@@ -141,6 +146,11 @@ $("div#viz").empty()
       $("span#topic_id").text(newTopicId.id);
     });
   };
+  
+ function zoom() {
+  vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+  }
+
 };
 
 
@@ -156,5 +166,6 @@ var makeTimeline = function() {
     };
   };
 };
+
 
 
