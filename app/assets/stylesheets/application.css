@@ -153,7 +153,7 @@ div#stats{
   position: relative;
 }
 
-#stats > div:nth-child(1) {
+#stats > div:nth-child(2) {
   display: block;
   width: 100%;
 }
