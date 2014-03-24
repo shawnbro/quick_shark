@@ -51,7 +51,6 @@ class TopicsController < ApplicationController
       @tree = @word_association[0][:wolfram].to_json
       render json: @tree.to_json
     else
-      binding.pry
       @tree = tree_results(@word_association[0])
       render json: @tree.to_json
     end

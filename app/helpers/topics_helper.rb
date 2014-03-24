@@ -5,29 +5,22 @@ module TopicsHelper
     wolfram = []
     stuff = HTTParty.get('http://api.wolframalpha.com/v2/query?input='+word.gsub(" ", "%20").downcase+'&appid='+WOLFRAM_ALPHA_API_KEY)
     stuff["queryresult"]["pod"].each do |subpod|
-      unless subpod["subpod"].class == Array 
+      unless subpod["subpod"].class == Array || subpod["subpod"].nil?
         wolfram.push(Hash["plaintext", subpod["subpod"]["plaintext"], "image", subpod["subpod"]["img"]])
       end
     end
     wolfram
   end
 
-  def get_wolfram_text(word)
-    wolfram = []
+  def get_wolfram_alpha(word)
+    wolfram = Hash["name", "wolfram", "children", []]
     stuff = HTTParty.get('http://api.wolframalpha.com/v2/query?input='+word.gsub(" ", "%20").downcase+'&appid='+WOLFRAM_ALPHA_API_KEY)
     stuff["queryresult"]["pod"].each do |subpod|
       unless subpod["subpod"].class == Array || subpod["subpod"].nil?
-        wolfram.push(Hash["plaintext", subpod["subpod"]["plaintext"]])
+        wolfram["children"].push(Hash["name", subpod["subpod"]["plaintext"]])
       end
     end
-      split = wolfram[1]["plaintext"].split("\n")
-      formatted_text = []
-      split.each do |word|
-        unless word.empty?
-          formatted_text << Hash["name", word.split("|")[0], "children", [Hash["name", word.split("|")[1]]]]
-        end
-      end
-    return formatted_text
+    return wolfram
   end
 
   def get_word_associations(word)
@@ -37,7 +30,7 @@ module TopicsHelper
         # etymologies: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word+'/etymologies?api_key='+WORKNIK_API_KEY),
         word_associations: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word.gsub(" ", "%20").downcase+'/relatedWords?limit=2&useCanonical=false&limitPerRelationshipType=10&api_key='+WORDNIK_API_KEY).map,
         reverse_definitions: HTTParty.get('http://api.wordnik.com:80/v4/words.json/reverseDictionary?query='+word.gsub(" ", "%20").downcase+'&minCorpusCount=5&maxCorpusCount=-1&minLength=1&maxLength=-1&includeTags=false&skip=0&limit=5&api_key='+WORDNIK_API_KEY),
-        wolfram: get_wolfram_text(word)    
+        # wolfram: get_wolfram_text(word)    
         }]
       word_association[0][:definitions].each do |definition|
         definition["word"] = "definition"
@@ -82,47 +75,35 @@ module TopicsHelper
 
 # formatting the incoming results from wordnik to the proper nested format
   def tree_results(word_data)
-    if word_data.include?("plaintext")
-      tree_data = {"name"=> (word_data[0]["plaintext"]), "info" => "tst", "children" => []}
-      word_data.each do |results|
-        unless results["plaintext"].nil?
-         tree_data["children"].push({"name" => results["plaintext"].split(" | ")[0], "children" => 
-           (results["plaintext"].split("|").map do |word|
-              Hash["name", word.split("|")]
-           end)
-         })
-        end
-      end
-    else
-      #get the data ready for d3 view
-      tree_data = {"name"=> (@topic.name), "info" => "tst", "children" => []}
+    #get the data ready for d3 view
+    tree_data = {"name"=> (@topic.name), "info" => "tst", "children" => []}
       
-      word_data.each do |text, v|
-        tree_data["children"].push({"name" => text.to_s, "children" => []})
-      end
-      
-      tree_data["children"][0]["children"] << Hash["name", word_data[:word]]
-      
-      word_data[:definitions].each do |text|
-        tree_data["children"][1]["children"] << Hash["name", text["text"]]
-      end
-      
-      word_data[:word_associations].each do |text|
-        tree_data["children"][2]["children"] << Hash["name", text["relationshipType"], "children", []]
-      end     
-      
-      word_data[:reverse_definitions]["results"].each do |result| 
-        tree_data["children"][3]["children"] << Hash["name", result["text"]]
-      end
-
-      i = 0
-      word_data[:word_associations].each do |text|
-        text["words"].each do |word|
-          tree_data["children"][2]["children"][i]["children"] << Hash["name", word]
-        end
-        i+=1
-      end
+    word_data.each do |text, v|
+      tree_data["children"].push({"name" => text.to_s, "children" => []})
     end
+      
+    tree_data["children"][0]["children"] << Hash["name", word_data[:word]]
+      
+    # word_data[:definitions].each do |text|
+    #   tree_data["children"][1]["children"] << Hash["name", text["text"]]
+    # end
+      
+    word_data[:word_associations].each do |text|
+      tree_data["children"][2]["children"] << Hash["name", text["relationshipType"], "children", []]
+    end     
+      
+    # word_data[:reverse_definitions]["results"].each do |result| 
+    #   tree_data["children"][3]["children"] << Hash["name", result["text"]]
+    # end
+
+    i = 0
+    word_data[:word_associations].each do |text|
+      text["words"].each do |word|
+        tree_data["children"][2]["children"][i]["children"] << Hash["name", word]
+      end
+      i+=1
+    end
+
     # tree_data["children"][4]["children"] << word_data[:wolfram]
     #reduce duplicates in word_association hash
     tree_data["children"][2]["children"].uniq!
