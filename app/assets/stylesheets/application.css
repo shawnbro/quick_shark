@@ -53,6 +53,7 @@ header nav ul li a{
 
 a {
   color: black;
+  margin-left: 10px;
 }
 
 a:visited {
@@ -63,8 +64,12 @@ a:hover {
   color: rgb(0,154,205);
 }
 
+input {
+  border-radius: 5px;
+}
+
 span {
-  color: white;
+  color: black;
 }
 
 span > span:hover {
@@ -72,13 +77,16 @@ span > span:hover {
 }
 
 div#journey {
-  color: white;
+  color: black;
 }
 
 h1 {
-  color: white;
+  color: black;
 }
 
+h2 {
+  margin-left: 10px;
+}
 
 div#viz{
   margin: 0 auto;
@@ -153,7 +161,7 @@ div#stats{
   position: relative;
 }
 
-#stats > div:nth-child(1) {
+#stats > div:nth-child(2) {
   display: block;
   width: 100%;
 }
@@ -184,9 +192,8 @@ text {
 
 .link {
   fill: none;
-  stroke: rgb(120,120,120);
+  stroke: rgb(212,212,212);
   stroke-width: 1.5px;
-  stroke-color: rgb(120,120,120);
 }
 
 div#past_topics {
