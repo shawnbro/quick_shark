@@ -74,7 +74,8 @@ $("div#viz").empty()
         return words[0]+" "+words[1]+" "+words[2]+"..."; 
       } else {
           return d.name;
-        }})
+      }
+    })
     .on("mouseover", animateText)
     .on("mouseout", removeTextSize)
     .on("click", function(d,i){

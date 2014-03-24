@@ -5,7 +5,7 @@ module TopicsHelper
     wolfram = []
     stuff = HTTParty.get('http://api.wolframalpha.com/v2/query?input='+word.gsub(" ", "%20").downcase+'&appid='+WOLFRAM_ALPHA_API_KEY)
     stuff["queryresult"]["pod"].each do |subpod|
-      unless subpod["subpod"].class == Array
+      unless subpod["subpod"].class == Array 
         wolfram.push(Hash["plaintext", subpod["subpod"]["plaintext"], "image", subpod["subpod"]["img"]])
       end
     end
@@ -16,11 +16,18 @@ module TopicsHelper
     wolfram = []
     stuff = HTTParty.get('http://api.wolframalpha.com/v2/query?input='+word.gsub(" ", "%20").downcase+'&appid='+WOLFRAM_ALPHA_API_KEY)
     stuff["queryresult"]["pod"].each do |subpod|
-      unless subpod["subpod"].class == Array
+      unless subpod["subpod"].class == Array || subpod["subpod"].nil?
         wolfram.push(Hash["plaintext", subpod["subpod"]["plaintext"]])
       end
     end
-    wolfram
+      split = wolfram[1]["plaintext"].split("\n")
+      formatted_text = []
+      split.each do |word|
+        unless word.empty?
+          formatted_text << Hash["name", word.split("|")[0], "children", [Hash["name", word.split("|")[1]]]]
+        end
+      end
+    return formatted_text
   end
 
   def get_word_associations(word)
@@ -29,7 +36,8 @@ module TopicsHelper
         definitions: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word.downcase.gsub(" ", "%20")+'/definitions?limit=200&includeRelated=true&useCanonical=true&includeTags=false&api_key='+WORDNIK_API_KEY).map,
         # etymologies: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word+'/etymologies?api_key='+WORKNIK_API_KEY),
         word_associations: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word.gsub(" ", "%20").downcase+'/relatedWords?limit=2&useCanonical=false&limitPerRelationshipType=10&api_key='+WORDNIK_API_KEY).map,
-        reverse_definitions: HTTParty.get('http://api.wordnik.com:80/v4/words.json/reverseDictionary?query='+word.gsub(" ", "%20").downcase+'&minCorpusCount=5&maxCorpusCount=-1&minLength=1&maxLength=-1&includeTags=false&skip=0&limit=5&api_key='+WORDNIK_API_KEY)    
+        reverse_definitions: HTTParty.get('http://api.wordnik.com:80/v4/words.json/reverseDictionary?query='+word.gsub(" ", "%20").downcase+'&minCorpusCount=5&maxCorpusCount=-1&minLength=1&maxLength=-1&includeTags=false&skip=0&limit=5&api_key='+WORDNIK_API_KEY),
+        wolfram: get_wolfram_text(word)    
         }]
       word_association[0][:definitions].each do |definition|
         definition["word"] = "definition"
@@ -95,17 +103,17 @@ module TopicsHelper
       
       tree_data["children"][0]["children"] << Hash["name", word_data[:word]]
       
-      # word_data[:definitions].each do |text|
-      #   tree_data["children"][1]["children"] << Hash["name", text["text"]]
-      # end
+      word_data[:definitions].each do |text|
+        tree_data["children"][1]["children"] << Hash["name", text["text"]]
+      end
       
       word_data[:word_associations].each do |text|
         tree_data["children"][2]["children"] << Hash["name", text["relationshipType"], "children", []]
       end     
       
-      # word_data[:reverse_definitions]["results"].each do |result| 
-      #   tree_data["children"][3]["children"] << Hash["name", result["text"]]
-      # end
+      word_data[:reverse_definitions]["results"].each do |result| 
+        tree_data["children"][3]["children"] << Hash["name", result["text"]]
+      end
 
       i = 0
       word_data[:word_associations].each do |text|
@@ -115,8 +123,10 @@ module TopicsHelper
         i+=1
       end
     end
+    # tree_data["children"][4]["children"] << word_data[:wolfram]
     #reduce duplicates in word_association hash
     tree_data["children"][2]["children"].uniq!
+    # tree_data["children"][4]["children"].flatten!
     return tree_data
   end
 
