@@ -12,8 +12,8 @@ $("div.tooltipsy").remove()
 // Create a svg canvas
   var vis = d3.select("#viz").append("svg:svg")
     .call(d3.behavior.zoom().scaleExtent([0, 8]).on("zoom", zoom))
-    .attr("width", 800)
-    .attr("height", 650)
+    .attr("width", "100%")
+    .attr("height", 700)
     .append("svg:g")
     .attr("transform", "translate(425, 425)")
     .append("g");

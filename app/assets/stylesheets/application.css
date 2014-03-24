@@ -64,7 +64,7 @@ a:hover {
 }
 
 span {
-  color: white;
+  color: black;
 }
 
 span > span:hover {
@@ -72,11 +72,11 @@ span > span:hover {
 }
 
 div#journey {
-  color: white;
+  color: black;
 }
 
 h1 {
-  color: white;
+  color: black;
 }
 
 
@@ -184,9 +184,8 @@ text {
 
 .link {
   fill: none;
-  stroke: rgb(120,120,120);
+  stroke: rgb(212,212,212);
   stroke-width: 1.5px;
-  stroke-color: rgb(120,120,120);
 }
 
 div#past_topics {
