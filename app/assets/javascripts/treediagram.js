@@ -8,6 +8,7 @@ window.onload = function() {
 
 var draw = function(data){treeData=data
 $("div#viz").empty()
+$("div.tooltipsy").remove()
 // Create a svg canvas
   var vis = d3.select("#viz").append("svg:svg")
     .attr("width", 900)
