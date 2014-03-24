@@ -65,11 +65,19 @@ module TopicsHelper
       url = "http://www.yiyinglu.com/failwhale/images/Homer_the_New_Fail_Whale_by_edwheeler.jpg"
     else
       photo_id = result[0]["id"]
+      photo_id_2 = result[1]["id"]
+      photo_id_3 = result[2]["id"]
+      photo_id_4 = result[3]["id"]
       info = flickr.photos.getInfo(:photo_id => photo_id)
+      info2 = flickr.photos.getInfo(:photo_id => photo_id_2) 
+      info3 = flickr.photos.getInfo(:photo_id => photo_id_3) 
+      info4 = flickr.photos.getInfo(:photo_id => photo_id_4) 
       url = FlickRaw.url(info)
+      url2 = FlickRaw.url(info2) 
+      url3 = FlickRaw.url(info3) 
+      url4 = FlickRaw.url(info4)
     end
-
-    return url
+    return url, url2, url3, url4
   end
 
 # formatting the incoming results from wordnik to the proper nested format
