@@ -517,7 +517,7 @@ div.login-form {
   margin-left: auto;
 }
 
-form {
+form.login-form {
   font-size: 25px;
   width: 40%;
   color: #22313d;
