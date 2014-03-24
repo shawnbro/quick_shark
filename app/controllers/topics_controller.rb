@@ -30,6 +30,11 @@ class TopicsController < ApplicationController
     render json: @description
   end
 
+  def definition
+    @definition = get_word_associations(params[:name])
+    render json: @definition
+  end
+
   def pictures
     @photo = find_photo(params[:name])
     render json: @photo
@@ -52,7 +57,11 @@ class TopicsController < ApplicationController
       render json: @tree_data
     else
       @tree = tree_results(@word_association[0])
-      render json: @tree.to_json
+      if @tree["children"][2]["children"] != []
+        render json: @tree.to_json
+      else
+        render json: {"name" => "No Results"}
+      end
     end
   end
 
