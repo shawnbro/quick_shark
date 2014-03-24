@@ -58,9 +58,8 @@
         $('iframe').remove();
         $('button').remove();
         for ( var i = 0; i < 4; i++ ){
-        $('<iframe>').attr( "src", 'http://www.youtube.com/embed/' + result.items[i].id.videoId + '').appendTo('div#videos');
+        $('<iframe height="425" width="320">').attr( "src", 'http://www.youtube.com/embed/' + result.items[i].id.videoId + '').append('div#videos');
         }
-        $("div#videos").append($("<button>").text("Refresh"))
       }
     })
   });
