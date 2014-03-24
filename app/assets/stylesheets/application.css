@@ -346,6 +346,24 @@ form input[type=search]::-webkit-search-cancel-button {
 -webkit-appearance: 100px;
 }
 
+form input[type=search]::-webkit-input-placeholder {
+   color: #ddd;
+}
+
+form input[type=search]:-moz-placeholder { /* Firefox 18- */
+   color: #ddd;  
+}
+
+form input[type=search]::-moz-placeholder {  /* Firefox 19+ */
+   color: #ddd;  
+}
+
+form input[type=search]:-ms-input-placeholder {  
+   color: #ddd;  
+}
+
+
+
 form input[type=search] {
 color: black;
 text-transform: uppercase;
