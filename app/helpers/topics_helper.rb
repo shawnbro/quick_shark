@@ -26,7 +26,7 @@ module TopicsHelper
   def get_word_associations(word)
       word_association = [{
         word: word,
-        definitions: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word.gsub(" ", "%20").downcase+'/definitions?limit=200&includeRelated=true&useCanonical=true&includeTags=false&api_key='+WORDNIK_API_KEY).map,
+        definitions: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word.downcase.gsub(" ", "%20")+'/definitions?limit=200&includeRelated=true&useCanonical=true&includeTags=false&api_key='+WORDNIK_API_KEY).map,
         # etymologies: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word+'/etymologies?api_key='+WORKNIK_API_KEY),
         word_associations: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word.gsub(" ", "%20").downcase+'/relatedWords?limit=2&useCanonical=false&limitPerRelationshipType=10&api_key='+WORDNIK_API_KEY).map,
         reverse_definitions: HTTParty.get('http://api.wordnik.com:80/v4/words.json/reverseDictionary?query='+word.gsub(" ", "%20").downcase+'&minCorpusCount=5&maxCorpusCount=-1&minLength=1&maxLength=-1&includeTags=false&skip=0&limit=5&api_key='+WORDNIK_API_KEY)    
