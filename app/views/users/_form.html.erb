@@ -1,24 +1,26 @@
-<%= form_for @user do |f| %>
+<div class="new-user-form">
+  <%= form_for @user do |f| %>
 
-<%= f.label :first_name %>
-<%= f.text_field :first_name, placeholder: "First Name" %>
-<br/>
+  <%= f.label :first_name %><br/>
+  <%= f.text_field :first_name %>
+  <br/>
 
-<%= f.label :last_name %>
-<%= f.text_field :last_name, placeholder: "Last Name" %>
-<br/>
+  <%= f.label :last_name %><br/>
+  <%= f.text_field :last_name %>
+  <br/>
 
-<%= f.label :email %>
-<%= f.email_field :email, placeholder: "your.email@email.com" %>
-<br/>
+  <%= f.label :email %><br/>
+  <%= f.email_field :email %>
+  <br/>
 
-<%= f.label :password %>
-<%= f.password_field :password, placeholder: "Password" %>
-<br/>
+  <%= f.label :password %><br/>
+  <%= f.password_field :password %>
+  <br/>
 
-<%= f.label :password_confirmation %>
-<%= f.password_field :password_confirmation, placeholder: "Password Confirmation" %>
-<br/>
-
-<%= f.submit @user.id.nil? ? "Join" : "Save Changes" %>
-<% end %>
+  <%= f.label :password_confirmation %><br/>
+  <%= f.password_field :password_confirmation %>
+  <br/>
+  <br/>
+  <%= f.submit @user.id.nil? ? "Join" : "Save Changes" %>
+  <% end %>
+</div>
