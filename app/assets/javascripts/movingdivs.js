@@ -1,6 +1,5 @@
 $(document).ready(function(){
   KeyboardJS.on('down', function() {
-    console.log('down firing');
     reset();
     $("div#define")[0].style.top = "5%";
     $("div#pictures")[0].style.top = "105%";
@@ -14,7 +13,6 @@ $(document).ready(function(){
   }); // on 'down'
 
   KeyboardJS.on('up', function() {
-    console.log('up firing');
     reset();
     $("div#pictures")[0].style.top = "5%";
     $("div#define")[0].style.top = "-105%";
@@ -35,7 +33,6 @@ $(document).ready(function(){
   }); // on 'up'
 
   KeyboardJS.on('left', function() {
-    console.log('left firing');
     reset();
     $("div#stats")[0].style.left = "5%";
     $("div#videos")[0].style.left = "-105%";
@@ -54,7 +51,6 @@ $(document).ready(function(){
   }); // on 'left'
 
   KeyboardJS.on('right', function() {
-    console.log('right firing');
     var videos;
 
     reset();
