@@ -402,6 +402,9 @@ text-align: center;
 }
 
 
+
+/*Styles for signup page*/
+
 form.new_user {
   font-size: 25px;
   width: 40%;
@@ -419,6 +422,24 @@ div.new-user-form {
   margin-left: auto;
 }
 
+/*Styles for login page*/
+
+div.login-form {
+  background-color: lightgreen;
+  margin-top: 100px;
+  border: 3px solid #000;
+  border-radius: 7px;
+  padding: 60px;
+  width: 450px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+form {
+  font-size: 25px;
+  width: 40%;
+  color: #22313d;
+}
 
 /* The Timeline On The Topic Show Page */
 
