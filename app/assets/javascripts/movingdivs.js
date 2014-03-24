@@ -54,13 +54,13 @@
       url: "/ytdata",
       data: {name: $("h1").text()},
       dataType: "JSON",
-      success: function(result){ 
+      success: function(result){
         $('iframe').remove();
         $('button').remove();
-        $("div#videos").append($("<button>").text("Refresh"))
         for ( var i = 0; i < 4; i++ ){
-        $('<iframe width="420" height="345">').attr( "src", 'http://www.youtube.com/embed/' + result.items[i].id.videoId + '').appendTo('div#videos');
+        $('<iframe>').attr( "src", 'http://www.youtube.com/embed/' + result.items[i].id.videoId + '').appendTo('div#videos');
         }
+        $("div#videos").append($("<button>").text("Refresh"))
       }
     })
   });
