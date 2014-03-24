@@ -27,17 +27,17 @@
   c1.101,1.368,2.767,2.258,4.656,2.258h4V20c0-0.808,0.488-1.54,1.234-1.849C25.981,17.845,26.843,18.017,27.414,18.586z"></path>
   </g>
 </svg>
-<header>
-  <nav>
-  <ul>
-      <li id="new_journey"><%= link_to("New Journey", root_path) %></li>
-      <li><%= link_to("My Account", "#{user_path(session[:user_id])}") if !session[:user_id].nil?%></li>
-      <li><%= link_to "Create Account", new_user_path if session[:user_id].nil? %></li>
-      <li><%= link_to("Log in","/login") if session[:user_id].nil? %></li>
-      <li><%= link_to("Log out #{User.find_by(id: session[:user_id]).first_name.capitalize}", "/session", method: "delete") unless session[:user_id].nil? %></li>
-  </ul>
-  </nav>
-</header>
+  <header>
+    <nav>
+      <ul>
+          <li id="new_journey"><%= link_to("New Journey", root_path) %></li>
+          <li><%= link_to("My Account", "#{user_path(session[:user_id])}") if !session[:user_id].nil?%></li>
+          <li><%= link_to "Create Account", new_user_path if session[:user_id].nil? %></li>
+          <li><%= link_to("Log in","/login") if session[:user_id].nil? %></li>
+          <li><%= link_to("Log out #{User.find_by(id: session[:user_id]).first_name.capitalize}", "/session", method: "delete") unless session[:user_id].nil? %></li>
+      </ul>
+    </nav>
+  </header>
 <%= yield %>
 
 </body>
