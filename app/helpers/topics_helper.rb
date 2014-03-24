@@ -9,7 +9,6 @@ module TopicsHelper
         wolfram.push(Hash["plaintext", subpod["subpod"]["plaintext"], "image", subpod["subpod"]["img"]])
       end
     end
-    binding.pry
     wolfram
   end
 
