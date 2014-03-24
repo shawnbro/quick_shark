@@ -441,6 +441,42 @@ form {
   color: #22313d;
 }
 
+/* Style for user account page */
+
+ul#user_journey_list {
+  width: 570px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+ul#user_journey_list li {
+  font-size: 24px;
+  padding: 5px;
+  border: 1px solid darkgrey;
+  display: inline-block;
+  width: 400px;
+  text-align: center;
+}
+
+form div{
+  display: inline-block;
+}
+
+ul#user_journey_list li:nth-child(odd) {
+  background: lightgreen;
+}
+
+input[type=submit] {
+  font-size: 20px;
+  display: inline;
+}
+
+h2.saved_headline {
+  text-align: center;
+}
+
+
+
 /* The Timeline On The Topic Show Page */
 
 div .bubble-line {
