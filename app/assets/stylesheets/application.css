@@ -22,7 +22,7 @@ body {
 }
 
 header {
-  height: 50px;  
+  height: 50px;
   display: inline-block;
   position: fixed;
   top: 0;
@@ -45,13 +45,13 @@ header nav ul li {
   text-shadow: 0 0 1px rgba(255,255,255,0.3);
   font-size: 1.35em;
   font-size: 20px;
-  float: left; 
+  float: left;
   margin: 0 20px 0 20px;
 }
 
 
 header nav ul {
-  list-style: none; 
+  list-style: none;
   position: relative;
   padding: 10px;
   margin: 0;
@@ -403,15 +403,15 @@ form input[type=search]::-webkit-input-placeholder {
 }
 
 form input[type=search]:-moz-placeholder { /* Firefox 18- */
-   color: #ddd;  
+   color: #ddd;
 }
 
 form input[type=search]::-moz-placeholder {  /* Firefox 19+ */
-   color: #ddd;  
+   color: #ddd;
 }
 
-form input[type=search]:-ms-input-placeholder {  
-   color: #ddd;  
+form input[type=search]:-ms-input-placeholder {
+   color: #ddd;
 }
 
 
@@ -542,4 +542,24 @@ div .flickr {
   width: 1000px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.videoWrap{
+  display: block;
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+div#video {
+  display: inline-block;
+}
+
+iframe {
+  height: 200px;
+  width: 400px;
+  border-radius: 20px;
+}
+
+button#refresh{
+  border-radius: 10px;
 }
