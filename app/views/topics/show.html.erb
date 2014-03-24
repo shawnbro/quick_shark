@@ -6,7 +6,11 @@
 
   <div><h1 style="display:none;"><%= @word_association[0][:word] %></h1><% unless !@word_association[0][:reverse_definitions].nil? %><span><%=@word_association[0][:reverse_definitions]["results"].sample["text"] %> <% end %>
   </div>
-<%= button_to "End Journey" , journey_path(@journey.id) , method: "get", id: "end_journey" %>
+
+<% if current_user %>
+  <%= button_to "End Journey" , journey_path(@journey.id) , method: "get", id: "end_journey" %>
+<% end %>
+
 <div id="define"><h2>Description</h2><p> <%= @description %> </p>
   <% @word_association[0][:definitions].each do |definition| %>
       <div><%= definition["text"] %></div>
@@ -27,11 +31,6 @@
 <div class="arrow-left"></div>
 <div class="arrow-top"></div>
 <div class="arrow-bottom"></div>
-
-<% if current_user %>
-  <%= button_to "End Journey" , journey_path(@journey.id) , method: "get", id: "end_journey" %>
-<% end %>
-
 
 <script>
   $(document).ready( function(){

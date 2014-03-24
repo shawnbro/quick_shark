@@ -11,14 +11,16 @@ $("div#viz").empty()
 $("div.tooltipsy").remove()
 // Create a svg canvas
   var vis = d3.select("#viz").append("svg:svg")
-    .attr("width", 900)
-    .attr("height", 850)
+    .call(d3.behavior.zoom().scaleExtent([0, 8]).on("zoom", zoom))
+    .attr("width", 800)
+    .attr("height", 650)
     .append("svg:g")
-    .attr("transform", "translate(425, 425)");
+    .attr("transform", "translate(425, 425)")
+    .append("g");
 
   // Create a cluster "canvas"
   var cluster = d3.layout.cluster()
-    .size([360,325]);
+    .size([360,425]);
 
   var diagonal = d3.svg.diagonal.radial()
     .projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
@@ -38,6 +40,7 @@ $("div.tooltipsy").remove()
     .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
     .attr("id", function(d){ return d.name })
     .attr("class", function(){ return "words" });
+
 
   // Add the dot at every node
   node.append("svg:circle")
@@ -142,6 +145,11 @@ $("div.tooltipsy").remove()
       $("span#topic_id").text(newTopicId.id);
     });
   };
+  
+ function zoom() {
+  vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+  }
+
 };
 
 
@@ -157,5 +165,6 @@ var makeTimeline = function() {
     };
   };
 };
+
 
 
