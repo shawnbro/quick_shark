@@ -20,10 +20,14 @@
     $.ajax({
       url: "/pictures",
       data: {name: $("h1").text()},
-      dataType: "text",
+      dataType: "JSON",
       success: function(result){
         $("div#pictures img").remove();
-        $("div#pictures").append("<img src="+result+" >");
+        $("div.flickr-wrapper").remove();
+        $("div#pictures").append("<div class=flickr-wrapper>");
+        for ( var i = 0; i < 4; i++ ){
+        $("div.flickr-wrapper").append("<div class=flickr><img src="+result[i]+" ></div>");
+        }
       }
     });
   });

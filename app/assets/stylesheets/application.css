@@ -440,3 +440,24 @@ div .bubble {
 div .bubble:hover {
   background: #009acd;
 }
+
+/* Picture styles */
+
+div .flickr {
+  display: inline-block;
+  width: 500px;
+  height:326px;
+  overflow: hidden;
+}
+
+.flickr img {
+  width: 100%;
+  margin: 10px;
+  border-radius: 7px;
+}
+
+.flickr-wrapper {
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
