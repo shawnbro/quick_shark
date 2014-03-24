@@ -24,6 +24,9 @@ body {
 header {
   height: 50px;  
   display: inline-block;
+  position: fixed;
+  top: 0;
+  margin: 0 0 0 59%;
 }
 
 header nav ul {
@@ -76,17 +79,14 @@ h1 {
   color: white;
 }
 
-/*#search_bar{
-  position: fixed;
-  top: 50%;
-  left: 25%;
-}*/
 
-div#viz {
+div#viz{
+  margin: 0 auto;
+  text-align: center;
+  z-index: -1;
   overflow: auto;
   width: 90%;
   height: 90%;
-  margin-left: 5%;
 }
 
 div#define{
@@ -96,7 +96,7 @@ div#define{
   background-color: rgba(102,102,102,.75);
   z-index: 1;
   border-radius: 15px;
-  top: -90%;
+  top: -120%;
   left: 5%;
   overflow: auto;
   border: 20px solid rgba(0, 0, 0, 0);
@@ -109,7 +109,7 @@ div#pictures{
   background-color: rgba(66,153,51,.75);
   z-index: 1;
   border-radius: 15px;
-  top: 97%;
+  top: 120%;
   left: 5%;
   overflow: auto;
   border: 20px solid rgba(0, 0, 0, 0);
@@ -122,7 +122,7 @@ div#videos{
   background-color: rgba(48,63,145,.75);
   z-index: 1;
   border-radius: 15px;
-  left: -90%;
+  left: -120%;
   top: 5%;
   overflow: auto;
   border: 20px solid rgba(0, 0, 0, 0);
@@ -135,7 +135,7 @@ div#stats{
   background-color: rgba(201,94,98,.75);
   z-index: 1;
   border-radius: 15px;
-  left: 97%;
+  left: 120%;
   top: 5%;
   overflow: auto;
   border: 20px solid rgba(0, 0, 0, 0);
@@ -164,8 +164,11 @@ text {
   stroke-color: rgb(120,120,120);
 }
 
-span#past_topics {
+div#past_topics {
   cursor: pointer;
+  width: 400px;
+  overflow: auto;
+  margin: 8px 40px;
 }
 
 .tooltipsy {
@@ -200,7 +203,7 @@ span#past_topics {
   -moz-transition: all 0.3s;
   transition: all 0.3s;
   width: 325px;
-  height: 80px;
+  height: 70px;
 }
 
 .container > section p {
@@ -289,7 +292,7 @@ form {
 
 .container {
   width: 70%;
-  margin: 200px auto;
+  margin: 20% auto;
   text-align: center;
 }
 
@@ -325,10 +328,90 @@ text-align: center;
 
 
 
+/* Arrows */
+
+.arrow-right {
+  width: 0px;
+  height: 0px;
+  border-top: 80px solid transparent;
+  border-bottom: 80px solid transparent;
+  border-right: 40px solid rgba(211, 211, 211, 0.27);
+  position: fixed;
+  right: 0;
+  top: 45%;
+}
+
+.arrow-left {
+  width: 0px;
+  height: 0px;
+  border-top: 80px solid transparent;
+  border-bottom: 80px solid transparent;
+  border-left: 40px solid rgba(211, 211, 211, 0.27);
+  position: fixed;
+  left: 0px;
+  top: 45%;
+}
+
+.arrow-top {
+  width: 0px;
+  height: 0px;
+  border-left: 80px solid transparent;
+  border-right: 80px solid transparent;
+  border-top: 40px solid rgba(211, 211, 211, 0.27);
+  position: fixed;
+  top: 0;
+  margin-left: -7%;
+  left: 50%;
+}
+
+.arrow-bottom {
+  width: 0px;
+  height: 0px;
+  border-left: 80px solid transparent;
+  border-right: 80px solid transparent;
+  border-bottom: 40px solid rgba(211, 211, 211, 0.27);
+  position: fixed;
+  top: 95%;
+  margin-left: -7%;
+  left: 50%;
+}
 
 
 
+form input[type=text] {
+  border: 5px solid #34495e;
+  font-size: 48px;
+  padding: 10px;
+  width: 100%;
+  outline: 0;
+  color: #22313d;
+}
 
 
+/* The Timeline On The Topic Show Page */
 
+div .bubble-line {
+  border-bottom: 2px solid #808080;
+  display: inline-block;
+  width: 14px;
+  position: relative;
+  top: -6px;
+  left: 0px;
+  margin: -2px;
+  z-index: -1;
+}
 
+div .bubble {
+  border: 2px solid #808080;
+  background: #FFFFFF;
+  border-radius: 10px;
+  height: 10px;
+  width: 10px;
+  display: inline-block;
+  margin: 0px;
+  margin-right: -3px;
+}
+
+div .bubble:hover {
+  background: #009acd;
+}

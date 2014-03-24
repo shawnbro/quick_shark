@@ -83,18 +83,20 @@ $("div#viz").empty()
       count = 0;
       d3.json("/data?word="+d.name, draw)
       $("h1").text(d.name)
-      var topicSpan = $("<span> </span><span>"+d.name+"</span>").on("click", create);
-      $("span#past_topics").append(topicSpan)
+      var topicSpan = $("<div class='bubble-line'></div><a id='sup' data-tooltip='"+d.name+"'><div class='bubble'></div></a>").on("click", create);
+      $("div#past_topics").append(topicSpan)
+      makeTimeline();
     });
 
   var create = function(){
     addTopic($("span#journey_id").text(), this.innerText)
     $.post("/topics/" + $("span#topic_id").text(), {counter: $("span#counter").text(), _method: "put"});
     count = 0;
-    d3.json("/data?word="+ this.innerText, draw)
+    d3.json("/data?word="+ (this.getAttribute("data-tooltip")), draw)
     $("h1").text(this.innerText)
-    var topicSpan = $("<span> </span><span>"+this.innerText+"</span>").on("click", create);
-    $("span#past_topics").append(topicSpan)
+    var topicSpan = $("<div class='bubble-line'></div><a id='sup' data-tooltip='"+this.getAttribute("data-tooltip")+"'><div class='bubble'></div></a>").on("click", create);
+    $("div#past_topics").append(topicSpan)
+    makeTimeline();
   };    
 
 
@@ -141,5 +143,18 @@ $("div#viz").empty()
   };
 };
 
+
+var makeTimeline = function() {
+ var test = $("div#past_topics").children()
+
+  for(i = 0; i < test.length; i++) { 
+    if(test[i].id === "sup") { 
+      $(test[i]).darkTooltip({
+        animation:'flipIn',
+        gravity:'north'
+      }); 
+    };
+  };
+};
 
 
