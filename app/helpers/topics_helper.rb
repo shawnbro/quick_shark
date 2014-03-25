@@ -65,6 +65,9 @@ module TopicsHelper
     # If there are no pictues, you get an "error" image
     if result.length == 0
       url = "http://www.yiyinglu.com/failwhale/images/Homer_the_New_Fail_Whale_by_edwheeler.jpg"
+      url2 = "http://www.yiyinglu.com/failwhale/images/Homer_the_New_Fail_Whale_by_edwheeler.jpg"
+      url3 = "http://www.yiyinglu.com/failwhale/images/Homer_the_New_Fail_Whale_by_edwheeler.jpg"
+      url4 = "http://www.yiyinglu.com/failwhale/images/Homer_the_New_Fail_Whale_by_edwheeler.jpg"
     else
       # Pull the id results from 4 random images
       photo_id = result[rand(result.length)]["id"]
