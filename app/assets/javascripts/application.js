@@ -16,14 +16,11 @@
 //= require turbolinks
 //= require keyboard
 //= require movingdivs
-//= require timer
 //= require d3
 //= require tooltipsy.min
 //= require jquery.darktooltip
 //= require_tree ./treeGraph
 //= require_tree ./journeyGraph
-//= require treediagram
-//= require journeybargraph
 
 //application namespaced object
 var Tangent = {};
