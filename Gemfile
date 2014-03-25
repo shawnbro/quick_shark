@@ -51,7 +51,7 @@ group :development, :test do
   gem 'launchy'
 end
 
-group :production, do 
+group :production do 
   gem 'rails_12factor'
 end
 
