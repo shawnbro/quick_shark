@@ -3,7 +3,7 @@
   <%= form_for :topic, url: topics_path, :html => {:id => "explore" } do |f| %>
     <%= f.search_field :topic, placeholder: "Enter Any Word, Topic, Idea, etc.", autofocus: "autofocus", autocomplete: "off" %><br />
     <p class="perspective">
-        <button class="btn intro-button number1" id="explore" disabled="true">
+        <button class="btn intro-button number1" id="exploreB" disabled="true">
           <svg class="icon">
             <use xlink:href="#compass"></use>
           </svg>
@@ -45,7 +45,7 @@ function disableEnterKey(e)
 /*deactivates explore button if search input is empty */
   $( "input#topic_topic" ).on("keyup", function(e) { 
     if(67 < e.keyCode && e.keyCode < 90) {
-      $( "button#explore" ).prop('disabled', false);
+      $( "button#exploreB" ).prop('disabled', false);
     }
   });
 </script>
