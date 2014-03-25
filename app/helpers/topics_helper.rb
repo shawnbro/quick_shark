@@ -2,6 +2,7 @@
 module TopicsHelper
 
   def get_wolfram_alpha(word)
+    # Initial API call, results passed into an array of a hash
     wolfram = []
     stuff = HTTParty.get('http://api.wolframalpha.com/v2/query?input='+word.gsub(" ", "%20").downcase+'&appid='+WOLFRAM_ALPHA_API_KEY)
     stuff["queryresult"]["pod"].each do |subpod|
@@ -24,15 +25,15 @@ module TopicsHelper
   # end
 
   def get_word_associations(word)
-
-
+    # Initial API call, results passed into an array of a hash
     word_association = [{
       word: word,
+      # HTTP get returns JSON objects then pushed into arrays
       definitions: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word.gsub(" ", "%20").downcase+'/definitions?limit=200&includeRelated=true&useCanonical=true&includeTags=false&api_key='+WORDNIK_API_KEY).map,
-      # etymologies: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word+'/etymologies?api_key='+WORKNIK_API_KEY),
       word_associations: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word.gsub(" ", "%20").downcase+'/relatedWords?limit=2&useCanonical=true&limitPerRelationshipType=10&api_key='+WORDNIK_API_KEY).map,
       reverse_definitions: HTTParty.get('http://api.wordnik.com:80/v4/words.json/reverseDictionary?query='+word.gsub(" ", "%20").downcase+'&minCorpusCount=5&maxCorpusCount=-1&minLength=1&maxLength=-1&includeTags=false&skip=0&limit=5&api_key='+WORDNIK_API_KEY)
       }]
+    # Setting definitions as word parameters for word tree
     word_association[0][:definitions].each do |definition|
       definition["word"] = "definition"
     end
@@ -40,16 +41,22 @@ module TopicsHelper
   end
 
   def find_topic_description(description)
+    # Initial API call
     url = Addressable::URI.parse('https://www.googleapis.com/freebase/v1/search')
+
+    # Set the parameters of the API call
     url.query_values = {
       query: description,
       type: "/common/topic"
     }
+
+    # Call again to return a JSON object for the selected query
     from_freebase = HTTParty.get(url, :format => :json)
     # fallback logic
     if from_freebase["result"].length == 0
       return "No description available"
     else
+      # Parsing out the description of the query
       wordTree = []
       mid = from_freebase["result"][0]["mid"]
       description = HTTParty.get("https://www.googleapis.com/freebase/v1/topic#{mid}?filter=/common/topic/description", :format => :json)

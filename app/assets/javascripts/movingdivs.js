@@ -16,14 +16,18 @@ $(document).ready(function(){
       data: {name: $("h1").text()},
       dataType: "JSON",
       success: function(result){
+
+        // Removing any leftover elements
         $("div#definitions p").remove();
         $("div#reverse_definitions p").remove();
+        // Append the definition to the div tab in a <p>
         $.each(result[0]["definitions"], function(index, value){
-        $("div#definitions").append($("<p>").text(value["text"]))
-          })
+          $("div#definitions").append($("<p>").text(value["text"]))
+        })
+        // Append the reverse definition to the div tab in a <p>
         $.each(result[0]["reverse_definitions"]["results"], function(index, value){
-        $("div#reverse_definitions").append($("<p>").text(value["text"]))
-          });
+          $("div#reverse_definitions").append($("<p>").text(value["text"]))
+        });
       }
     });
   }); // on 'down'
