@@ -66,7 +66,7 @@ class TopicsController < ApplicationController
       render json: @tree_data
     else
       @tree = tree_results(@word_association[0])
-      if @tree["children"][2]["children"] != []
+      if @tree["children"][2]["children"] != nil
         render json: @tree.to_json
       else
         render json: {"name" => "No Results"}

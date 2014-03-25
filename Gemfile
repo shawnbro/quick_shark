@@ -49,6 +49,7 @@ group :development, :test do
   gem 'jasmine-rails'
   gem 'simplecov'
   gem 'launchy'
+  gem "capybara-webkit"
 end
 
 group :production do 
