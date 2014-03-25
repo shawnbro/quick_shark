@@ -37,13 +37,16 @@ $(document).ready(function(){
         return d.counter;
       }) ]);
 
-      svg.append("g").attr("class", "y axis").call(yAxis).append("text").attr(
-      "transform", "rotate(-90)").attr("y", 6).attr("dy", ".71em").style(
-      "text-anchor", "end").text(yAxisText);
+      // svg.append("g").attr("class", "y axis").call(yAxis).append("text").attr(
+      // "transform", "rotate(-90)").attr("y", 6).attr("dy", ".71em").style(
+      // "text-anchor", "end").text(yAxisText);
 
       svg.selectAll(".bar").data(allData).enter().append("rect")
       .attr("class", "bar").attr("x", function(d, i) {
         return i * width/allData.length;
+      })
+      .attr("id",function(d){
+        return "id"+d.id.toString();
       })
       .attr("width", (width/allData.length)-20)
       .attr("y", function(d) {
@@ -51,7 +54,10 @@ $(document).ready(function(){
       })
       .attr("height", function(d) {
         return height - y(d.counter);
-      });
+      }).style("fill","pink")
+      .on('mouseover',animateText)
+      .on('mouseout', removeTextSize)
+      ;
 
       svg.selectAll("text.x").data(allData).enter()
         .append("text").attr("class", "x")
@@ -64,8 +70,62 @@ $(document).ready(function(){
           return d.name; 
         })//closes text
 
-      function type(d) {
-        d.counter = +d.counter;
-        return d;
-      }//closes function type
+      
+      svg.selectAll("text.seconds")
+        .data(allData).enter()
+          .append("text").attr("class", "seconds")
+            .attr("x", function(d, i) {
+              return (i * width/allData.length) + ((width/allData.length)-20)/2;
+            })
+            .attr("y", function(d){ 
+              return height - d.counter;
+            })
+            .text(function(d){
+              return d.counter
+            })
+            .attr("id",function(d){
+              return "id"+d.id.toString();
+            })
+            .attr("text-anchor", "middle")
+            .style("opacity", "0")
+            .on('mouseover',animateText)
+            .on('mouseout', removeTextSize)
+        
+        function animateText() { 
+      var graphItems = d3.selectAll('text.seconds')
+      for(i = 0; i < graphItems[0].length; i++){
+        if(graphItems[0][i].id === this.id){
+            d3.select("text#"+graphItems[0][i].id).transition()
+            .duration(100)
+            .style("font-size", "50px")
+            .style("cursor", "pointer")
+            .style("fill", "#E38D9C")
+            .style("opacity", "1")
+        }
+      }
+      d3.select(this)
+      .transition()
+      .duration(100)
+      .style("fill","#FFE5E9")
+          
+  };
+
+        function removeTextSize() {
+      d3.selectAll("text.seconds")
+        .transition()
+          .duration(100)
+          .style("font-size", "14px")
+          .style("opacity", "0")
+      d3.select(this)
+      .transition()
+      .duration(100)
+      .style("fill","pink")
+  };
+
+      // function type(d) {
+      //  d.counter = +d.counter;
+      //  return d;
+      // }//closes function type
+
+
     }// closes barchart

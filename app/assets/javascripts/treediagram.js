@@ -173,13 +173,6 @@ function draw(treeData) {
   }
 }
 
-//JSON object with the data
-window.onload = function() {
-  var value = $("h1").text();
-  d3.json("/data?word="+value, draw);
-  startCounter = window.setInterval(increment, 1000);
-}
-
 // add to the timeline
 function makeTimeline() {
  var test = $("div#past_topics").children()
@@ -190,6 +183,15 @@ function makeTimeline() {
         animation:'flipIn',
         gravity:'north'
       }); 
-    }
-  }
+    };
+  };
+};
+
+
+
+//JSON object with the data
+window.onload = function() {
+  var value = $("h1").text();
+  d3.json("/data?word="+value, draw);
+  startCounter = window.setInterval(increment, 1000);
 }

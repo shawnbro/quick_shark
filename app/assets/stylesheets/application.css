@@ -22,7 +22,7 @@ body {
 }
 
 header {
-  height: 50px;  
+  height: 50px;
   display: inline-block;
   position: fixed;
   top: 0;
@@ -50,7 +50,7 @@ header nav ul li {
 
 
 header nav ul {
-  list-style: none; 
+  list-style: none;
   position: relative;
   padding: 10px;
   margin: 0;
@@ -113,11 +113,6 @@ a:visited {
 /*a:hover {
   color: rgb(0,154,205);
 }
-
-input {
-  border-radius: 5px;
-}
-
 */
 
 span {
@@ -411,15 +406,15 @@ form input[type=search]::-webkit-input-placeholder {
 }
 
 form input[type=search]:-moz-placeholder { /* Firefox 18- */
-   color: #ddd;  
+   color: #ddd;
 }
 
 form input[type=search]::-moz-placeholder {  /* Firefox 19+ */
-   color: #ddd;  
+   color: #ddd;
 }
 
-form input[type=search]:-ms-input-placeholder {  
-   color: #ddd;  
+form input[type=search]:-ms-input-placeholder {
+   color: #ddd;
 }
 
 
@@ -615,3 +610,121 @@ div .flickr {
   margin-left: auto;
   margin-right: auto;
 }
+
+.videoWrap{
+  display: block;
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+div#video {
+  display: inline-block;
+}
+
+iframe {
+  height: 200px;
+  width: 400px;
+  border-radius: 20px;
+}
+
+button#refresh{
+  border-radius: 10px;
+
+
+/* Journey Show Page */
+
+.your-journey {
+  font-family: 'Raleway', Arial, sans-serif;
+  font-weight: 100;
+  color: black;
+}
+
+.your-journey span {
+  color: rgb(157, 202, 215);
+}
+
+.your-journey span.tangent-number {
+  color: rgb(156, 135, 191);
+}
+
+div.the-journey {
+  margin: 20px auto;
+}
+
+
+/* Our App Nav Key Styles */
+div.nav-commands {
+  width: 70px;
+  display: inline-block;
+}
+
+div.arrow-row {
+  margin-bottom: 4px;
+}
+
+div.arrow-key {
+  font-weight: bolder;
+  width: 20px;
+  height: 20px;
+  background-color: none;
+  border: 2px solid black;
+  border-radius: 5px;
+  display: inline-block;
+  text-align: center;
+  color: black;
+}
+
+div.fake-key {
+  width: 20px;
+  height: 20px;
+  background-color: none;
+  border: 2px transparent black;
+  display: inline-block;
+}
+
+div#clear-key {
+  font-family: sans-serif;
+  font-weight: bolder;
+  width: 20px;
+  height: 20px;
+  background-color: none;
+  border: 2px solid black;
+  border-radius: 5px;
+  color: black;
+  text-align: center;
+}
+
+div.clear-row {
+  margin-top: 20px;
+}
+
+span.key {
+  color: black;
+  font-weight: bolder;
+}
+
+ul.key-container {
+  font-family: sans-serif;
+  list-style-type: none;
+  font-size: 10px;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+ul.key-container li {
+  margin-left: -30px;
+}
+
+div.keys {
+  display: inline-block;
+}
+
+
+div.nav-key-container {
+  z-index: 100;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-left: 5px;
+}
+
+
