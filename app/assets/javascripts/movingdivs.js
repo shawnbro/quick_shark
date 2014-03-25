@@ -18,14 +18,14 @@ $(document).ready(function(){
       success: function(result){
         $("div#definitions p").remove();
         $("div#reverse_definitions p").remove();
-        $.each(result[0]["definitions"], function(index, value){ 
-        $("div#definitions").append($("<p>").text(value["text"])) 
+        $.each(result[0]["definitions"], function(index, value){
+        $("div#definitions").append($("<p>").text(value["text"]))
           })
-        $.each(result[0]["reverse_definitions"]["results"], function(index, value){ 
+        $.each(result[0]["reverse_definitions"]["results"], function(index, value){
         $("div#reverse_definitions").append($("<p>").text(value["text"]))
           });
-      }  
-    });   
+      }
+    });
   }); // on 'down'
 
   KeyboardJS.on('up', function() {
@@ -72,17 +72,26 @@ $(document).ready(function(){
     reset();
     $("div#videos")[0].style.left = "5%";
     $("div#stats")[0].style.left = "105%";
+    // AJAX call to retrieve JSON object
     $.ajax({
       url: "/ytdata",
+      // Passing the name of the topic here
       data: {name: $("h1").text()},
       dataType: "JSON",
       success: function(result){
+        // Setting the retrieved data from the AJAX call
+        // to a variable for use later in the function
         newVideos = result;
-
+        // Remove any previous divs or elements
+        // wihtin the video div
         $('iframe').remove();
         $('div#video').remove();
         $('div.videoWrap').remove();
         $('button').remove();
+
+        // Creating a div wrapper for the video divs, appending to the tab div
+        // Creating iframes and divs for the YouTube videos, then appending to the div wrapper
+        // Creating a refresh button and appending ot the tab div
         $("div#videos").append('<div class="videoWrap">');
         for ( var i = 0; i < 4; i++ ){
           $('<div id=video><iframe src="http://www.youtube.com/embed/' + result.items[i].id.videoId + '"></div>').appendTo('div.videoWrap');
@@ -95,12 +104,18 @@ $(document).ready(function(){
   var videoIndex = 4;
 
   $('#videos').on("click", "button", function() {
+
+    // Same function as above, clearing previous elements
+    // Then making new divs and iframes with new Youtube results
     $('iframe').remove();
     $('div#video').remove();
     $('div.videoWrap').remove();
     $('button').remove();
     $("div#videos").append('<div class="videoWrap">');
     for ( var i = 0; i < 4; i++ ){
+      // Variable set in the AJAX call function used here
+      // % 50 used to return to the beginning of the results
+      // Once the user refreshes past 50 videos
       $('<div id=video><iframe src="http://www.youtube.com/embed/' + newVideos.items[(i+videoIndex) % 50].id.videoId + '"></div>').appendTo('div.videoWrap');
     }
     $("div#videos").append($("<button>").text("Refresh"));
