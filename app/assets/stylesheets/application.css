@@ -718,8 +718,14 @@ div.nav-key-container {
   position: absolute;
 }*/
 
+/* Journey Show Page */
+div#journey_show{
+  margin-top: 100px;
+
+
 /* no results paragraph */
 #no-results {
   padding-top: 20%;
   padding-left: 10%;
+>>>>>>> a5eb03a6916ba1d698535f039150a9c2f075f0e5
 }

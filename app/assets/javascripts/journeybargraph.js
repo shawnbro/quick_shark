@@ -92,8 +92,10 @@ function drawBarchart(containerId, allData, yAxisText, chartAreaWidth,
     .attr("height", function(d) {
       return height - y(d.counter);
     })
-    //Fill of bar is pink
-    .style("fill","pink")
+    //Bar color
+    .style("fill", function(d) {
+      return "rgb(100, 145, " + (d.counter*100) + ")";
+    })
     //On bar mouseover, large number of seconds on topic appears
     .on('mouseover',animateText)
     //On bar mouseout, number of seconds disappears
@@ -155,9 +157,10 @@ function drawBarchart(containerId, allData, yAxisText, chartAreaWidth,
     .attr("text-anchor", "middle")
     //At first, this element should not be visible
     .style("opacity", "0")
-    //On mouseover, the seconds pop up
+    //On mouseover, 
+    //On bar mouseover, large number of seconds on topic appears
     .on('mouseover',animateText)
-    //On mouseout, the seconds disappear
+    //On bar mouseout, number of seconds disappears
     .on('mouseout', removeTextSize);//Close svg.selectAll("text.seconds")
 
   function animateText() { 
@@ -165,21 +168,21 @@ function drawBarchart(containerId, allData, yAxisText, chartAreaWidth,
     var graphItems = d3.selectAll('text.seconds')
     //For each second label, check if the id is equal to the bar's id
     //If it is, change the style of the seconds label so it appears
-      for(i = 0; i < graphItems[0].length; i++){
-        if(graphItems[0][i].id === this.id){
-          d3.select("text#"+graphItems[0][i].id).transition()
+    for(i = 0; i < graphItems[0].length; i++){
+      if(graphItems[0][i].id === this.id){
+        d3.select("text#"+graphItems[0][i].id)
+          .transition()
           .duration(100)
           .style("font-size", "50px")
           .style("cursor", "pointer")
-          .style("fill", "#E38D9C")
+          .style("fill", "white")
           .style("opacity", "1")
-        }//closes if
-      }//closes for
-      //change the style of the bar
+      }//closes if
       d3.select(this)
         .transition()
         .duration(100)
-        .style("fill","#FFE5E9")
+        .style("fill","orange")
+    }//closes for
   };//closes animateText
 
   function removeTextSize() {
@@ -193,7 +196,9 @@ function drawBarchart(containerId, allData, yAxisText, chartAreaWidth,
     d3.select(this)
       .transition()
       .duration(100)
-      .style("fill","pink")
+      .style("fill", function(d) {
+        return "rgb(100, 145, " + (d.counter*100) + ")";
+      })
   };
 
   //Set default sort order to false, as in not sorted
