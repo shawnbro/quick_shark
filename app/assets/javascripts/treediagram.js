@@ -46,7 +46,8 @@ function draw(treeData) {
   // empty the #vis "canvas" if it exists, and remove the tooltipsy div
   $("#viz").empty();
   $("div.tooltipsy").remove();
-  if(treeData.children[1].children.length === 0) { // stops the process if treeData is null
+  console.log(treeData.children)
+  if(treeData.children[1].children.length === 0 && treeData.children[2].children.length === 0 && treeData.children[3].children.length === 0) { // stops the process if treeData is null
     $("body").append("<p id='no-results'>Your search returned no results.  Try hitting the arrow buttons on your keyboard to find out more or click on 'New Journey' to try again...</p>")
   } else {
     // Create the svg canvas (at #viz)
