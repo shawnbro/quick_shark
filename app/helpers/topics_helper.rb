@@ -63,6 +63,9 @@ module TopicsHelper
     # fallback logic
     if result.length == 0
       url = "http://www.yiyinglu.com/failwhale/images/Homer_the_New_Fail_Whale_by_edwheeler.jpg"
+      url2 = "http://www.yiyinglu.com/failwhale/images/Homer_the_New_Fail_Whale_by_edwheeler.jpg"
+      url3 = "http://www.yiyinglu.com/failwhale/images/Homer_the_New_Fail_Whale_by_edwheeler.jpg"
+      url4 = "http://www.yiyinglu.com/failwhale/images/Homer_the_New_Fail_Whale_by_edwheeler.jpg"
     else
       photo_id = result[rand(result.length)]["id"]
       photo_id_2 = result[rand(result.length)]["id"]
