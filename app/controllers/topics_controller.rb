@@ -20,7 +20,7 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find_by(id: params[:id])
-    @journey = Journey.find_by(id: @topic.journey_id)  
+    @journey = Journey.find_by(id: @topic.journey_id)
     @word_association = get_word_associations(@topic.name)
     @videos = get_youtube_vids(@topic.name).take(4)
   end
@@ -47,11 +47,11 @@ class TopicsController < ApplicationController
 
   def data
     if Topic.find_by(name: params[:word] ) !=  nil
-      @topic = Topic.find_by(name: params[:word] ) 
+      @topic = Topic.find_by(name: params[:word] )
       else
       @topic = Topic.create(name: params[:word])
     end
-    @word_association = get_word_associations(@topic[:name]) 
+    @word_association = get_word_associations(@topic[:name])
     if @word_association[0][:word_associations].nil?
       @tree = tree_results(get_wolfram_text(@topic.name))
       render json: @tree_data
@@ -69,15 +69,18 @@ class TopicsController < ApplicationController
     @topic = Topic.create(name: params[:topic])
 
     if current_user
-      @journey = Journey.find(params[:journey])  
+      @journey = Journey.find(params[:journey])
       @journey.topics << @topic
       render json: @topic
     end
   end
 
   def ytdata
+    # Set topic name
     @topic = Topic.find_by(name: params[:name] )
+    # Find Youtube JSON object by topic name
     @video_data = youtube_json(@topic.name)
+    # Render JSON object to /ytdata route for access later
     render json: @video_data
   end
 
