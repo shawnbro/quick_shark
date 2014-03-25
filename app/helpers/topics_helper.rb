@@ -64,11 +64,12 @@ module TopicsHelper
       )
     # If there are no pictues, you get an "error" image
     if result.length == 0
-      url = "http://www.yiyinglu.com/failwhale/images/Homer_the_New_Fail_Whale_by_edwheeler.jpg"
-      url2 = "http://www.yiyinglu.com/failwhale/images/Homer_the_New_Fail_Whale_by_edwheeler.jpg"
-      url3 = "http://www.yiyinglu.com/failwhale/images/Homer_the_New_Fail_Whale_by_edwheeler.jpg"
-      url4 = "http://www.yiyinglu.com/failwhale/images/Homer_the_New_Fail_Whale_by_edwheeler.jpg"
+      url = []
+      4.times do
+        url = url.push("http://www.yiyinglu.com/failwhale/images/Homer_the_New_Fail_Whale_by_edwheeler.jpg")
+      end
     else
+<<<<<<< HEAD
       photo_id = result[rand(result.length)]["id"]
       photo_id_2 = result[rand(result.length)]["id"]
       photo_id_3 = result[rand(result.length)]["id"]
@@ -81,8 +82,23 @@ module TopicsHelper
       url2 = FlickRaw.url(info2)
       url3 = FlickRaw.url(info3)
       url4 = FlickRaw.url(info4)
+=======
+      # pick 4 random photo id's
+      photo_array = []
+      4.times do
+        photo_array = photo_array.push(result[rand(result.length)]["id"])
+      end
+      # plug 4 random id's in to get info back
+      info_array = photo_array.map do |id|
+       flickr.photos.getInfo(:photo_id => id)
+      end
+      # plug info into FlickRaw to extract url
+      url = info_array.map do |info|
+        FlickRaw.url(info)
+      end
+>>>>>>> f6994243281a93028a506ea9c0957b1d7f5d4f99
     end
-    return url, url2, url3, url4
+    return url
   end
 
 # formatting the incoming results from wordnik to the proper nested format
