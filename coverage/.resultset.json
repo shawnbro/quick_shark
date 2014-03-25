@@ -1,14 +1,14 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/kevin/dev/quick_shark/app/models/journey.rb": [
+      "/Users/shawnbroukhim/dev/quick_shark/app/models/journey.rb": [
         1,
         1,
         1,
         1,
         null
       ],
-      "/Users/kevin/dev/quick_shark/spec/models/tangent_spec.rb": [
+      "/Users/shawnbroukhim/dev/quick_shark/spec/models/tangent_spec.rb": [
         1,
         null,
         1,
@@ -19,7 +19,7 @@
         2,
         null
       ],
-      "/Users/kevin/dev/quick_shark/app/models/tangent.rb": [
+      "/Users/shawnbroukhim/dev/quick_shark/app/models/tangent.rb": [
         1,
         1,
         1,
@@ -38,7 +38,7 @@
         null,
         null
       ],
-      "/Users/kevin/dev/quick_shark/spec/models/topic_spec.rb": [
+      "/Users/shawnbroukhim/dev/quick_shark/spec/models/topic_spec.rb": [
         1,
         null,
         1,
@@ -48,7 +48,7 @@
         2,
         null
       ],
-      "/Users/kevin/dev/quick_shark/app/models/topic.rb": [
+      "/Users/shawnbroukhim/dev/quick_shark/app/models/topic.rb": [
         1,
         1,
         1,
@@ -60,7 +60,7 @@
         null,
         null
       ],
-      "/Users/kevin/dev/quick_shark/spec/models/user_spec.rb": [
+      "/Users/shawnbroukhim/dev/quick_shark/spec/models/user_spec.rb": [
         1,
         null,
         1,
@@ -74,7 +74,7 @@
         2,
         null
       ],
-      "/Users/kevin/dev/quick_shark/app/models/user.rb": [
+      "/Users/shawnbroukhim/dev/quick_shark/app/models/user.rb": [
         1,
         1,
         1,
@@ -83,6 +83,6 @@
         null
       ]
     },
-    "timestamp": 1395770105
+    "timestamp": 1395774926
   }
 }

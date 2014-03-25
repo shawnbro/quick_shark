@@ -12,17 +12,6 @@ module TopicsHelper
     wolfram
   end
 
-  # def get_wolfram_text(word)
-  #   wolfram = []
-  #   stuff = HTTParty.get('http://api.wolframalpha.com/v2/query?input='+word.gsub(" ", "%20").downcase+'&appid='+WOLFRAM_ALPHA_API_KEY)
-  #   stuff["queryresult"]["pod"].each do |subpod|
-  #     unless subpod["subpod"].class == Array
-  #       wolfram.push(Hash["plaintext", subpod["subpod"]["plaintext"]])
-  #     end
-  #   end
-  #   wolfram
-  # end
-
   def get_word_associations(word)
       word_association = [{
         word: word,
