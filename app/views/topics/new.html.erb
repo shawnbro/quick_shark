@@ -48,6 +48,21 @@ function disableEnterKey(e)
       $( "button#explore" ).prop('disabled', false);
     }
   });
+</script>
 
+
+<script type="text/javascript">
+// hover for instructions
+  var wordList = ["atlas", "apple", "journey", "discovery", "ball"];
+  function words(){
+    word1 = wordList[Math.floor(Math.random()*wordList.length)];
+    word2 = wordList[Math.floor(Math.random()*wordList.length)]
+    if(word1 === word2){
+      word2 =  wordList[Math.floor(Math.random()*wordList.length)]
+    }
+    return [word1, word2]
+  };
+  $("body").attr("title","Input any search term here to see a tree of relationships. Try '"+ words()[0] +"' or '"+ words()[1] +"'");
+  $("body").tooltipsy({alignTo: $("input#topic_topic"), offset: [0, -10], delay: 1000});
 </script>
 
