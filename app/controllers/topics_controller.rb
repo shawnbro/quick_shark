@@ -7,22 +7,25 @@ class TopicsController < ApplicationController
 
   def create
     unless params[:topic]["topic"].empty?
-      @topic = Topic.create(name: params["topic"]["topic"]) || Topic.create(name: params["topic"]["topic"])
-        if current_user
-          @journey = Journey.create(title: params["topic"]["topic"], user_id: current_user[:id])
-          @journey.topics << @topic
-        end
-        redirect_to topic_path(@topic)
-      else
-        redirect_to root_path
+      @topic = Topic.find_by(name: params["topic"]["topic"]) || Topic.create(name: params["topic"]["topic"])
+
+      if current_user
+        @journey = Journey.create(title: params["topic"]["topic"], user_id: current_user[:id])
+        @journey.topics << @topic
+      end
+
+      redirect_to topic_path( @topic, journey_id: @journey.try(:id) )
+
+    else
+      redirect_to root_path
     end
   end
 
   def show
     @topic = Topic.find_by(name: params[:id])
 
-    if current_user
-      @journey = Journey.find_by(id: @topic.journey_id) 
+    if current_user && params[:journey_id]
+      @journey = Journey.find_by(id: params[:journey_id]) 
     end 
 
     @word_association = get_word_associations(@topic.name)
@@ -70,10 +73,10 @@ class TopicsController < ApplicationController
   end
 
   def add_topic
-    @topic =  Topic.create(name: params["topic"]["topic"]) || Topic.create(name: params[:topic])
+    @topic =  Topic.find_by(name: params["topic"]["topic"]) || Topic.create(name: params[:topic])
 
     if current_user
-      @journey = Journey.find(params[:journey])  
+      @journey = Journey.find(params[:journey_id])  
       @journey.topics << @topic
       render json: @topic
     end

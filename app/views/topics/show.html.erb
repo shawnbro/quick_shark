@@ -1,4 +1,4 @@
-<% if current_user %>
+<% if @journey %>
   <div id='journey'> Current Journey: <span><%= @journey[:title] %></span> </div><span id="journey_id" style="display: none;"><%= @journey[:id] %></span>
   <div id='past_topics'><a id='sup' data-tooltip='<%= @topic.name %>'><div class='bubble'></div></a>
 </div>
@@ -7,7 +7,7 @@
   <div><h1 style="display:none;"><%= @word_association[0][:word] %></h1><% unless !@word_association[0][:reverse_definitions].nil? %><span><%=@word_association[0][:reverse_definitions]["results"].sample["text"] %> <% end %>
   </div>
 
-<% if current_user %>
+<% if @journey %>
   <%= button_to "End Journey" , journey_path(@journey.id) , method: "get", id: "end_journey" %>
 <% end %>
 
