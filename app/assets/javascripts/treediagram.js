@@ -59,6 +59,7 @@ function draw(treeData) {
   // Create a d3 cluster canvas
   var cluster = d3.layout.cluster()
     .size([360,425]);
+
   
   // **TAKE THE DATA AND CREATE "NODES" ON THE CLUSTER CANVAS**
   var nodes = cluster.nodes(treeData);
@@ -168,7 +169,7 @@ function draw(treeData) {
   };
   
  function zoom() {
-  vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+  vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")")
   }
 }
 
