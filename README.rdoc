@@ -61,7 +61,7 @@
 
 # A link to tangent can be found here: (https://tangentapp.herokuapp.com)
 
-# The public repository for Tangent on Github can be found here:
+# The public repository for Tangent on Github can be found here: (https://github.com/shawnbro/quick_shark/blob/master/app/assets/images/TangentERD.jpg)
 
 # A full list of user stories can be found by looking at [this Pivotal Tracker Project](https://www.pivotaltracker.com/s/projects/1040714)
 
