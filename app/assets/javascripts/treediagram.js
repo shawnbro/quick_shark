@@ -53,7 +53,7 @@ function draw(treeData) {
     .attr("width", "100%")
     .attr("height", "89%")
     .append("svg:g")
-    .attr("transform", "translate(425, 425)")
+    .attr("transform", "translate(520, 350) scale(.6)")
     .append("g");
 
   // Create a d3 cluster canvas
@@ -167,10 +167,11 @@ function draw(treeData) {
       $("span#topic_id").text(newTopicId.id);
     });
   };
-  
- function zoom() {
-  vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")")
+
+  function zoom() {
+    vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")")
   }
+
 }
 
 // add to the timeline
@@ -186,8 +187,6 @@ function makeTimeline() {
     };
   };
 };
-
-
 
 //JSON object with the data
 window.onload = function() {
