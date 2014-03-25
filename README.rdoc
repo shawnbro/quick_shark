@@ -1,28 +1,69 @@
-== README
+== Tangent
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### GA WDI NYC Jan 14, Project 2
 
-Things you may want to cover:
+### Overview
 
-* Ruby version
+**Tangent** is a web application that takes users on a journey of discovery through chosen words and their assoiations. Tangent was developed as a Rails project for the January 2014 Web Development Immersive course at General Assembly. It was developed over a one week sprint to model the agile software development process.
 
-* System dependencies
+* Ruby 2.1.0
+* Ruby on Rails 4.0.2
+* PostgreSQL Database
+* Authentication & Authorization (using bcypt-ruby)
+* Ruby Gems:
+  * HTTParty
+  * Addresable/URI
+  * Bcrypt
+  * Flickraw
+  * d3-rails
+  * Simplecov - to monitor test coverage
+  * JSON
+  * Unirest
+  * Launchy
+* Javascript libraries:
+  * D3.js
+  * Tooltip
+  * Keyboard.js
+  * Tooltipsy.js
+  * Darktooltip.js
+* APIs:
+  * Wordnik
+  * Wolfram Alpha
+  * Flickr
+  * YouTube
+  * Freebase
+* TDD:
+  * RSpec-Rails
+  * Capybara
+  * QT
+  * Factory Girl
+  * FFaker
 
-* Configuration
+### User Stories Completed
+* A user can view a saved journey visualization from first search to final search
+* A user can get a description of the topic
+* A registered user has a profile page with account information and journeys listed
+* A user can create an account
+* A user can log in/log out securely
+* A registered user can delete a journey from a journey list
+* A registered user can view a list of all journies
+* A user can go to the home page and search
+* A user can enter a term and see related topics
+* A user can see the names of other topics branched out from the first topic
+* A user can click on any word/topic on the tree and it will re-visualize it as the main word
+* A user can get statistical information about a topic
+* A user can click explore
+* A user can save their "journey"
+* A user can get any relevant video about the topic
+* A registered user can end one journey and create a new journey at any time
+* A registered user can view a bar graph visualization with each topic of the journey on it, and how long the user spent on the topic
+* A user can end the journey at any time by clicking the journey end button
 
-* Database creation
+### ERD
 
-* Database initialization
+# The public repository for Tangent on Github can be found here:
 
-* How to run the test suite
+# A full list of user stories can be found by looking at [this Pivotal Tracker Project](https://www.pivotaltracker.com/s/projects/1040714)
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+---
+###### Written by Rory Budnick, Shawn Broukhim, Kirsten Doyne, Cory Haber, Quincy Iheme, and Kevin McAlear
