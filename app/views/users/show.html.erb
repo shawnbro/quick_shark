@@ -14,7 +14,7 @@
   <ul id="user_journey_list">
     <% journey_list = Journey.where(user_id: @user.id) %>
     <% journey_list.each do |journey| %>
-      <li><a href="/journeys/<%= journey.id %>"><%= journey.title  %></a></li>
+      <li><%= link_to journey.title, journey_path(journey.id), method: "get"  %></li>
       <%= button_to "Delete" , journey_path(journey.id) , method: "delete" %><br/>
     <% end %>
   </ul>
