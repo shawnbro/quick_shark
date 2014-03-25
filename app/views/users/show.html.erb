@@ -12,7 +12,7 @@
   <h2 class="saved_headline">Saved Journeys</h2>
   <span class="journey_title">
   <ul id="user_journey_list">
-    <% journey_list = Journey.where(:user_id == @user.id) %>
+    <% journey_list = Journey.where(user_id: @user.id) %>
     <% journey_list.each do |journey| %>
       <li><a href="/journeys/<%= journey.id %>"><%= journey.title  %></a></li>
       <%= button_to "Delete" , journey_path(journey.id) , method: "delete" %><br/>
