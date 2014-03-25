@@ -66,14 +66,17 @@ module TopicsHelper
     if result.length == 0
       url = "http://www.yiyinglu.com/failwhale/images/Homer_the_New_Fail_Whale_by_edwheeler.jpg"
     else
+      # Pull the id results from 4 random images
       photo_id = result[rand(result.length)]["id"]
       photo_id_2 = result[rand(result.length)]["id"]
       photo_id_3 = result[rand(result.length)]["id"]
       photo_id_4 = result[rand(result.length)]["id"]
+      # Retrieve the info for those 4 pics, then set the info to a variable
       info = flickr.photos.getInfo(:photo_id => photo_id)
       info2 = flickr.photos.getInfo(:photo_id => photo_id_2)
       info3 = flickr.photos.getInfo(:photo_id => photo_id_3)
       info4 = flickr.photos.getInfo(:photo_id => photo_id_4)
+      # Using the info, retrieve the urls of the pics
       url = FlickRaw.url(info)
       url2 = FlickRaw.url(info2)
       url3 = FlickRaw.url(info3)

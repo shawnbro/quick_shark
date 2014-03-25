@@ -38,13 +38,18 @@ $(document).ready(function(){
       data: {name: $("h1").text()},
       dataType: "JSON",
       success: function(result){
+        // Removing any leftover elements
         $("div#pictures img").remove();
         $("div.flickr-wrapper").remove();
+        // Creating a picture wrapper div for all the pics
+        // Then creating picture divs for each pic, then appending to the pic wrapper
         $("div#pictures").append("<div class=flickr-wrapper>");
         for ( var i = 0; i < 4; i++ ){
-        $("div.flickr-wrapper").append("<div class=flickr><img src="+result[i]+" ></div>");
+          $("div.flickr-wrapper").append("<div class=flickr><img src="+result[i]+" ></div>");
         }
+        // Creating a refresh button, then appending that to the wrapper
         $("div.flickr-wrapper").append($("<button id='photo_refresh'></button>").text("Refresh"));
+        // Adding event listener to refresh button, function below
         $("div.flickr-wrapper button").on("click", updatePhotos);
       }
     });
@@ -62,6 +67,7 @@ $(document).ready(function(){
       data: {name: $("h1").text()},
       dataType: "JSON",
       success: function(result){
+
         $("div#stats img").remove();
         for(i=0; i < result.length; i++) {
           $("div#stats").append("<div class='stat'><img src='"+result[i]["image"]["src"]+"' ></div>");
@@ -76,7 +82,7 @@ $(document).ready(function(){
     reset();
     $("div#videos")[0].style.left = "5%";
     $("div#stats")[0].style.left = "105%";
-    // AJAX call to retrieve JSON object
+    // AJAX call to retrieve Youtube JSON object
     $.ajax({
       url: "/ytdata",
       // Passing the name of the topic here
@@ -139,6 +145,8 @@ $(document).ready(function(){
 
 
 var updatePhotos = function() {
+  // Essentially same function as above
+  // Clearing elements then creating new divs and generating new pics
   $.ajax({
     url: "/pictures",
     data: {name: $("h1").text()},
@@ -151,7 +159,7 @@ var updatePhotos = function() {
         $("div.flickr-wrapper").append("<div class=flickr><img src="+result[i]+" ></div>")
        };
       $("div.flickr-wrapper").append($("<button id='photo_refresh'></button>").text("Refresh"));
-      $("div.flickr-wrapper button").on("click", updatePhotos) 
+      $("div.flickr-wrapper button").on("click", updatePhotos)
     }
   });
 };
