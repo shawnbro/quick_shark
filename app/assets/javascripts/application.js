@@ -10,6 +10,7 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require_self
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
@@ -19,3 +20,19 @@
 //= require d3
 //= require tooltipsy.min
 //= require jquery.darktooltip
+//= require_tree ./treeGraph
+//= require_tree ./journeyGraph
+
+//application namespaced object
+var Tangent = {};
+
+Tangent.setHeading = function(heading_text) {
+  this.heading_text = heading_text;
+  $("h1").text(heading_text);
+}
+
+// $(function(){
+//   Tangent.currentGraph = new Tangent.TreeGraph();
+//   Tangent.getData("");
+//   Tangent.currentGraph.render();
+// });

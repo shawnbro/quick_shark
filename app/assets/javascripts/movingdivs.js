@@ -65,15 +65,13 @@ $(document).ready(function(){
 
         $('iframe').remove();
         $('div#video').remove();
+        $('div.videoWrap').remove();
         $('button').remove();
         $("div#videos").append('<div class="videoWrap">');
         for ( var i = 0; i < 4; i++ ){
-          $('<div id=video><iframe width="400" height="200" src="http://www.youtube.com/embed/' + result.items[i].id.videoId + '"></div>').appendTo('div.videoWrap').css('border-radius', '10px');
+          $('<div id=video><iframe src="http://www.youtube.com/embed/' + result.items[i].id.videoId + '"></div>').appendTo('div.videoWrap');
         }
         $("div#videos").append($("<button id='refresh'></button>").text("Refresh"));
-        $('button').css('border-radius', '10px');
-        $('div.videoWrap').css('display', 'block').css('width', '1000px').css('margin-left', 'auto').css('margin-right', 'auto');
-        $('div#video').css('display', 'inline-block');
       }
     }); // end ajax
   }); // on 'right'
@@ -83,14 +81,12 @@ $(document).ready(function(){
   $('#videos').on("click", "button", function() {
     $('iframe').remove();
     $('div#video').remove();
+    $('div.videoWrap').remove();
     $('button').remove();
     for ( var i = 0; i < 4; i++ ){
-      $('<div id=video><iframe width="400" height="200" src="http://www.youtube.com/embed/' + newVideos.items[(i+videoIndex) % 50].id.videoId + '"></div>').appendTo('div.videoWrap').css('border-radius', '10px');
+      $('<div id=video><iframe src="http://www.youtube.com/embed/' + newVideos.items[(i+videoIndex) % 50].id.videoId + '"></div>').appendTo('div.videoWrap');
     }
     $("div#videos").append($("<button>").text("Refresh"));
-    $('button').css('border-radius', '10px');
-    $('div.videoWrap').css('display', 'block').css('width', '1000px').css('margin-left', 'auto').css('margin-right', 'auto');
-    $('div#video').css('display', 'inline-block');
 
     videoIndex += 4;
 
