@@ -51,7 +51,7 @@ function draw(treeData) {
   var vis = d3.select("#viz").append("svg:svg")
     .call(d3.behavior.zoom().scaleExtent([0, 8]).on("zoom", zoom))
     .attr("width", "100%")
-    .attr("height", "90%")
+    .attr("height", "89%")
     .append("svg:g")
     .attr("transform", "translate(425, 425)")
     .append("g");
@@ -173,13 +173,6 @@ function draw(treeData) {
   }
 }
 
-//JSON object with the data
-window.onload = function() {
-  var value = $("h1").text();
-  d3.json("/data?word="+value, draw);
-  startCounter = window.setInterval(increment, 1000);
-}
-
 // add to the timeline
 function makeTimeline() {
  var test = $("div#past_topics").children()
@@ -190,7 +183,16 @@ function makeTimeline() {
         animation:'flipIn',
         gravity:'north'
       }); 
-    }
-  }
+    };
+  };
+};
+
+
+
+//JSON object with the data
+window.onload = function() {
+  var value = $("h1").text();
+  d3.json("/data?word="+value, draw);
+  startCounter = window.setInterval(increment, 1000);
 }
 
