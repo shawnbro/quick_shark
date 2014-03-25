@@ -1,7 +1,7 @@
 $(document).ready(function(){
   window.result;
-  
-  var url = "/journey_data?id=" + journeyID;
+
+  var url = "/journeys/" + journeyID + ".json";
 
   d3.json(url, function (data) {
     result = data;
