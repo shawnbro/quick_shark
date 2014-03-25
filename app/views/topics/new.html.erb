@@ -53,7 +53,7 @@ function disableEnterKey(e)
 
 <script type="text/javascript">
 // hover for instructions
-  var wordList = ["atlas", "apple", "journey", "discovery", "ball"];
+  var wordList = ["atlas", "apple", "journey", "discovery", "ball", "angel", "query", "trite", "spiteful", "anarchy", "decay", "stupor", "stupdendous", "brain", "petite", "luxury", "game", "peanut", "egg", "forlorn", "milky way", "shark", "fish", "paris", "america", "chocolate", "ocean", "cat", "dog", "human", "heart", "love", "passion", "fury", "death", "anger", "annoyed", "friend", "enemy"];
   function words(){
     word1 = wordList[Math.floor(Math.random()*wordList.length)];
     word2 = wordList[Math.floor(Math.random()*wordList.length)]
@@ -63,6 +63,6 @@ function disableEnterKey(e)
     return [word1, word2]
   };
   $("body").attr("title","Input any search term here to see a tree of relationships. Try '"+ words()[0] +"' or '"+ words()[1] +"'");
-  $("body").tooltipsy({alignTo: $("input#topic_topic"), offset: [0, -10], delay: 2000});
+  $("body").tooltipsy({alignTo: $("input#topic_topic"), offset: [0, -30], delay: 2000, className: 'searchbar_tooltipsy'});
 </script>
 
