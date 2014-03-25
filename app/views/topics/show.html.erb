@@ -1,5 +1,5 @@
 <% if @journey %>
-  <div id='journey'> Current Journey: <span><%= @journey[:title] %></span> </div><span id="journey_id" style="display: none;"><%= @journey[:id] %></span>
+  <div style="display:none;" id='journey'> Current Journey: <span><%= @journey[:title] %></span> </div><span id="journey_id" style="display: none;"><%= @journey[:id] %></span>
   <div id='past_topics'><a id='sup' data-tooltip='<%= @topic.name %>'><div class='bubble'></div></a>
 </div>
 <% end %>
