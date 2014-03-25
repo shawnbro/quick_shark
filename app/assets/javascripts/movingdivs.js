@@ -129,7 +129,7 @@ $(document).ready(function(){
       // Once the user refreshes past 50 videos
       $('<div id=video><iframe src="http://www.youtube.com/embed/' + newVideos.items[(i+videoIndex) % 50].id.videoId + '"></div>').appendTo('div.videoWrap');
     }
-    $("div#videos").append($("<button>").text("Refresh"));
+    $("div#videos").append($("<button id='refresh'></button>").text("Refresh"));
 
     videoIndex += 4;
 
