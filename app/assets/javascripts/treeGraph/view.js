@@ -31,7 +31,7 @@ Tangent.TreeGraph.prototype.createCanvas = function(){
     .attr("width", 800)
     .attr("height", 750)
     .append("svg:g")
-    .attr("transform", "translate(425, 425)")
+    .attr("transform", "translate(520, 350) scale(.6)")
     .append("g");
 
   // Create a d3 cluster canvas

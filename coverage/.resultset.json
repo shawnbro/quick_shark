@@ -1,21 +1,21 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/shawnbroukhim/dev/quick_shark/app/models/journey.rb": [
+      "/Users/kirsten/dev/quick_shark/app/models/journey.rb": [
         1,
         1,
         1,
         null
       ],
-      "/Users/shawnbroukhim/dev/quick_shark/spec/models/topic_spec.rb": [
+      "/Users/kirsten/dev/quick_shark/spec/models/topic_spec.rb": [
         1,
         null,
         1,
         2,
-        null,
+        2,
         null
       ],
-      "/Users/shawnbroukhim/dev/quick_shark/app/models/topic.rb": [
+      "/Users/kirsten/dev/quick_shark/app/models/topic.rb": [
         1,
         1,
         null,
@@ -25,21 +25,22 @@
         null,
         null
       ],
-      "/Users/shawnbroukhim/dev/quick_shark/spec/models/user_spec.rb": [
+      "/Users/kirsten/dev/quick_shark/spec/models/user_spec.rb": [
         1,
         null,
         1,
         1,
         4,
         null,
-        2,
-        2,
-        2,
-        2,
+        1,
+        1,
+        1,
+        1,
         null,
         null
       ],
-      "/Users/shawnbroukhim/dev/quick_shark/app/models/user.rb": [
+      "/Users/kirsten/dev/quick_shark/app/models/user.rb": [
+        1,
         1,
         1,
         1,
@@ -48,6 +49,6 @@
         null
       ]
     },
-    "timestamp": 1395598539
+    "timestamp": 1395769408
   }
 }
