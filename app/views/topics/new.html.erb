@@ -3,7 +3,7 @@
   <%= form_for :topic, url: topics_path, :html => {:id => "explore" } do |f| %>
     <%= f.search_field :topic, placeholder: "Enter Any Word, Topic, Idea, etc.", autofocus: "autofocus", autocomplete: "off" %><br />
     <p class="perspective">
-        <button class="btn intro-button" id="explore" disabled="true">
+        <button class="btn intro-button number1" id="explore" disabled="true">
           <svg class="icon">
             <use xlink:href="#compass"></use>
           </svg>
@@ -15,7 +15,7 @@
   <%= form_for :topic, url: topics_path, :html => {:id => "random"} do |f| %>
     <%= f.hidden_field :topic, :value => @random_word %>
     <p class="perspective">
-        <button id="random"class="btn intro-button" onKeyPress=”return disableEnterKey(event)”>
+        <button id="random"class="btn intro-button number2" onKeyPress=”return disableEnterKey(event)”>
           <svg class="icon">
             <use xlink:href="#shuffle"></use>
           </svg>
