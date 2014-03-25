@@ -8,7 +8,7 @@ describe "enter a search term which returns no results and have it display no re
     find("#exploreB").click
     Capybara.current_driver = :webkit
     within("p#no-results") do 
-      expect(page).to have_content("Your search returned no results.  Try hitting the arrow buttons () on your keyboard to find out more or click on 'New Journey' to try again...")
+      expect(page).to have_content("Your search returned no results.  Try hitting the arrow buttons on your keyboard to find out more or click on 'New Journey' to try again...")
     end
   end
 end
