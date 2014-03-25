@@ -85,7 +85,19 @@ function draw(treeData) {
     .enter().append("svg:g")
     .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
     .attr("id", function(d){ return d.name })
-    .attr("class", function(){ return "words" });
+    .attr("class", function(){ return "words" })
+    .on("click", function(d,i) {
+      words = d.name.split(" "); 
+      if(words.length < 3){
+        addTopic($("span#journey_id").text(), d.name);
+        count = 0;
+        d3.json("/data?word="+d.name, draw)
+        $("h1").text(d.name)
+        var topicSpan = $("<div class='bubble-line'></div><a id='sup' data-tooltip='"+d.name+"'><div class='bubble'></div></a>").on("click", create);
+        $("div#past_topics").append(topicSpan);
+        makeTimeline();
+      }
+    });
 
   // Add the dot at every node
   node.append("svg:circle")
@@ -113,19 +125,8 @@ function draw(treeData) {
       }
     })
     .on("mouseover", animateText)
-    .on("mouseout", removeTextSize)
-    .on("click", function(d,i) {
-      words = d.name.split(" "); 
-      if(words.length < 3){
-        addTopic($("span#journey_id").text(), d.name);
-        count = 0;
-        d3.json("/data?word="+d.name, draw)
-        $("h1").text(d.name)
-        var topicSpan = $("<div class='bubble-line'></div><a id='sup' data-tooltip='"+d.name+"'><div class='bubble'></div></a>").on("click", create);
-        $("div#past_topics").append(topicSpan);
-        makeTimeline();
-      }
-    });
+    .on("mouseout", removeTextSize);
+ 
 
   function create(){
     count = 0;
