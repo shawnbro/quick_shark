@@ -51,9 +51,9 @@ function draw(treeData) {
   var vis = d3.select("#viz").append("svg:svg")
     .call(d3.behavior.zoom().scaleExtent([0, 8]).on("zoom", zoom))
     .attr("width", "100%")
-    .attr("height", "90%")
+    .attr("height", "89%")
     .append("svg:g")
-    .attr("transform", "translate(425, 425)")
+    .attr("transform", "translate(520, 350) scale(.6)")
     .append("g");
 
   // Create a d3 cluster canvas
@@ -161,9 +161,9 @@ function draw(treeData) {
       $("span#topic_id").text(newTopicId.id);
     });
   };
-  
- function zoom() {
-  vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")")
+
+  function zoom() {
+    vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")")
   }
 }
 
@@ -183,7 +183,7 @@ function makeTimeline() {
         animation:'flipIn',
         gravity:'north'
       }); 
-    }
-  }
-}
+    };
+  };
+};
 

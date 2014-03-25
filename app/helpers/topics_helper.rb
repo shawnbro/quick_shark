@@ -63,11 +63,14 @@ module TopicsHelper
     # fallback logic
     if result.length == 0
       url = "http://www.yiyinglu.com/failwhale/images/Homer_the_New_Fail_Whale_by_edwheeler.jpg"
+      url2 = "http://www.yiyinglu.com/failwhale/images/Homer_the_New_Fail_Whale_by_edwheeler.jpg"
+      url3 = "http://www.yiyinglu.com/failwhale/images/Homer_the_New_Fail_Whale_by_edwheeler.jpg"
+      url4 = "http://www.yiyinglu.com/failwhale/images/Homer_the_New_Fail_Whale_by_edwheeler.jpg"
     else
-      photo_id = result[0]["id"]
-      photo_id_2 = result[1]["id"]
-      photo_id_3 = result[2]["id"]
-      photo_id_4 = result[3]["id"]
+      photo_id = result[rand(result.length)]["id"]
+      photo_id_2 = result[rand(result.length)]["id"]
+      photo_id_3 = result[rand(result.length)]["id"]
+      photo_id_4 = result[rand(result.length)]["id"]
       info = flickr.photos.getInfo(:photo_id => photo_id)
       info2 = flickr.photos.getInfo(:photo_id => photo_id_2) 
       info3 = flickr.photos.getInfo(:photo_id => photo_id_3) 
