@@ -46,7 +46,8 @@ function draw(treeData) {
   // empty the #vis "canvas" if it exists, and remove the tooltipsy div
   $("#viz").empty();
   $("div.tooltipsy").remove();
-  if(treeData.children[1].children.length === 0) { // stops the process if treeData is null
+  console.log(treeData.children)
+  if(treeData.children[1].children.length === 0 || (treeData.children[2].children.length === 0 && treeData.children[3].children.length === 0) ) { // stops the process if treeData is null
     $("body").append("<p id='no-results'>Your search returned no results.  Try hitting the arrow buttons on your keyboard to find out more or click on 'New Journey' to try again...</p>")
   } else {
     // Create the svg canvas (at #viz)
@@ -87,7 +88,19 @@ function draw(treeData) {
       .enter().append("svg:g")
       .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
       .attr("id", function(d){ return d.name })
-      .attr("class", function(){ return "words" });
+      .attr("class", function(){ return "words" })
+      .on("click", function(d,i) {
+        words = d.name.split(" "); 
+        if(words.length < 3){
+          addTopic($("span#journey_id").text(), d.name);
+          count = 0;
+          d3.json("/data?word="+d.name, draw)
+          $("h1").text(d.name)
+          var topicSpan = $("<div class='bubble-line'></div><a id='sup' data-tooltip='"+d.name+"'><div class='bubble'></div></a>").on("click", create);
+          $("div#past_topics").append(topicSpan);
+          makeTimeline();
+        }
+      });
 
     // Add the dot at every node
     node.append("svg:circle")
@@ -115,19 +128,7 @@ function draw(treeData) {
         }
       })
       .on("mouseover", animateText)
-      .on("mouseout", removeTextSize)
-      .on("click", function(d,i) {
-        words = d.name.split(" "); 
-        if(words.length < 3){
-          addTopic($("span#journey_id").text(), d.name);
-          count = 0;
-          d3.json("/data?word="+d.name, draw)
-          $("h1").text(d.name)
-          var topicSpan = $("<div class='bubble-line'></div><a id='sup' data-tooltip='"+d.name+"'><div class='bubble'></div></a>").on("click", create);
-          $("div#past_topics").append(topicSpan);
-          makeTimeline();
-        }
-      });
+      .on("mouseout", removeTextSize);
 
     function create(){
       count = 0;
