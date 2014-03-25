@@ -5,7 +5,10 @@ require 'rspec/rails'
 require 'rspec/autorun'
 require 'capybara/rails'
 require 'simplecov'
+Capybara.javascript_driver = :webkit
 SimpleCov.start
+
+Capybara.javascript_driver = :webkit
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.

@@ -59,8 +59,6 @@ $(document).ready(function(){
     });
   }); // on 'up'
 
-
-
   KeyboardJS.on('left', function() {
     reset();
     $("div#stats")[0].style.left = "5%";
@@ -71,8 +69,7 @@ $(document).ready(function(){
       data: {name: $("h1").text()},
       dataType: "JSON",
       success: function(result){
-
-        $("div#stats img").remove();
+        $("div.stat").remove();
         for(i=0; i < result.length; i++) {
           $("div#stats").append("<div class='stat'><img src='"+result[i]["image"]["src"]+"' ></div>");
         }
@@ -147,26 +144,24 @@ $(document).ready(function(){
 
   KeyboardJS.on('c', reset);
 
-
-var updatePhotos = function() {
-  // Essentially same function as above
-  // Clearing elements then creating new divs and generating new pics
-  $.ajax({
-    url: "/pictures",
-    data: {name: $("h1").text()},
-    dataType: "JSON",
-    success: function(result){
-      $("div#pictures img").remove();
-      $("div.flickr-wrapper").remove();
-      $("div#pictures").append("<div class=flickr-wrapper>");
-      for ( var i = 0; i < 4; i++ ){
-        $("div.flickr-wrapper").append("<div class=flickr><img src="+result[i]+" ></div>")
-       };
-      $("div.flickr-wrapper").append($("<button id='photo_refresh'></button>").text("Refresh"));
-      $("div.flickr-wrapper button").on("click", updatePhotos)
-    }
-  });
-};
-
+  var updatePhotos = function() {
+    // Essentially same function as above
+    // Clearing elements then creating new divs and generating new pics
+    $.ajax({
+      url: "/pictures",
+      data: {name: $("h1").text()},
+      dataType: "JSON",
+      success: function(result){
+        $("div#pictures img").remove();
+        $("div.flickr-wrapper").remove();
+        $("div#pictures").append("<div class=flickr-wrapper>");
+        for ( var i = 0; i < 4; i++ ){
+          $("div.flickr-wrapper").append("<div class=flickr><img src="+result[i]+" ></div>")
+         };
+        $("div.flickr-wrapper").append($("<button id='photo_refresh'></button>").text("Refresh"));
+        $("div.flickr-wrapper button").on("click", updatePhotos)
+      }
+    });
+  };
 }); // end ready
 
