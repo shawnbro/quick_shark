@@ -607,3 +607,23 @@ div .flickr {
   margin-left: auto;
   margin-right: auto;
 }
+
+/* Journey Show Page */
+
+.your-journey {
+  font-family: 'Raleway', Arial, sans-serif;
+  font-weight: 100;
+  color: black;
+}
+
+.your-journey span {
+  color: rgb(157, 202, 215);
+}
+
+.your-journey span.tangent-number {
+  color: rgb(156, 135, 191);
+}
+
+div.the-journey {
+  margin: 20px auto;
+}
