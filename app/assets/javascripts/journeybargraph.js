@@ -88,6 +88,8 @@ $(document).ready(function(){
             })
             .attr("text-anchor", "middle")
             .style("opacity", "0")
+            .on('mouseover',animateText)
+            .on('mouseout', removeTextSize)
         
         function animateText() { 
       var graphItems = d3.selectAll('text.seconds')
