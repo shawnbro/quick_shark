@@ -23,7 +23,7 @@
 //= require_tree ./treeGraph
 //= require_tree ./journeyGraph
 //= require treediagram
-//= journeybargraph
+//= require journeybargraph
 
 //application namespaced object
 var Tangent = {};
