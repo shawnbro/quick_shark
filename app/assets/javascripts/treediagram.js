@@ -1,15 +1,53 @@
 
-//JSON object with the data
-window.onload = function() {
-  var value = $("h1").text();
-  d3.json("/data?word="+value, draw);
-  startCounter = window.setInterval(increment, 1000);
-}
+// draw the d3 graph visualization
+function draw(treeData) {
+  // define local functions
+  function addColor() {
+    d3.select(this)
+      .transition()
+        .duration(300)
+        .style("fill", "rgb(0,154,205)")
+  }
+  function removeColor() {
+    d3.select(this)
+      .transition()
+        .duration(800)
+        .style("fill", "white")
+  }
+  function animateText() { 
+    if(this.id !== $("h1").text()){
+      d3.select(this)
+        .transition()
+          .duration(100)
+          .style("font-size", "16px")   
+          .style("cursor", "pointer")
+          .style("fill", "rgb(0,154,205)")
+    }
+  }
+  function removeTextSize() {
+    if(this.id !== $("h1").text()){
+      d3.select(this)
+        .transition()
+          .duration(100)
+          .style("font-size", "14px")
+          .style("fill", "black")
+    }
+  }
+  function addTopic(journey, topic){
+    var url = "/add_topic?journey=" + journey + "&topic=" + topic;
 
-var draw = function(data){treeData=data
-$("div#viz").empty()
-$("div.tooltipsy").remove()
-// Create a svg canvas
+    $.post(url, function(res) {
+      history.pushState({}, null, res.name);
+      window.newTopicId=res;
+      $("span#topic_id").text(newTopicId.id);
+    });
+  }
+
+  // empty the #vis "canvas" if it exists, and remove the tooltipsy div
+  $("#viz").empty();
+  $("div.tooltipsy").remove();
+
+  // Create the svg canvas (at #viz)
   var vis = d3.select("#viz").append("svg:svg")
     .call(d3.behavior.zoom().scaleExtent([0, 8]).on("zoom", zoom))
     .attr("width", "100%")
@@ -18,29 +56,36 @@ $("div.tooltipsy").remove()
     .attr("transform", "translate(425, 425)")
     .append("g");
 
-  // Create a cluster "canvas"
+  // Create a d3 cluster canvas
   var cluster = d3.layout.cluster()
     .size([360,425]);
 
+  
+  // **TAKE THE DATA AND CREATE "NODES" ON THE CLUSTER CANVAS**
+  var nodes = cluster.nodes(treeData);
+
+  // **TAKE THE NODES AND CREATE "LINKS" ON THE CLUSTER CANVAS**
+  var links = cluster.links(nodes);
+
+  // create a d3 diagonal projection default for drawing links
   var diagonal = d3.svg.diagonal.radial()
     .projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
 
-  var nodes = cluster.nodes(treeData);
-  var links = cluster.links(nodes);
-
+  // draw all of the existing links on the cluster canvas to be connected
+  //   by the above defined d3 diagonal projection path
   var link = vis.selectAll("pathlink")
     .data(links)
     .enter().append("svg:path")
     .attr("class", "link")
     .attr("d", diagonal)
 
+  // draw all of the existing nodes on the cluster canvas
   var node = vis.selectAll("g.node")
     .data(nodes)
     .enter().append("svg:g")
     .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
     .attr("id", function(d){ return d.name })
     .attr("class", function(){ return "words" });
-
 
   // Add the dot at every node
   node.append("svg:circle")
@@ -51,20 +96,6 @@ $("div.tooltipsy").remove()
     .on("mouseover", addColor)
     .on("mouseout", removeColor);
 
-  function addColor() {
-    d3.select(this)
-      .transition()
-        .duration(300)
-        .style("fill", "rgb(0,154,205)")
-  };
-
-  function removeColor() {
-    d3.select(this)
-      .transition()
-        .duration(800)
-        .style("fill", "white")
-  }
-
   node.append("svg:text")
     .attr("dx", function(d) { return d.x < 180 ? 15 : -15; })
     .attr("dy", ".31em")
@@ -73,60 +104,45 @@ $("div.tooltipsy").remove()
     .attr("title", function(d) {return d.name} )
     .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
     .attr("transform", function(d) { return d.x < 180 ? null : "rotate(180)"; })
-    .text(function(d) { words = d.name.split(" "); 
+    .text(function(d) {
+      words = d.name.split(" "); 
       if(words.length > 3){
         return words[0]+" "+words[1]+" "+words[2]+"..."; 
       } else {
-          return d.name;
-        }})
+        return d.name;
+      }
+    })
     .on("mouseover", animateText)
     .on("mouseout", removeTextSize)
-    .on("click", function(d,i){ 
-      addTopic($("span#journey_id").text(), d.name);
-      $.post("/topics/" +$("span#topic_id").text(), {counter: $("span#counter").text(), _method: "put"});
-      count = 0;
-      d3.json("/data?word="+d.name, draw)
-      $("h1").text(d.name)
-      var topicSpan = $("<div class='bubble-line'></div><a id='sup' data-tooltip='"+d.name+"'><div class='bubble'></div></a>").on("click", create);
-      $("div#past_topics").append(topicSpan);
-      makeTimeline();
+    .on("click", function(d,i) {
+      words = d.name.split(" "); 
+      if(words.length < 3){
+        addTopic($("span#journey_id").text(), d.name);
+        $.post("/topics/" +$("span#topic_id").text(), {counter: $("span#counter").text(), _method: "put"});
+        count = 0;
+        d3.json("/data?word="+d.name, draw)
+        $("h1").text(d.name)
+        var topicSpan = $("<div class='bubble-line'></div><a id='sup' data-tooltip='"+d.name+"'><div class='bubble'></div></a>").on("click", create);
+        $("div#past_topics").append(topicSpan);
+        makeTimeline();
+      }
     });
 
-
-  var create = function(){
-    addTopic($("span#journey_id").text(), this.getAttribute("data-tooltip"))
-    $.post("/topics/" + $("span#topic_id").text(), {counter: $("span#counter").text(), _method: "put"});
+  function create(){
     count = 0;
+
+    addTopic($("span#journey_id").text(),
+             this.getAttribute("data-tooltip"))
+    $.post({url:     "/topics/" + $("span#topic_id").text(),
+            counter: $("span#counter").text(),
+            _method: "put"});
     d3.json("/data?word="+ (this.getAttribute("data-tooltip")), draw)
-    $("h1").text(this.getAttribute("data-tooltip"))
-    var topicSpan = $("<div class='bubble-line'></div><a id='sup' data-tooltip='"+this.getAttribute("data-tooltip")+"'><div class='bubble'></div></a>").on("click", create);
+    $("h1").text(this.getAttribute("data-tooltip"));
+    var topicSpan = $("<div class='bubble-line'></div><a id='sup' data-tooltip='"+this.getAttribute("data-tooltip")+"'><div class='bubble'></div></a>")
+      .on("click", create);
     $("div#past_topics").append(topicSpan)
     makeTimeline();
-  };    
-
-
-  function animateText() { 
-    if(this.id !== $("h1").text()){
-      d3.select(this)
-        .transition()
-          .duration(100)
-          .style("font-size", "16px")
-          .style("cursor", "pointer")
-          .style("fill", "rgb(0,154,205)")
-      }
-  };
-
-  function removeTextSize() {
-    if(this.id !== $("h1").text()){
-      d3.select(this)
-        .transition()
-          .duration(100)
-          .style("font-size", "14px")
-          .style("fill", "black")
-      }
-
-  };
-
+  }
   $("text").tooltipsy({alignTo: 'cursor', offset: [5, 5]});
 
   var value = $("h1").text();
@@ -153,13 +169,19 @@ $("div.tooltipsy").remove()
   };
   
  function zoom() {
-  vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+  vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")")
   }
+}
 
-};
+//JSON object with the data
+window.onload = function() {
+  var value = $("h1").text();
+  d3.json("/data?word="+value, draw);
+  startCounter = window.setInterval(increment, 1000);
+}
 
-
-var makeTimeline = function() {
+// add to the timeline
+function makeTimeline() {
  var test = $("div#past_topics").children()
 
   for(i = 0; i < test.length; i++) { 
@@ -168,9 +190,6 @@ var makeTimeline = function() {
         animation:'flipIn',
         gravity:'north'
       }); 
-    };
-  };
-};
-
-
-
+    }
+  }
+}

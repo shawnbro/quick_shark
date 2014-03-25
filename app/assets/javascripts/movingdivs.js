@@ -8,8 +8,24 @@ $(document).ready(function(){
       url: "/description",
       data: {name: $("h1").text()},
       dataType: "text",
-      success: function(result){$("div#define p").text(result)}
+       success: function(result){$("div#define p#description").text(result)}
     });
+    // ajax get for definitions
+    $.ajax({
+      url: "/definitions",
+      data: {name: $("h1").text()},
+      dataType: "JSON",
+      success: function(result){
+        $("div#definitions p").remove();
+        $("div#reverse_definitions p").remove();
+        $.each(result[0]["definitions"], function(index, value){ 
+        $("div#definitions").append($("<p>").text(value["text"])) 
+          })
+        $.each(result[0]["reverse_definitions"]["results"], function(index, value){ 
+        $("div#reverse_definitions").append($("<p>").text(value["text"]))
+          });
+      }  
+    });   
   }); // on 'down'
 
   KeyboardJS.on('up', function() {
