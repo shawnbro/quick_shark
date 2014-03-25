@@ -6,7 +6,7 @@ describe "a user can log out" do
   it "logs out" do
     login(user)
     click_link "Log out"
-    expect(page).to have_content("Log In")
+    expect(page).to have_content("Log in")
   end
 
   def login(user)
