@@ -1,16 +1,3 @@
-// add to the timeline
-function makeTimeline() {
- var test = $("div#past_topics").children()
-
-  for(i = 0; i < test.length; i++) { 
-    if(test[i].id === "sup") { 
-      $(test[i]).darkTooltip({
-        animation:'flipIn',
-        gravity:'north'
-      }); 
-    }
-  }
-}
 
 // draw the d3 graph visualization
 function draw(treeData) {
@@ -32,7 +19,7 @@ function draw(treeData) {
       d3.select(this)
         .transition()
           .duration(100)
-          .style("font-size", "16px")
+          .style("font-size", "16px")   
           .style("cursor", "pointer")
           .style("fill", "rgb(0,154,205)")
     }
@@ -55,11 +42,6 @@ function draw(treeData) {
       $("span#topic_id").text(newTopicId.id);
     });
   }
-  
-  function zoom() {
-    vis.attr("transform",
-             "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-  }
 
   // empty the #vis "canvas" if it exists, and remove the tooltipsy div
   $("#viz").empty();
@@ -67,16 +49,9 @@ function draw(treeData) {
 
   // Create the svg canvas (at #viz)
   var vis = d3.select("#viz").append("svg:svg")
-<<<<<<< HEAD
     .call(d3.behavior.zoom().scaleExtent([0, 8]).on("zoom", zoom))
     .attr("width", "100%")
     .attr("height", "100%")
-=======
-    .call(d3.behavior.zoom()
-            .scaleExtent([0, 10]).on("zoom", zoom))
-    .attr("width", 800)
-    .attr("height", 750)
->>>>>>> a39167ab1a2bca2c19de398d82ca99560b3ac30f
     .append("svg:g")
     .attr("transform", "translate(425, 425)")
     .append("g");
@@ -84,6 +59,7 @@ function draw(treeData) {
   // Create a d3 cluster canvas
   var cluster = d3.layout.cluster()
     .size([360,425]);
+
   
   // **TAKE THE DATA AND CREATE "NODES" ON THE CLUSTER CANVAS**
   var nodes = cluster.nodes(treeData);
@@ -138,19 +114,22 @@ function draw(treeData) {
     })
     .on("mouseover", animateText)
     .on("mouseout", removeTextSize)
-    .on("click", function(d,i) { 
-      addTopic($("span#journey_id").text(), d.name);
-      $.post("/topics/" +$("span#topic_id").text(), {counter: $("span#counter").text(), _method: "put"});
-      // count = 0;
-      d3.json("/data?word="+d.name, draw)
-      $("h1").text(d.name)
-      var topicSpan = $("<div class='bubble-line'></div><a id='sup' data-tooltip='"+d.name+"'><div class='bubble'></div></a>").on("click", create);
-      $("div#past_topics").append(topicSpan);
-      makeTimeline();
+    .on("click", function(d,i) {
+      words = d.name.split(" "); 
+      if(words.length < 3){
+        addTopic($("span#journey_id").text(), d.name);
+        $.post("/topics/" +$("span#topic_id").text(), {counter: $("span#counter").text(), _method: "put"});
+        count = 0;
+        d3.json("/data?word="+d.name, draw)
+        $("h1").text(d.name)
+        var topicSpan = $("<div class='bubble-line'></div><a id='sup' data-tooltip='"+d.name+"'><div class='bubble'></div></a>").on("click", create);
+        $("div#past_topics").append(topicSpan);
+        makeTimeline();
+      }
     });
 
   function create(){
-    // count = 0;
+    count = 0;
 
     addTopic($("span#journey_id").text(),
              this.getAttribute("data-tooltip"))
@@ -173,7 +152,6 @@ function draw(treeData) {
   $("#end_journey").click(function(topic){
     $.post("/topics/" +$("span#topic_id").text(), {counter: $("span#counter").text(), _method: "put"});
   });
-}
 
   $("#new_journey").click(function(topic){
     $.post("/topics/" +$("span#topic_id").text(), {counter: $("span#counter").text(), _method: "put"});
@@ -191,13 +169,19 @@ function draw(treeData) {
   };
   
  function zoom() {
-  vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+  vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")")
   }
+}
 
-};
+//JSON object with the data
+window.onload = function() {
+  var value = $("h1").text();
+  d3.json("/data?word="+value, draw);
+  startCounter = window.setInterval(increment, 1000);
+}
 
-
-var makeTimeline = function() {
+// add to the timeline
+function makeTimeline() {
  var test = $("div#past_topics").children()
 
   for(i = 0; i < test.length; i++) { 
@@ -206,15 +190,7 @@ var makeTimeline = function() {
         animation:'flipIn',
         gravity:'north'
       }); 
-    };
-  };
-};
-
-
-
-//JSON object with the data
-window.onload = function() {
-  var value = $("h1").text();
-  d3.json("/data?word="+value, draw);
-  startCounter = window.setInterval(increment, 1000);
+    }
+  }
 }
+

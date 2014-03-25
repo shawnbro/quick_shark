@@ -16,6 +16,11 @@ Tangent.TreeGraph.prototype.getData = function(searchTerm) {
 }
 
 Tangent.TreeGraph.prototype.journeyForth = function(topic_id, counter, searchTerm) {
+  // function saveResult(result){
+  //   this.data = result;
+  // }
+  // saveResult = saveResult.bind(this);
+
   $.post("/topics/" + encodeURIComponent(topic_id),
     {_method: "PUT",
      counter: counter}
