@@ -55,8 +55,8 @@ $(document).ready(function(){
       .attr("height", function(d) {
         return height - y(d.counter);
       }).style("fill","pink")
-      .on("mouseover",animateText)
-            .on('mouseout', removeTextSize)
+      .on('mouseover',animateText)
+      .on('mouseout', removeTextSize)
       ;
 
       svg.selectAll("text.x").data(allData).enter()
@@ -88,6 +88,8 @@ $(document).ready(function(){
             })
             .attr("text-anchor", "middle")
             .style("opacity", "0")
+            .on('mouseover',animateText)
+            .on('mouseout', removeTextSize)
         
         function animateText() { 
       var graphItems = d3.selectAll('text.seconds')
