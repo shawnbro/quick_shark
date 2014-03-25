@@ -1,16 +1,3 @@
-// add to the timeline
-function makeTimeline() {
- var test = $("div#past_topics").children()
-
-  for(i = 0; i < test.length; i++) { 
-    if(test[i].id === "sup") { 
-      $(test[i]).darkTooltip({
-        animation:'flipIn',
-        gravity:'north'
-      }); 
-    }
-  }
-}
 
 // draw the d3 graph visualization
 function draw(treeData) {
@@ -32,7 +19,7 @@ function draw(treeData) {
       d3.select(this)
         .transition()
           .duration(100)
-          .style("font-size", "16px")
+          .style("font-size", "16px")   
           .style("cursor", "pointer")
           .style("fill", "rgb(0,154,205)")
     }
@@ -54,11 +41,6 @@ function draw(treeData) {
       window.newTopicId=res;
       $("span#topic_id").text(newTopicId.id);
     });
-  }
-  
-  function zoom() {
-    vis.attr("transform",
-             "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
   }
 
   // empty the #vis "canvas" if it exists, and remove the tooltipsy div
@@ -132,19 +114,22 @@ function draw(treeData) {
     })
     .on("mouseover", animateText)
     .on("mouseout", removeTextSize)
-    .on("click", function(d,i) { 
-      addTopic($("span#journey_id").text(), d.name);
-      $.post("/topics/" +$("span#topic_id").text(), {counter: $("span#counter").text(), _method: "put"});
-      // count = 0;
-      d3.json("/data?word="+d.name, draw)
-      $("h1").text(d.name)
-      var topicSpan = $("<div class='bubble-line'></div><a id='sup' data-tooltip='"+d.name+"'><div class='bubble'></div></a>").on("click", create);
-      $("div#past_topics").append(topicSpan);
-      makeTimeline();
+    .on("click", function(d,i) {
+      words = d.name.split(" "); 
+      if(words.length < 3){
+        addTopic($("span#journey_id").text(), d.name);
+        $.post("/topics/" +$("span#topic_id").text(), {counter: $("span#counter").text(), _method: "put"});
+        count = 0;
+        d3.json("/data?word="+d.name, draw)
+        $("h1").text(d.name)
+        var topicSpan = $("<div class='bubble-line'></div><a id='sup' data-tooltip='"+d.name+"'><div class='bubble'></div></a>").on("click", create);
+        $("div#past_topics").append(topicSpan);
+        makeTimeline();
+      }
     });
 
   function create(){
-    // count = 0;
+    count = 0;
 
     addTopic($("span#journey_id").text(),
              this.getAttribute("data-tooltip"))
@@ -167,6 +152,10 @@ function draw(treeData) {
   $("#end_journey").click(function(topic){
     $.post("/topics/" +$("span#topic_id").text(), {counter: $("span#counter").text(), _method: "put"});
   });
+    function zoom() {
+    vis.attr("transform",
+             "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+  }
 }
 
 //JSON object with the data
@@ -174,4 +163,18 @@ window.onload = function() {
   var value = $("h1").text();
   d3.json("/data?word="+value, draw);
   startCounter = window.setInterval(increment, 1000);
+}
+
+// add to the timeline
+function makeTimeline() {
+ var test = $("div#past_topics").children()
+
+  for(i = 0; i < test.length; i++) { 
+    if(test[i].id === "sup") { 
+      $(test[i]).darkTooltip({
+        animation:'flipIn',
+        gravity:'north'
+      }); 
+    }
+  }
 }

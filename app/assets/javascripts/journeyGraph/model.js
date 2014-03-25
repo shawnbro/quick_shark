@@ -2,13 +2,34 @@ Tangent.JourneyGraph = function() {
   
 }
 
-Tangent.TreeGraph.prototype.add = function() {
-
+Tangent.JourneyGraph.prototype.add = function(journey, topic) {
+  var url = "/add_topic?journey=" + journey + "&topic=" + topic;
+  $.post(url, function(res) {
+    history.pushState({}, null, res.name);
+    window.newTopicId=res;
+    $("span#topic_id").text(newTopicId.id);
+  });
 }
+
+Tangent.JourneyGraph.prototype.create = function(){
+  count = 0;
+  
+}
+
+
+// function addTopic(journey, topic){
+//   var url = "/add_topic?journey=" + journey + "&topic=" + topic;
+
+//   $.post(url, function(res) {
+//     history.pushState({}, null, res.name);
+//     window.newTopicId=res;
+//     $("span#topic_id").text(newTopicId.id);
+//   });
+// }
+
 
 // function create(){
 //   count = 0;
-
 //   addTopic($("span#journey_id").text(),
 //            this.getAttribute("data-tooltip"))
 //   $.post({url:     "/topics/" + $("span#topic_id").text(),
