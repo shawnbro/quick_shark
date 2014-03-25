@@ -26,7 +26,7 @@ module TopicsHelper
   def get_word_associations(word)
       word_association = [{
         word: word,
-        definitions: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word.downcase.gsub(" ", "%20")+'/definitions?limit=200&includeRelated=true&useCanonical=true&includeTags=false&api_key='+WORDNIK_API_KEY).map,
+        definitions: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word.gsub(" ", "%20").downcase+'/definitions?limit=200&includeRelated=true&useCanonical=true&includeTags=false&api_key='+WORDNIK_API_KEY).map,
         # etymologies: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word+'/etymologies?api_key='+WORKNIK_API_KEY),
         word_associations: HTTParty.get('http://api.wordnik.com:80/v4/word.json/'+word.gsub(" ", "%20").downcase+'/relatedWords?limit=2&useCanonical=true&limitPerRelationshipType=10&api_key='+WORDNIK_API_KEY).map,
         reverse_definitions: HTTParty.get('http://api.wordnik.com:80/v4/words.json/reverseDictionary?query='+word.gsub(" ", "%20").downcase+'&minCorpusCount=5&maxCorpusCount=-1&minLength=1&maxLength=-1&includeTags=false&skip=0&limit=5&api_key='+WORDNIK_API_KEY)    
@@ -65,11 +65,19 @@ module TopicsHelper
       url = "http://www.yiyinglu.com/failwhale/images/Homer_the_New_Fail_Whale_by_edwheeler.jpg"
     else
       photo_id = result[0]["id"]
+      photo_id_2 = result[1]["id"]
+      photo_id_3 = result[2]["id"]
+      photo_id_4 = result[3]["id"]
       info = flickr.photos.getInfo(:photo_id => photo_id)
+      info2 = flickr.photos.getInfo(:photo_id => photo_id_2) 
+      info3 = flickr.photos.getInfo(:photo_id => photo_id_3) 
+      info4 = flickr.photos.getInfo(:photo_id => photo_id_4) 
       url = FlickRaw.url(info)
+      url2 = FlickRaw.url(info2) 
+      url3 = FlickRaw.url(info3) 
+      url4 = FlickRaw.url(info4)
     end
-
-    return url
+    return url, url2, url3, url4
   end
 
 # formatting the incoming results from wordnik to the proper nested format

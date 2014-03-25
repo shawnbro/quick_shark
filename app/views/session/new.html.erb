@@ -1,6 +1,6 @@
 <h2>Login below!</h2>
 
-<div class="form">
+<div class="login-form">
 <% unless @message.nil? %>
   <div id="errors">
     <h3>Errors!</h3>
@@ -10,12 +10,13 @@
   </div>
 <% end %>
 
-<%= form_tag "/session" do %>
-  <%= label_tag :email %>
+<%= form_tag "/session", {class: 'login-form'} do %>
+  <%= label_tag :email %><br/>
   <%= email_field_tag :email %>
-  <%= label_tag :password %>
+  <br/>
+  <%= label_tag :password %><br/>
   <%= password_field_tag :password %>
-  <br>
+  <br/><br/>
   <div class="login">
   <%= submit_tag "Log in!" %>
 </div>
