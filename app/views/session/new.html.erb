@@ -9,10 +9,12 @@
 <% end %>
 
 <%= form_tag "/session", {class: 'login-form'} do %>
-  <%= email_field_tag :email, placeholder: "email"  %>
+  <%= label_tag :email %><br/>
+  <%= email_field_tag :email %>
   <br/>
   <br/>
-  <%= password_field_tag :password, placeholder: "password" %>
+  <%= label_tag :password %><br/>
+  <%= password_field_tag :password %>
   <br/><br/>
   <div class="login">
   <%= submit_tag "Log in!" %>

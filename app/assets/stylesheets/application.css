@@ -227,11 +227,13 @@ div#past_topics {
 }
 
 .tooltipsy {
-  padding: 10px;
-  max-width: 200px;
+  padding: 5px;
+  max-width: 400px;
+  border-radius: 2px;
+  font-size: 15px;
+  font-weight: 100;
   color: white;
-  border-radius: 5px;
-  background-color: rgba(135,135,135,.8)
+  background-color: rgba(0,0,0,.6)
 }
 
 .searchbar_tooltipsy {
@@ -479,6 +481,13 @@ div.new-user-form {
   width: 450px;
   margin-right: auto;
   margin-left: auto;
+  text-align: center;
+}
+
+.new-user-form input[type="submit"] {
+  border: 2px solid black;
+  background: none;
+  padding: 15px 60px;
 }
 
 /*Styles for login page*/
@@ -490,6 +499,8 @@ div.login-form {
   width: 450px;
   margin-right: auto;
   margin-left: auto;
+  text-align: center;
+  margin-top: 200px;
 }
 
 form.login-form {
