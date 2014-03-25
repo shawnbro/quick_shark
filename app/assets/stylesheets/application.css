@@ -110,11 +110,6 @@ a:visited {
   color: rgb(120, 120, 120);
 }
 
-/*a:hover {
-  color: rgb(0,154,205);
-}
-*/
-
 span {
   color: black;
 }
@@ -201,26 +196,6 @@ div#stats{
   border-top: 10px;
 }
 
-/*Style for Wolfram Alpha Tab*/
-#stats > div.stats {
-  width: 50%;
-  display: inline-block;
-  padding: 2em;
-  position: relative;
-}
-
-#stats > div:nth-child(2) {
-  display: block;
-  width: 100%;
-}
-
-#stats > div > img {
-  position: relative;
-}
-
-#stats > div:nth-child(3) {
-/*  position: absolute;*/
-}
 
 svg {
   font: 12px sans-serif;
@@ -398,7 +373,7 @@ form {
 }
 
 form input[type=search]::-webkit-search-cancel-button {
--webkit-appearance: 100px;
+  -webkit-appearance: 100px;
 }
 
 form input[type=search]::-webkit-input-placeholder {
@@ -417,26 +392,22 @@ form input[type=search]:-ms-input-placeholder {
    color: #ddd;
 }
 
-
-
 form input[type=search] {
-color: black;
-text-transform: uppercase;
-display: block;
-margin: 0;
-width: 100%;
-height: 1.2em;
-border: 0 solid #98989f;
-border-bottom: 3px solid #000;
-background: transparent;
-font-size: 3em;
--webkit-appearance: none;
--webkit-tap-highlight-color: rgba(0,0,0,0);
-outline: none;
-text-align: center;
+  color: black;
+  text-transform: uppercase;
+  display: block;
+  margin: 0;
+  width: 100%;
+  height: 1.2em;
+  border: 0 solid #98989f;
+  border-bottom: 3px solid #000;
+  background: transparent;
+  font-size: 3em;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  outline: none;
+  text-align: center;
 }
-
-
 
 /* Arrows */
 
@@ -485,8 +456,6 @@ text-align: center;
   margin-left: -7%;
   left: 50%;
 }
-
-
 
 /*Styles for signup page*/
 
@@ -617,6 +586,7 @@ div .flickr {
   margin-left: auto;
   margin-right: auto;
 }
+
 div#video {
   display: inline-block;
 }
@@ -627,8 +597,9 @@ iframe {
   border-radius: 20px;
 }
 
-button#refresh{
+button#refresh {
   border-radius: 10px;
+}
 
 
 /* Journey Show Page */
@@ -650,7 +621,6 @@ button#refresh{
 div.the-journey {
   margin: 20px auto;
 }
-
 
 /* Our App Nav Key Styles */
 div.nav-commands {
@@ -726,5 +696,26 @@ div.nav-key-container {
   left: 0;
   margin-left: 5px;
 }
+
+/*Style for Wolfram Alpha Tab*/
+#stats > div.stat {
+  width: 50%;
+  display: inline-block;
+  padding: 2em;
+  position: relative;
+}
+
+#stats > div:nth-child(2) {
+  display: block;
+  width: 100%;
+}
+
+#stats > div > img {
+  position: relative;
+}
+
+/*#stats > div:nth-child(3) {
+  position: absolute;
+}*/
 
 

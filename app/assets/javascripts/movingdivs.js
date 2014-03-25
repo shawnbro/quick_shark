@@ -60,7 +60,7 @@ $(document).ready(function(){
       success: function(result){
         $("div#stats img").remove();
         for(i=0; i < result.length; i++) {
-          $("div#stats").append("<img src='"+result[i]["image"]["src"]+"' >");
+          $("div#stats").append("<div class='stat'><img src='"+result[i]["image"]["src"]+"' ></div>");
         }
       }
     })
@@ -99,6 +99,7 @@ $(document).ready(function(){
     $('div#video').remove();
     $('div.videoWrap').remove();
     $('button').remove();
+    $("div#videos").append('<div class="videoWrap">');
     for ( var i = 0; i < 4; i++ ){
       $('<div id=video><iframe src="http://www.youtube.com/embed/' + newVideos.items[(i+videoIndex) % 50].id.videoId + '"></div>').appendTo('div.videoWrap');
     }
