@@ -197,26 +197,6 @@ div#stats{
   border-top: 10px;
 }
 
-/*Style for Wolfram Alpha Tab*/
-#stats > div.stats {
-  width: 50%;
-  display: inline-block;
-  padding: 2em;
-  position: relative;
-}
-
-#stats > div:nth-child(2) {
-  display: block;
-  width: 100%;
-}
-
-#stats > div > img {
-  position: relative;
-}
-
-#stats > div:nth-child(3) {
-/*  position: absolute;*/
-}
 
 svg {
   font: 12px sans-serif;
@@ -626,4 +606,26 @@ iframe {
 
 button#refresh{
   border-radius: 10px;
+}
+
+
+/*Style for Wolfram Alpha Tab*/
+#stats > div.stat {
+  width: 50%;
+  display: inline-block;
+  padding: 2em;
+  position: relative;
+}
+
+#stats > div:nth-child(2) {
+  display: block;
+  width: 100%;
+}
+
+#stats > div > img {
+  position: relative;
+}
+
+#stats > div:nth-child(3) {
+/*  position: absolute;*/
 }
