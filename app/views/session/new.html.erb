@@ -1,5 +1,3 @@
-<h2>Login below!</h2>
-
 <div class="login-form">
 <% unless @message.nil? %>
   <div id="errors">
@@ -14,11 +12,12 @@
   <%= label_tag :email %><br/>
   <%= email_field_tag :email %>
   <br/>
+  <br/>
   <%= label_tag :password %><br/>
   <%= password_field_tag :password %>
   <br/><br/>
   <div class="login">
-  <%= submit_tag "Log in!" %>
+  <%= submit_tag "Log in" %>
 </div>
 <% end %>
 </div>

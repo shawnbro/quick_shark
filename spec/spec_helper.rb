@@ -5,6 +5,7 @@ require 'rspec/rails'
 require 'rspec/autorun'
 require 'capybara/rails'
 require 'simplecov'
+Capybara.javascript_driver = :webkit
 SimpleCov.start
 
 Capybara.javascript_driver = :webkit
