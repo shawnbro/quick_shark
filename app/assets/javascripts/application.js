@@ -22,7 +22,8 @@
 //= require jquery.darktooltip
 //= require_tree ./treeGraph
 //= require_tree ./journeyGraph
-//= require treediagram.js
+//= require treediagram
+//= journeybargraph
 
 //application namespaced object
 var Tangent = {};
