@@ -7,7 +7,7 @@ class TopicsController < ApplicationController
 
   def create
     unless params[:topic]["topic"].empty?
-      @topic = Topic.create(name: params["topic"]["topic"])
+      @topic = Topic.create(name: params["topic"]["topic"]) || Topic.create(name: params["topic"]["topic"])
         if current_user
           @journey = Journey.create(title: params["topic"]["topic"], user_id: current_user[:id])
           @journey.topics << @topic
@@ -19,8 +19,12 @@ class TopicsController < ApplicationController
   end
 
   def show
-    @topic = Topic.find_by(id: params[:id])
-    @journey = Journey.find_by(id: @topic.journey_id)  
+    @topic = Topic.find_by(name: params[:id])
+
+    if current_user
+      @journey = Journey.find_by(id: @topic.journey_id) 
+    end 
+
     @word_association = get_word_associations(@topic.name)
     @videos = get_youtube_vids(@topic.name).take(4)
   end
@@ -66,7 +70,7 @@ class TopicsController < ApplicationController
   end
 
   def add_topic
-    @topic = Topic.create(name: params[:topic])
+    @topic =  Topic.create(name: params["topic"]["topic"]) || Topic.create(name: params[:topic])
 
     if current_user
       @journey = Journey.find(params[:journey])  
