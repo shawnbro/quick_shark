@@ -114,8 +114,9 @@ a:visited {
   color: rgb(0,154,205);
 }
 */
+
 span {
-  color: white;
+  color: black;
 }
 
 span > span:hover {
@@ -128,9 +129,12 @@ div#journey {
 }
 
 h1 {
-  color: white;
+  color: black;
 }
 
+h2 {
+  margin-left: 10px;
+}
 
 div#viz{
   margin: 0 auto;
@@ -236,9 +240,8 @@ text {
 
 .link {
   fill: none;
-  stroke: rgb(120,120,120);
+  stroke: rgb(212,212,212);
   stroke-width: 1.5px;
-  stroke-color: rgb(120,120,120);
 }
 
 div#past_topics {
