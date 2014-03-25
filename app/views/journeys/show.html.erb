@@ -18,6 +18,7 @@
 </div>
 <%= button_to "Delete" , journey_path(@journey.id) , method: "delete" %>
 <input type=checkbox id="sort">Sort</input>
+<%= button_to "Reset" , journey_path(@journey.id) , method: "get" %>
 
 <script type="text/javascript">
   window.journeyID = <%= @journey.id %>;

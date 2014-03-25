@@ -37,10 +37,6 @@ function drawBarchart(containerId, allData, yAxisText, chartAreaWidth,
       return d.counter;
     }) ]);
 
-      // svg.append("g").attr("class", "y axis").call(yAxis).append("text").attr(
-      // "transform", "rotate(-90)").attr("y", 6).attr("dy", ".71em").style(
-      // "text-anchor", "end").text(yAxisText);
-
 svg.selectAll(".bar").data(allData).enter().append("rect")
 .attr("class", "bar").attr("x", function(d, i) {
   return i * width/allData.length;
@@ -189,13 +185,11 @@ var sortBars = function () {
         .on('mouseout', removeTextSize);
 
 };
-        
-
- d3.select("#sort").on("click", sortBars);
-      // function type(d) {
-      //  d.counter = +d.counter;
-      //  return d;
-      // }//closes function type
 
 
+ d3.select("#sort").on("change", function() {
+    if(this.checked) {
+      sortBars();
+    } 
+  });
     }// closes barchart
