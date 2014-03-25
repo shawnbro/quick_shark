@@ -43,7 +43,9 @@ class TopicsController < ApplicationController
   end
 
   def pictures
+    # Find the photo by the topic you are searching
     @photo = find_photo(params[:name])
+    # Render JSON object to /pictures route for access later
     render json: @photo
   end
 
