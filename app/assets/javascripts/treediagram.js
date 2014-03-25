@@ -118,7 +118,6 @@ function draw(treeData) {
       words = d.name.split(" "); 
       if(words.length < 3){
         addTopic($("span#journey_id").text(), d.name);
-        $.post("/topics/" +$("span#topic_id").text(), {counter: $("span#counter").text(), _method: "put"});
         count = 0;
         d3.json("/data?word="+d.name, draw)
         $("h1").text(d.name)
@@ -133,9 +132,6 @@ function draw(treeData) {
 
     addTopic($("span#journey_id").text(),
              this.getAttribute("data-tooltip"))
-    $.post({url:     "/topics/" + $("span#topic_id").text(),
-            counter: $("span#counter").text(),
-            _method: "put"});
     d3.json("/data?word="+ (this.getAttribute("data-tooltip")), draw)
     $("h1").text(this.getAttribute("data-tooltip"));
     var topicSpan = $("<div class='bubble-line'></div><a id='sup' data-tooltip='"+this.getAttribute("data-tooltip")+"'><div class='bubble'></div></a>")
@@ -150,7 +146,9 @@ function draw(treeData) {
   d3.select("g#"+value).attr("transform", function(){ return "rotate(0 0 0)"});
 
   $("#end_journey").click(function(topic){
-    $.post("/topics/" +$("span#topic_id").text(), {counter: $("span#counter").text(), _method: "put"});
+    $.post("/journeys/" + $("span#journey_id").text(), {
+      _method: "put"
+    });
   });
 
   $("#new_journey").click(function(topic){

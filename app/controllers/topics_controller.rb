@@ -73,10 +73,10 @@ class TopicsController < ApplicationController
   end
 
   def add_topic
-    @topic =  Topic.find_by(name: params["topic"]["topic"]) || Topic.create(name: params[:topic])
+    @topic =  Topic.find_by(name: params[:topic]) || Topic.create(name: params[:topic])
 
     if current_user
-      @journey = Journey.find(params[:journey_id])  
+      @journey = Journey.find(params[:journey])  
       @journey.topics << @topic
       render json: @topic
     end
