@@ -11,33 +11,31 @@
 * PostgreSQL Database
 * Authentication & Authorization (using bcypt-ruby)
 * Ruby Gems:
-  * HTTParty
-  * Addresable/URI
-  * Bcrypt
-  * Flickraw
-  * d3-rails
-  * Simplecov - to monitor test coverage
-  * JSON
-  * Unirest
-  * Launchy
+  * HTTParty (Used to query web services and examine the resulting output)(https://github.com/jnunemaker/httparty)
+  * Addresable/URI (Used to generate the url to access Google's API)(https://github.com/sporkmonger/addressable)
+  * Bcrypt (Used to password protect ruby web app via authentication and authorization)(https://github.com/codahale/bcrypt-ruby)
+  * Flickraw (A Ruby library used to access the Flickr API)(https://github.com/hanklords/flickraw)
+  * d3-rails (Provides D3 for rails)(https://github.com/iblue/d3-rails)
+  * Simplecov (Used to monitor test coverage)(https://github.com/colszowka/simplecov)
+  * JSON (Used to use JSON objects in ruby)(https://github.com/douglascrockford/JSON-js)
 * Javascript libraries:
-  * D3.js
-  * Tooltip
-  * Keyboard.js
-  * Tooltipsy.js
-  * Darktooltip.js
+  * D3.js (Used to visualize the data)(https://github.com/mbostock/d3)
+  * Tooltip (Used to add event listeners to interactive elements)(https://github.com/x-tag/tooltip)
+  * Keyboard.js (Used to make AJAX calls on keyboard arrow press)(https://github.com/RobertWHurst/KeyboardJS)
+  * Tooltipsy.js (Used to add event listeners to interactive elements)(https://github.com/briancray/tooltipsy)
+  * Darktooltip.js (Used to add event listeners to interactive elements)(https://github.com/darthrubens/darktooltip)
 * APIs:
-  * Wordnik
-  * Wolfram Alpha
-  * Flickr
-  * YouTube
-  * Freebase
+  * Wordnik (Used to find associative words and definitions)(http://developer.wordnik.com/)
+  * Wolfram Alpha (Used to find stats on a certain topic)(http://products.wolframalpha.com/developers/)
+  * Flickr (Used to generate pictures relating to a certain topic)(https://www.flickr.com/services/api/)
+  * YouTube (Used to generate videos relating to a certain topic)(https://developers.google.com/youtube/)
+  * Freebase (Used to generate descriptions relating to a certain topic)(https://developers.google.com/freebase/)
 * TDD:
-  * RSpec-Rails
-  * Capybara
-  * QT
-  * Factory Girl
-  * FFaker
+  * RSpec-Rails (Used to test methods)(https://github.com/rspec/rspec-rails)
+  * Capybara (Used for acceptance testing)(https://github.com/jnicklas/capybara)
+  * QT (Used to test javascript within capybara)(https://github.com/mirror/qt)
+  * Factory Girl (Used to generate dummy models for testing)(https://github.com/thoughtbot/factory_girl)
+  * FFaker (Used to randomly generate words for models used in tests)(https://github.com/EmmanuelOga/ffaker)
 
 ### User Stories Completed
 * A user can view a saved journey visualization from first search to final search
@@ -60,6 +58,8 @@
 * A user can end the journey at any time by clicking the journey end button
 
 ### ERD
+
+# A link to tangent can be found here: (https://tangentapp.herokuapp.com)
 
 # The public repository for Tangent on Github can be found here:
 
