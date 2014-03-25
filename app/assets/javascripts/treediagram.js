@@ -46,131 +46,135 @@ function draw(treeData) {
   // empty the #vis "canvas" if it exists, and remove the tooltipsy div
   $("#viz").empty();
   $("div.tooltipsy").remove();
+  console.log(treeData.children)
+  if(treeData.children[1].children.length === 0 && treeData.children[2].children.length === 0 && treeData.children[3].children.length === 0) { // stops the process if treeData is null
+    $("body").append("<p id='no-results'>Your search returned no results.  Try hitting the arrow buttons on your keyboard to find out more or click on 'New Journey' to try again...</p>")
+  } else {
+    // Create the svg canvas (at #viz)
+    var vis = d3.select("#viz").append("svg:svg")
+      .call(d3.behavior.zoom().scaleExtent([0, 8]).on("zoom", zoom))
+      .attr("width", "100%")
+      .attr("height", "89%")
+      .append("svg:g")
+      .attr("transform", "translate(520, 350) scale(.6)")
+      .append("g");
 
-  // Create the svg canvas (at #viz)
-  var vis = d3.select("#viz").append("svg:svg")
-    .call(d3.behavior.zoom().scaleExtent([0, 8]).on("zoom", zoom))
-    .attr("width", "100%")
-    .attr("height", "89%")
-    .append("svg:g")
-    .attr("transform", "translate(520, 350) scale(.6)")
-    .append("g");
+    // Create a d3 cluster canvas
+    var cluster = d3.layout.cluster()
+      .size([360,425]);
 
-  // Create a d3 cluster canvas
-  var cluster = d3.layout.cluster()
-    .size([360,425]);
+    
+    // **TAKE THE DATA AND CREATE "NODES" ON THE CLUSTER CANVAS**
+    var nodes = cluster.nodes(treeData);
 
-  
-  // **TAKE THE DATA AND CREATE "NODES" ON THE CLUSTER CANVAS**
-  var nodes = cluster.nodes(treeData);
+    // **TAKE THE NODES AND CREATE "LINKS" ON THE CLUSTER CANVAS**
+    var links = cluster.links(nodes);
 
-  // **TAKE THE NODES AND CREATE "LINKS" ON THE CLUSTER CANVAS**
-  var links = cluster.links(nodes);
+    // create a d3 diagonal projection default for drawing links
+    var diagonal = d3.svg.diagonal.radial()
+      .projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
 
-  // create a d3 diagonal projection default for drawing links
-  var diagonal = d3.svg.diagonal.radial()
-    .projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
+    // draw all of the existing links on the cluster canvas to be connected
+    //   by the above defined d3 diagonal projection path
+    var link = vis.selectAll("pathlink")
+      .data(links)
+      .enter().append("svg:path")
+      .attr("class", "link")
+      .attr("d", diagonal)
 
-  // draw all of the existing links on the cluster canvas to be connected
-  //   by the above defined d3 diagonal projection path
-  var link = vis.selectAll("pathlink")
-    .data(links)
-    .enter().append("svg:path")
-    .attr("class", "link")
-    .attr("d", diagonal)
+    // draw all of the existing nodes on the cluster canvas
+    var node = vis.selectAll("g.node")
+      .data(nodes)
+      .enter().append("svg:g")
+      .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
+      .attr("id", function(d){ return d.name })
+      .attr("class", function(){ return "words" });
 
-  // draw all of the existing nodes on the cluster canvas
-  var node = vis.selectAll("g.node")
-    .data(nodes)
-    .enter().append("svg:g")
-    .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
-    .attr("id", function(d){ return d.name })
-    .attr("class", function(){ return "words" });
+    // Add the dot at every node
+    node.append("svg:circle")
+      .attr("r", 10)
+      .attr("stroke", "grey")
+      .attr("fill", "white")
+      // add animation
+      .on("mouseover", addColor)
+      .on("mouseout", removeColor);
 
-  // Add the dot at every node
-  node.append("svg:circle")
-    .attr("r", 10)
-    .attr("stroke", "grey")
-    .attr("fill", "white")
-    // add animation
-    .on("mouseover", addColor)
-    .on("mouseout", removeColor);
+    node.append("svg:text")
+      .attr("dx", function(d) { return d.x < 180 ? 15 : -15; })
+      .attr("dy", ".31em")
+      .attr("fill", "white")
+      .attr("id", function(d){return d.name})
+      .attr("title", function(d) {return d.name} )
+      .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
+      .attr("transform", function(d) { return d.x < 180 ? null : "rotate(180)"; })
+      .text(function(d) {
+        words = d.name.split(" "); 
+        if(words.length > 3){
+          return words[0]+" "+words[1]+" "+words[2]+"..."; 
+        } else {
+          return d.name;
+        }
+      })
+      .on("mouseover", animateText)
+      .on("mouseout", removeTextSize)
+      .on("click", function(d,i) {
+        words = d.name.split(" "); 
+        if(words.length < 3){
+          addTopic($("span#journey_id").text(), d.name);
+          count = 0;
+          d3.json("/data?word="+d.name, draw)
+          $("h1").text(d.name)
+          var topicSpan = $("<div class='bubble-line'></div><a id='sup' data-tooltip='"+d.name+"'><div class='bubble'></div></a>").on("click", create);
+          $("div#past_topics").append(topicSpan);
+          makeTimeline();
+        }
+      });
 
-  node.append("svg:text")
-    .attr("dx", function(d) { return d.x < 180 ? 15 : -15; })
-    .attr("dy", ".31em")
-    .attr("fill", "white")
-    .attr("id", function(d){return d.name})
-    .attr("title", function(d) {return d.name} )
-    .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
-    .attr("transform", function(d) { return d.x < 180 ? null : "rotate(180)"; })
-    .text(function(d) {
-      words = d.name.split(" "); 
-      if(words.length > 3){
-        return words[0]+" "+words[1]+" "+words[2]+"..."; 
-      } else {
-        return d.name;
-      }
-    })
-    .on("mouseover", animateText)
-    .on("mouseout", removeTextSize)
-    .on("click", function(d,i) {
-      words = d.name.split(" "); 
-      if(words.length < 3){
-        addTopic($("span#journey_id").text(), d.name);
-        count = 0;
-        d3.json("/data?word="+d.name, draw)
-        $("h1").text(d.name)
-        var topicSpan = $("<div class='bubble-line'></div><a id='sup' data-tooltip='"+d.name+"'><div class='bubble'></div></a>").on("click", create);
-        $("div#past_topics").append(topicSpan);
-        makeTimeline();
-      }
+    function create(){
+      count = 0;
+
+      addTopic($("span#journey_id").text(),
+               this.getAttribute("data-tooltip"))
+      d3.json("/data?word="+ (this.getAttribute("data-tooltip")), draw)
+      $("h1").text(this.getAttribute("data-tooltip"));
+      var topicSpan = $("<div class='bubble-line'></div><a id='sup' data-tooltip='"+this.getAttribute("data-tooltip")+"'><div class='bubble'></div></a>")
+        .on("click", create);
+      $("div#past_topics").append(topicSpan)
+      makeTimeline();
+    }
+    $("text").tooltipsy({alignTo: 'cursor', offset: [5, 5]});
+
+    var value = $("h1").text();
+    d3.select("#"+value).style("font-size", "26px")
+    d3.select("g#"+value).attr("transform", function(){ return "rotate(0 0 0)"});
+
+    $("#end_journey").click(function(topic){
+      $.post("/journeys/" + $("span#journey_id").text(), {
+        _method: "put"
+      });
     });
 
-  function create(){
-    count = 0;
 
-    addTopic($("span#journey_id").text(),
-             this.getAttribute("data-tooltip"))
-    d3.json("/data?word="+ (this.getAttribute("data-tooltip")), draw)
-    $("h1").text(this.getAttribute("data-tooltip"));
-    var topicSpan = $("<div class='bubble-line'></div><a id='sup' data-tooltip='"+this.getAttribute("data-tooltip")+"'><div class='bubble'></div></a>")
-      .on("click", create);
-    $("div#past_topics").append(topicSpan)
-    makeTimeline();
+    var addTopic = function(journey, topic){
+      var url = "/add_topic?journey=" + journey + "&topic=" + topic;
+
+      $.post(url, function(res) {
+        history.pushState({}, null, res.name);
+        window.newTopicId=res;
+        $("span#topic_id").text(newTopicId.id);
+      });
+    };
+
+    function zoom() {
+      vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")")
+    }
   }
-  $("text").tooltipsy({alignTo: 'cursor', offset: [5, 5]});
-
-  var value = $("h1").text();
-  d3.select("#"+value).style("font-size", "26px")
-  d3.select("g#"+value).attr("transform", function(){ return "rotate(0 0 0)"});
-
-  $("#end_journey").click(function(topic){
-    $.post("/journeys/" + $("span#journey_id").text(), {
-      _method: "put"
-    });
-  });
-
-
-  var addTopic = function(journey, topic){
-    var url = "/add_topic?journey=" + journey + "&topic=" + topic;
-
-    $.post(url, function(res) {
-      history.pushState({}, null, res.name);
-      window.newTopicId=res;
-      $("span#topic_id").text(newTopicId.id);
-    });
-  };
-
-  function zoom() {
-    vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")")
-  }
-}
+} // end if statement
 
 //JSON object with the data
 window.onload = function() {
   var value = $("h1").text();
-  d3.json("/data?word="+value, draw);
+  d3.json("/data?word="+value,  draw);
 }
 
 // add to the timeline

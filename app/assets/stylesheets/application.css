@@ -718,4 +718,8 @@ div.nav-key-container {
   position: absolute;
 }*/
 
-
+/* no results paragraph */
+#no-results {
+  padding-top: 20%;
+  padding-left: 10%;
+}
