@@ -9,15 +9,19 @@ describe "a user searches" do
     fill_in "Email", with: user.email
     fill_in "Password", with: user.password
     click_button "Log in!"
+    visit root_path
     fill_in 'topic[topic]', with: "Sharks"
-    click_button 'Submit'
-    save_and_open_page
+    find("#exploreB").click
     within ('#journey') do 
       expect(page).to have_content("Sharks")
     end
-
+    expect(page).to have_css("svg")
     expect(page).to have_content("Sharks")
-    expect(page).to have_content("fish")
-    save_and_open_page
+    expect(page).to have_content("Description")
+    expect(page).to have_content("Definitions")
+    expect(page).to have_content("Reverse Definitions")
+    expect(page).to have_content("Pictures")
+    expect(page).to have_content("Videos")
+    expect(page).to have_content("Information")
   end
 end
