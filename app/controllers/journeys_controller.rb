@@ -27,7 +27,7 @@ class JourneysController < ApplicationController
 
   def journey_json
     @journey.tangents.order('created_at').map do |t|
-      { name: t.topic.name, counter: t.duration }
+      { name: t.topic.name, counter: t.duration, id: t.id }
     end
   end
 

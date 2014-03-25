@@ -151,10 +151,6 @@ function draw(treeData) {
     });
   });
 
-  $("#new_journey").click(function(topic){
-    $.post("/topics/" +$("span#topic_id").text(), {counter: $("span#counter").text(), _method: "put"});
-  });
-
 
   var addTopic = function(journey, topic){
     var url = "/add_topic?journey=" + journey + "&topic=" + topic;
@@ -175,7 +171,6 @@ function draw(treeData) {
 window.onload = function() {
   var value = $("h1").text();
   d3.json("/data?word="+value, draw);
-  startCounter = window.setInterval(increment, 1000);
 }
 
 // add to the timeline

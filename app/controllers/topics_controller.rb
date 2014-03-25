@@ -22,7 +22,7 @@ class TopicsController < ApplicationController
   end
 
   def show
-    @topic = Topic.find_by(name: params[:id])
+    @topic = Topic.find_by(name: params[:id]) 
 
     if current_user && params[:journey_id]
       @journey = Journey.find_by(id: params[:journey_id]) 
@@ -90,7 +90,6 @@ class TopicsController < ApplicationController
 
   def update
     @topic = Topic.find(params[:id])
-    @topic.counter = params[:counter]
     @topic.save
     render json: @topic
   end
