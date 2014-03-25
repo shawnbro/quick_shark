@@ -55,8 +55,8 @@ $(document).ready(function(){
       .attr("height", function(d) {
         return height - y(d.counter);
       }).style("fill","pink")
-      .on("mouseover",animateText)
-            .on('mouseout', removeTextSize)
+      .on('mouseover',animateText)
+      .on('mouseout', removeTextSize)
       ;
 
       svg.selectAll("text.x").data(allData).enter()
