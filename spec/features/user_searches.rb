@@ -23,6 +23,5 @@ describe "a user searches" do
     expect(page).to have_content("Pictures")
     expect(page).to have_content("Videos")
     expect(page).to have_content("Information")
-    save_and_open_page
   end
 end
