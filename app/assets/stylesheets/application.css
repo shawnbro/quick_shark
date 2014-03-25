@@ -563,8 +563,8 @@ div .bubble:hover {
 
 div .flickr {
   display: inline-block;
-  width: 500px;
-  height:326px;
+  width: 400px;
+  height:261px;
   overflow: hidden;
 }
 
@@ -575,7 +575,7 @@ div .flickr {
 }
 
 .flickr-wrapper {
-  width: 1000px;
+  width: 800px;
   margin-left: auto;
   margin-right: auto;
 }

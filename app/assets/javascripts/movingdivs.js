@@ -44,6 +44,7 @@ $(document).ready(function(){
         for ( var i = 0; i < 4; i++ ){
         $("div.flickr-wrapper").append("<div class=flickr><img src="+result[i]+" ></div>");
         }
+        $("div.flickr-wrapper").append($("<button id='refresh'></button>").text("Refresh"));
       }
     });
   }); // on 'up'
