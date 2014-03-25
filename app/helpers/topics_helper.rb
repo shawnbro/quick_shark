@@ -56,11 +56,13 @@ module TopicsHelper
   end
 
   def find_photo(tags)
+    # Inital API call, "tags" is the search query
     result = flickr.photos.search(
       :tags => tags,
+      # Parameter that returns Gettyimages.com quality pictues
       :is_getty => true
       )
-    # fallback logic
+    # If there are no pictues, you get an "error" image
     if result.length == 0
       url = "http://www.yiyinglu.com/failwhale/images/Homer_the_New_Fail_Whale_by_edwheeler.jpg"
     else
