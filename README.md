@@ -7,8 +7,7 @@ Tangent
 
 **Tangent** is a web application that takes users on a journey of discovery through chosen words and their assoiations. Tangent was developed as a Rails project for the January 2014 Web Development Immersive course at General Assembly. It was developed over a one week sprint to model the agile software development process.
 
-#Technologies Used:
-
+### Technologies Used:
 * Ruby 2.1.0
 * Ruby on Rails 4.0.2
 * PostgreSQL Database
@@ -41,7 +40,7 @@ Tangent
   * Factory Girl (Used to generate dummy models for testing)(https://github.com/thoughtbot/factory_girl)
   * FFaker (Used to randomly generate words for models used in tests)(https://github.com/EmmanuelOga/ffaker)
 
-### User Stories Completed
+### User Stories Completed:
 * A user can view a saved journey visualization from first search to final search
 * A user can get a description of the topic
 * A registered user has a profile page with account information and journeys listed
