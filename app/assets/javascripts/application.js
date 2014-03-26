@@ -21,6 +21,7 @@
 //= require jquery.darktooltip
 //= require_tree ./treeGraph
 //= require_tree ./journeyGraph
+//=require pace.min
 
 //application namespaced object
 var Tangent = {};

@@ -45,13 +45,14 @@ $(document).ready(function(){
         // Removing any leftover elements
         $("div#pictures img").remove();
         $("div.flickr-wrapper").remove();
+        $("div#pictures button").remove();
         // Creating a picture wrapper div for all the pics
         // Then creating picture divs for each pic, then appending to the pic wrapper
         $("div#pictures").append("<div class=flickr-wrapper>");
         for ( var i = 0; i < 4; i++ ){
           $("div.flickr-wrapper").append("<div class=flickr><img src="+result[i]+" ></div>");
         }
-        // Creating a refresh button, then appending that to the wrapper
+        // Creating a refresh button, then appending that to the header
         $("div#pictures h2").after($("<button id='photo_refresh'></button>").text("Refresh"));
         // Adding event listener to refresh button, function below
         $("div#pictures button").on("click", updatePhotos);
@@ -154,12 +155,13 @@ $(document).ready(function(){
       success: function(result){
         $("div#pictures img").remove();
         $("div.flickr-wrapper").remove();
+        $("div#pictures button").remove();
         $("div#pictures").append("<div class=flickr-wrapper>");
         for ( var i = 0; i < 4; i++ ){
           $("div.flickr-wrapper").append("<div class=flickr><img src="+result[i]+" ></div>")
          };
-        $("div.flickr-wrapper").append($("<button id='photo_refresh'></button>").text("Refresh"));
-        $("div.flickr-wrapper button").on("click", updatePhotos)
+        $("div#pictures h2").after($("<button id='photo_refresh'></button>").text("Refresh"));
+        $("div#pictures button").on("click", updatePhotos)
       }
     });
   };

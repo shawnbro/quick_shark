@@ -754,7 +754,7 @@ div.fake-key {
 
 div#clear-key {
   font-family: sans-serif;
-  font-weight: bolder;
+  font-weight: 500;
   width: 20px;
   height: 20px;
   background-color: none;
