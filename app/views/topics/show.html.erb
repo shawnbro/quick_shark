@@ -11,16 +11,16 @@
   <%= button_to "End Journey" , journey_path(@journey.id) , method: "get", id: "end_journey" %>
 <% end %>
 
-<div id="define"><h2>Description</h2><p id="description"> <%= @description %> </p>
+<div id="define"><h2>Random Description</h2><p id="description"> <%= @description %> </p>
   <div id="definitions"><h2>Definitions<h2><p><p></div>
   <div id="reverse_definitions"><h2>Reverse Definitions<h2><p><p></div>
 
   </div>
     </div>
 
-<div id="pictures"><h2>Pictures</h2></div>
-<div id="videos"><h2>Videos</h2></div>
-<div id="stats"><h2>Information</h2></div>
+<div id="pictures"><h2>Related Pictures</h2></div>
+<div id="videos"><h2>Related Videos</h2></div>
+<div id="stats"><h2>Related Info</h2></div>
 
 </div>
 
@@ -28,26 +28,26 @@
 <span id="topic_id" style="display:none"><%=@topic.id%></span>
 <%= javascript_include_tag "treediagram" %>
 <div id="viz"></div>
-<div class="arrow-right"><div class="iconmelon">
-  <svg viewBox="0 0 32 32">
-    <use xlink:href="#camera-video"></use>
-  </svg>
-</div></div>
-<div class="arrow-left"><div class="iconmelon">
-  <svg viewBox="0 0 32 32">
+<div class="arrow-right">
+  <svg viewBox="0 0 50 50" class="pannel-icons" id="icon-right">
     <use xlink:href="#dashboard-speed"></use>
   </svg>
-</div></div>
-<div class="arrow-top"><div class="iconmelon">
-  <svg viewBox="0 0 32 32">
+</div>
+<div class="arrow-left">
+  <svg viewBox="0 0 50 50" class="pannel-icons" id="icon-left">
+    <use xlink:href="#camera-video"></use>
+  </svg>
+</div>
+<div class="arrow-top">
+  <svg viewBox="0 0 50 50" class="pannel-icons" id="icon-top">
     <use xlink:href="#receipt-shopping"></use>
   </svg>
-</div></div>
-<div class="arrow-bottom"><div class="iconmelon">
-  <svg viewBox="0 0 32 32">
+</div>
+<div class="arrow-bottom">
+  <svg viewBox="0 0 50 50" class="pannel-icons" id="icon-bottom">
     <use xlink:href="#picture-stock"></use>
   </svg>
-</div></div>
+</div>
 
  <div class="nav-key-container">
       <div class="nav-commands">

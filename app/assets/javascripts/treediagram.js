@@ -56,7 +56,7 @@ function draw(treeData) {
       .attr("width", "100%")
       .attr("height", "89%")
       .append("svg:g")
-      .attr("transform", "translate(520, 350) scale(.6)")
+      .attr("transform", "translate(615, 345) scale(.6)")
       .append("g");
 
     // Create a d3 cluster canvas
