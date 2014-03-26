@@ -843,3 +843,21 @@ div.journey_wrapper h2 {
 .view-journey:active, .view-journey:hover {
   color: rgba(3, 183, 123, 1);
 }
+
+#side-instructions {
+  display: none;
+  width: 25%;
+  height: 25%;
+  position: absolute;
+  float: right;
+  top: 0;
+  padding-top: 10%;
+}
+
+#side-instructions p {
+  font-family: 'Lato', Arial, sans-serif;
+  background-color: rgba( 211, 211, 211, .27 );  
+  color: rgb(120, 120, 120);
+  font-size: .4em;
+}
+
