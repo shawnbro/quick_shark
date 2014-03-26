@@ -24,6 +24,7 @@
   * Keyboard.js (Used to make AJAX calls on keyboard arrow press)(https://github.com/RobertWHurst/KeyboardJS)
   * Tooltipsy.js (Used to add event listeners to interactive elements)(https://github.com/briancray/tooltipsy)
   * Darktooltip.js (Used to add event listeners to interactive elements)(https://github.com/darthrubens/darktooltip)
+  * Pace.js (Used to show user when AJAX call is being made)(https://github.com/HubSpot/pace)
 * APIs:
   * Wordnik (Used to find associative words and definitions)(http://developer.wordnik.com/)
   * Wolfram Alpha (Used to find stats on a certain topic)(http://products.wolframalpha.com/developers/)
@@ -57,11 +58,11 @@
 * A registered user can view a bar graph visualization with each topic of the journey on it, and how long the user spent on the topic
 * A user can end the journey at any time by clicking the journey end button
 
-### ERD
+### ERD (https://github.com/shawnbro/quick_shark/blob/master/app/assets/images/TangentERD.jpg)
 
 # A link to tangent can be found here: (https://tangentapp.herokuapp.com)
 
-# The public repository for Tangent on Github can be found here:
+# The public repository for Tangent on Github can be found here: (https://github.com/shawnbro/quick_shark/blob/master/app/assets/images/TangentERD.jpg)
 
 # A full list of user stories can be found by looking at [this Pivotal Tracker Project](https://www.pivotaltracker.com/s/projects/1040714)
 
