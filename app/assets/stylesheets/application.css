@@ -685,11 +685,13 @@ div#define h2,
 div#pictures h2,
 div#stats h2 {
   font-weight: 100;
+  color: black;
 }
 
 div#define {
   font-weight: 100;
-  line-height: 1.5;
+  line-height: 1.7;
+  color: #6A6A6A;
 }
 
 iframe {
