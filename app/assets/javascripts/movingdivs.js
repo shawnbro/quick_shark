@@ -1,7 +1,7 @@
 $(document).ready(function(){
   KeyboardJS.on('down', function() {
     reset();
-    $("div#define")[0].style.top = "5%";
+    $("div#define")[0].style.top = "2%";
     $("div#pictures")[0].style.top = "105%";
     // ajax get for description
     $.ajax({
@@ -34,7 +34,7 @@ $(document).ready(function(){
 
   KeyboardJS.on('up', function() {
     reset();
-    $("div#pictures")[0].style.top = "5%";
+    $("div#pictures")[0].style.top = "2%";
     $("div#define")[0].style.top = "-105%";
     // ajax get for pictures
     $.ajax({
@@ -45,16 +45,17 @@ $(document).ready(function(){
         // Removing any leftover elements
         $("div#pictures img").remove();
         $("div.flickr-wrapper").remove();
+        $("div#pictures button").remove();
         // Creating a picture wrapper div for all the pics
         // Then creating picture divs for each pic, then appending to the pic wrapper
         $("div#pictures").append("<div class=flickr-wrapper>");
         for ( var i = 0; i < 4; i++ ){
           $("div.flickr-wrapper").append("<div class=flickr><img src="+result[i]+" ></div>");
         }
-        // Creating a refresh button, then appending that to the wrapper
-        $("div.flickr-wrapper").append($("<button id='photo_refresh'></button>").text("Refresh"));
+        // Creating a refresh button, then appending that to the header
+        $("div#pictures h2").after($("<button id='photo_refresh'></button>").text("Refresh"));
         // Adding event listener to refresh button, function below
-        $("div.flickr-wrapper button").on("click", updatePhotos);
+        $("div#pictures button").on("click", updatePhotos);
       }
     });
   }); // on 'up'
@@ -107,7 +108,7 @@ $(document).ready(function(){
         for ( var i = 0; i < 4; i++ ){
           $('<div id=video><iframe src="http://www.youtube.com/embed/' + result.items[i].id.videoId + '"></div>').appendTo('div.videoWrap');
         }
-        $("div#videos").append($("<button id='refresh'></button>").text("Refresh"));
+        $("div#videos h2").after($("<button id='refresh'></button>").text("Refresh"));
       }
     }); // end ajax
   }); // on 'right'
@@ -129,7 +130,7 @@ $(document).ready(function(){
       // Once the user refreshes past 50 videos
       $('<div id=video><iframe src="http://www.youtube.com/embed/' + newVideos.items[(i+videoIndex) % 50].id.videoId + '"></div>').appendTo('div.videoWrap');
     }
-    $("div#videos").append($("<button id='refresh'></button>").text("Refresh"));
+    $("div#videos h2").after($("<button id='refresh'></button>").text("Refresh"));
 
     videoIndex += 4;
 
@@ -154,12 +155,13 @@ $(document).ready(function(){
       success: function(result){
         $("div#pictures img").remove();
         $("div.flickr-wrapper").remove();
+        $("div#pictures button").remove();
         $("div#pictures").append("<div class=flickr-wrapper>");
         for ( var i = 0; i < 4; i++ ){
           $("div.flickr-wrapper").append("<div class=flickr><img src="+result[i]+" ></div>")
          };
-        $("div.flickr-wrapper").append($("<button id='photo_refresh'></button>").text("Refresh"));
-        $("div.flickr-wrapper button").on("click", updatePhotos)
+        $("div#pictures h2").after($("<button id='photo_refresh'></button>").text("Refresh"));
+        $("div#pictures button").on("click", updatePhotos)
       }
     });
   };

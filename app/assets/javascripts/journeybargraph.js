@@ -13,7 +13,7 @@ $(document).ready(function(){
      //Run drawBarchart function, which takes bar-chart id as container Id, 
      //global variable result as allData, seconds as yaxisText, 
      //700 as chartAreaWidth, 400 as chartAreaHeight.
-    drawBarchart("bar-chart",result,"Seconds",700,400);
+    drawBarchart("bar-chart",result,"Seconds",100,400);
   });//Close d3.json function
 });//Close document.ready
 
@@ -31,7 +31,7 @@ function drawBarchart(containerId, allData, yAxisText, chartAreaWidth,
     bottom : 30,
     left : 40
   }, 
-  width = chartAreaWidth - margin.left - margin.right, 
+  width = (chartAreaWidth* allData.length) - margin.left - margin.right, 
   height = chartAreaHeight - margin.top - margin.bottom;
 
   //quantitative scale for y axis, ranging from 0 to height of chart
