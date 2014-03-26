@@ -59,7 +59,7 @@ Tangent
 * A registered user can view a bar graph visualization with each topic of the journey on it, and how long the user spent on the topic
 * A user can end the journey at any time by clicking the journey end button
 
-### ERD (https://github.com/shawnbro/quick_shark/blob/master/app/assets/images/TangentERD.jpg)
+ERD (https://github.com/shawnbro/quick_shark/blob/master/app/assets/images/TangentERD.jpg)
 
 # A link to tangent can be found here: (https://tangentapp.herokuapp.com)
 
