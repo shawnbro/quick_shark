@@ -59,13 +59,14 @@ Tangent
 * A registered user can view a bar graph visualization with each topic of the journey on it, and how long the user spent on the topic
 * A user can end the journey at any time by clicking the journey end button
 
-ERD (https://github.com/shawnbro/quick_shark/blob/master/app/assets/images/TangentERD.jpg)
+# ERD 
+(https://github.com/shawnbro/quick_shark/blob/master/app/assets/images/TangentERD.jpg)
 
-# A link to tangent can be found here: (https://tangentapp.herokuapp.com)
+A link to tangent can be found here: (https://tangentapp.herokuapp.com)
 
-# The public repository for Tangent on Github can be found here: (https://github.com/shawnbro/quick_shark/blob/master/app/assets/images/TangentERD.jpg)
+The public repository for Tangent on Github can be found here: (https://github.com/shawnbro/quick_shark/blob/master/app/assets/images/TangentERD.jpg)
 
-# A full list of user stories can be found by looking at [this Pivotal Tracker Project](https://www.pivotaltracker.com/s/projects/1040714)
+A full list of user stories can be found by looking at [this Pivotal Tracker Project](https://www.pivotaltracker.com/s/projects/1040714)
 
 ---
 ###### Written by Rory Budnick, Shawn Broukhim, Kirsten Doyne, Cory Haber, Quincy Iheme, and Kevin McAlear
