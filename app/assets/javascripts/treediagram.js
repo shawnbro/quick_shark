@@ -154,9 +154,8 @@ function draw(treeData) {
       });
     });
 
-
-    var addTopic = function(journey, topic){
-      var url = "/add_topic?journey=" + journey + "&topic=" + topic;
+  var addTopic = function(journey, topic){
+    var url = "/add_topic?journey=" + journey + "&topic=" + topic;
 
       $.post(url, function(res) {
         history.pushState({}, null, res.name);
