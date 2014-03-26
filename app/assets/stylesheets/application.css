@@ -528,26 +528,24 @@ form.login-form {
 /* Style for user account page */
 
 ul#user_journey_list {
-  width: 570px;
+  width: 900px;
   margin-right: auto;
   margin-left: auto;
+  margin-top: 70px;
 }
 
 ul#user_journey_list li {
   font-size: 24px;
   padding: 5px;
-  border: 1px solid darkgrey;
   display: inline-block;
-  width: 400px;
+  width: 700px;
   text-align: center;
+  /*margin-top: 10px;*/
+  height: 50px;
 }
 
 form div{
   display: inline-block;
-}
-
-ul#user_journey_list li:nth-child(odd) {
-  background: lightgreen;
 }
 
 input[type=submit] {
@@ -750,7 +748,8 @@ div.nav-key-container {
 
 /* Journey Show Page */
 div#journey_show{
-  margin-top: 100px;
+  margin-top: 120px;
+  text-align: center;
 }
 
 /* no results paragraph */
@@ -760,7 +759,11 @@ div#journey_show{
 }
 
 
-input[type=submit]#end_journey {
+input[type=submit]#end_journey, 
+.edit-account, 
+.delete-account input, 
+.journey-item li form input[type=submit],
+.bar-actions input {
   border: 1px solid black;
   text-transform: uppercase;
   background: none;
@@ -770,8 +773,73 @@ input[type=submit]#end_journey {
   padding: 4px;
 }
 
+.bar-actions span {
 
-input[type=submit]#end_journey:hover, input[type=submit]#end_journey:active {
+  text-transform: uppercase;
+  background: none;
+  font-weight: 100;
+  font-size: 11px; 
+  padding: 4px;
+}
+
+
+.bar-actions {
+  margin-bottom: 40px;
+}
+
+
+input[type=submit]#end_journey:hover, 
+input[type=submit]#end_journey:active, 
+.edit-account:active, 
+.edit-account:hover, 
+.delete-account input:active, 
+.delete-account input:hover, 
+.journey-item li form input[type=submit]:hover, 
+.journey-item li form input[type=submit]:active,
+.journey-item li form input[type=submit]:hover,
+.journey-item li form input[type=submit]:active,
+.bar-actions input:hover,
+.bar-actions input:active {
   color: rgba(3, 183, 123, 1);
   background: #F9F9F9;
+}
+
+div#errors ul {
+  list-style-type: none;
+  color: rgb(223, 77, 77);
+}
+
+a.edit-account {
+  text-decoration: none;
+  color: black;
+}
+
+div.journey_wrapper {
+  margin-top: 100px;
+  text-align: center;
+}
+
+div.journey_wrapper h2 {
+  font-weight: 100;
+  font-size: 30px;
+}
+
+.view-journey {
+  float: left;
+  width: 400px;
+  text-decoration: none;
+  font-weight: 100;
+  color: black;
+}
+
+.journey-item li form {
+  float: right;
+}
+
+.journey-item li {
+  border-bottom: 1px dashed #ddd;
+}
+
+.view-journey:active, .view-journey:hover {
+  color: rgba(3, 183, 123, 1);
 }
