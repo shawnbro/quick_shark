@@ -141,59 +141,87 @@ div#viz{
 }
 
 div#define{
-  height: 90%;
+  -moz-transition: all .5s ease;
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease;
+  height: 93%;
   width: 90%;
   position: fixed;
   background-color: rgba(255,255,255,.95);
   z-index: 1;
-  border-radius: 15px;
+  border-radius: 5px;
   top: -120%;
   left: 5%;
   overflow: auto;
   border: 30px solid rgba(0, 0, 0, 0);
   border-top: 10px;
+  -moz-box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.1);
+  padding: 10px;
 }
 
 div#pictures{
-  height: 90%;
+  -moz-transition: all .5s ease;
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease;
+  height: 93%;
   width: 90%;
   position: fixed;
   background-color: rgba(255,255,255,.95);
   z-index: 1;
-  border-radius: 15px;
+  border-radius: 5px;
   top: 120%;
   left: 5%;
   overflow: auto;
   border: 20px solid rgba(0, 0, 0, 0);
   border-top: 10px;
+  -moz-box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.1);
+  padding: 10px;
 }
 
 div#videos{
-  height: 90%;
+  -moz-transition: all .5s ease;
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease;
+  height: 93%;
   width: 90%;
   position: fixed;
   background-color: rgba(255,255,255,.95);
   z-index: 1;
-  border-radius: 15px;
+  border-radius: 5px;
   left: -120%;
-  top: 5%;
+  top: 2%;
   overflow: auto;
   border: 20px solid rgba(0, 0, 0, 0);
   border-top: 10px;
+  -moz-box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.1);
+  padding: 10px;
 }
 
 div#stats{
-  height: 90%;
+  -moz-transition: all .5s ease;
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease;
+  height: 93%;
   width: 90%;
   position: fixed;
   background-color: rgba(255,255,255,.95);
   z-index: 1;
-  border-radius: 15px;
+  border-radius: 5px;
   left: 120%;
-  top: 5%;
+  top: 2%;
   overflow: auto;
   border: 20px solid rgba(0, 0, 0, 0);
   border-top: 10px;
+  -moz-box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.1);
+  padding: 10px;
 }
 
 

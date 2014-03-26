@@ -1,7 +1,7 @@
 $(document).ready(function(){
   KeyboardJS.on('down', function() {
     reset();
-    $("div#define")[0].style.top = "5%";
+    $("div#define")[0].style.top = "2%";
     $("div#pictures")[0].style.top = "105%";
     // ajax get for description
     $.ajax({
@@ -34,7 +34,7 @@ $(document).ready(function(){
 
   KeyboardJS.on('up', function() {
     reset();
-    $("div#pictures")[0].style.top = "5%";
+    $("div#pictures")[0].style.top = "2%";
     $("div#define")[0].style.top = "-105%";
     // ajax get for pictures
     $.ajax({
