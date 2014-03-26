@@ -845,7 +845,7 @@ div.journey_wrapper h2 {
 }
 
 #side-instructions {
-  display: none;
+/*  display: none;*/
   width: 10%;
   height: 10%;
   position: absolute;
