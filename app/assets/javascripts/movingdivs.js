@@ -52,9 +52,9 @@ $(document).ready(function(){
           $("div.flickr-wrapper").append("<div class=flickr><img src="+result[i]+" ></div>");
         }
         // Creating a refresh button, then appending that to the wrapper
-        $("div.flickr-wrapper").append($("<button id='photo_refresh'></button>").text("Refresh"));
+        $("div#pictures h2").after($("<button id='photo_refresh'></button>").text("Refresh"));
         // Adding event listener to refresh button, function below
-        $("div.flickr-wrapper button").on("click", updatePhotos);
+        $("div#pictures button").on("click", updatePhotos);
       }
     });
   }); // on 'up'
@@ -107,7 +107,7 @@ $(document).ready(function(){
         for ( var i = 0; i < 4; i++ ){
           $('<div id=video><iframe src="http://www.youtube.com/embed/' + result.items[i].id.videoId + '"></div>').appendTo('div.videoWrap');
         }
-        $("div#videos").append($("<button id='refresh'></button>").text("Refresh"));
+        $("div#videos h2").after($("<button id='refresh'></button>").text("Refresh"));
       }
     }); // end ajax
   }); // on 'right'
@@ -129,7 +129,7 @@ $(document).ready(function(){
       // Once the user refreshes past 50 videos
       $('<div id=video><iframe src="http://www.youtube.com/embed/' + newVideos.items[(i+videoIndex) % 50].id.videoId + '"></div>').appendTo('div.videoWrap');
     }
-    $("div#videos").append($("<button id='refresh'></button>").text("Refresh"));
+    $("div#videos h2").after($("<button id='refresh'></button>").text("Refresh"));
 
     videoIndex += 4;
 
