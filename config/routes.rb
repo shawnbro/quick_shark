@@ -23,4 +23,25 @@ QuickShark::Application.routes.draw do
 
   get "/ytdata", to: "topics#ytdata"
 
+
+  # # PJ: Below is a suggeseted direction for your routes, to make them fit a more 
+  # # RESTful convention. For more, see: http://guides.rubyonrails.org/routing.html
+  
+  # # your groups interface is very simple, and you got it mostly right...
+  # root "topics#new"
+
+  # resource  :session, only: [:new, :create, :destroy] # singular resource, maybe not with new
+
+  # resources :users, shallow: true do
+  #   resources :journeys do
+  #     resources :tangents, only: [:create, :show]
+  #   end
+  # end
+
+  # # this can be for future features, actually unnecessary now...
+  # # resources :topics, only: [:index, :show]
+
+  # # above, when you're getting data, definition, description, pictures, stats, and ytdata
+  # # you should just be loading that from the tangent#show onto the page in the first place,
+  # # if that content is then loaded by the browser asynchronously
 end
