@@ -14,9 +14,8 @@
 <div id="define"><h2>Random Description</h2><p id="description"> <%= @description %> </p>
   <div id="definitions"><h2>Definitions<h2><p><p></div>
   <div id="reverse_definitions"><h2>Reverse Definitions<h2><p><p></div>
-
   </div>
-    </div>
+</div>
 
 <div id="pictures"><h2>Related Pictures</h2></div>
 <div id="videos"><h2>Related Videos</h2></div>
@@ -80,4 +79,12 @@
   $(document).ready( function(){
     makeTimeline();
   });
+</script>
+<script>
+  $("body").append("<div id='side-instructions'><p>Click on a word...Push the arrow keys...Click and drag...Scroll to zoom.</p></div>");
+  $(window).mousemove(function() {
+    setTimeout( function() {
+      $('#side-instructions').css("display", "hidden");
+    }, 5000);
+  })
 </script>
